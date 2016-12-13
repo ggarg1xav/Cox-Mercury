@@ -1,4 +1,4 @@
-package com.xavient.framework.util;
+package com.xavient.util;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
