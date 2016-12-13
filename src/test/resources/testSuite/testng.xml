@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TestSuite" thread-count="3"  parallel="tests" >
-  <test name="Login">
-  <parameter name="browser" value="Chrome" />
-    <classes>
-       <class name="com.xavient.framework.COX_Test_Suite.Test_Login">
-       </class>
-    </classes>
-</test>
- </suite>
+<suite name="TestSuite" thread-count="3" parallel="tests">
+
+	<parameter name="pdfngreport-properties"
+
+		value="src/main/resources/report_resource/pdfngreport.properties" />
+
+	<listeners>
+
+		<listener class-name="com.uttesh.pdfngreport.PDFReportListener" />
+
+	</listeners>
+
+
+
+	<test name="Login">
+		<parameter name="browser" value="Chrome" />
+		<classes>
+			<class name="com.xavient.test.script.Test_Login" />
+		</classes>
+	</test>
+</suite>
