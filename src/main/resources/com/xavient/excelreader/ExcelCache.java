@@ -80,7 +80,7 @@ public class ExcelCache {
 					if (objectType.equalsIgnoreCase("list")) {
 						String listValue = (String) map2.get(objectType);
 						String[] listValues = listValue.split("\\$\\$");
-						for (int i = 0; i < listValues.length - 1; i++) {
+						for (int i = 0; i < listValues.length; i++) {
 
 							expectData.add(listValues[i]);
 						}
@@ -124,9 +124,5 @@ public class ExcelCache {
 
 	}
 
-	public static void main(String[] args) throws IOException {
-		System.out.println(ExcelCache.getExpectedListData("sheet1","table1"));
-
-	}
 
 }
