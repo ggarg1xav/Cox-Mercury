@@ -4,12 +4,35 @@ import org.openqa.selenium.By;
 
 public interface DashBoardView {
 
+	By pword = By.id("pword");
+	By user_name = 	By.id("username");
+	By submit_login = By.name("go");
+	
 	By alertBtn = By.xpath("//button[contains(@ng-click,'getNotification')]");
 	By loginUserName = By.className("");
 	By signOut = By.xpath("//i[@tooltip='LogOut']");
 
 	By headerTitle = By.xpath("//div[@class=\"panel-heading\"]/h4/span");
+	
+	/*
+	 Home Page 
+	 */
+	
+	By View = By.cssSelector(".fa.fa-file-text-o");
+	By View3 = By.xpath(".//*[contains(text(),'LOB Queue & Agent Overview With COE Agent Drilldown View')]");
+	By Queue_And_Agent_Overview = By.xpath(".//*[contains(text(),'Queue And Agent Overview')]");
 
+	
+	
+	/*
+	 view 3 - Table Names
+	 */
+	By view3_curr_data = By.xpath(".//*[contains(text(),'Current Data')]");
+	By view3_today_data = By.xpath(".//*[contains(text(),\"Today's Data\")]");
+	By view3_curr_agent_stats = By.xpath(".//*[contains(text(),'Current Agents Statistics for all COEs')]");
+	By view3_agent_details = By.xpath(".//*[@id='tableCtrl']/div/div[3]/div/div[1]/div/h4");
+	
+	
 	/*
 	 * ToolTip locator
 	 */
