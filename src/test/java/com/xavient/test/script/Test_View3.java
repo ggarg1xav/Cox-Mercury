@@ -15,7 +15,7 @@ import com.xavient.pages.DashBoardView;
 import com.xavient.util.Helper;
 import com.xavient.util.Properties_Reader;
 
-public class Test_Login implements  DashBoardView {
+public class Test_View3 implements  DashBoardView {
 
 	WebDriver driver;
  Helper helper;
