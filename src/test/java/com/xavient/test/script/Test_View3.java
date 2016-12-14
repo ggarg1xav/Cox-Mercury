@@ -3,9 +3,6 @@ package com.xavient.test.script;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
@@ -17,73 +14,66 @@ import com.xavient.util.Properties_Reader;
 
 public class Test_View3 implements  DashBoardView {
 
-	WebDriver driver;
+WebDriver driver;
  Helper helper;
  
-
-String curr_data_table  = ".//*[@id='VIEW_3_table-first1']/thead/tr/th"; 
-String Agent_table_data_start = "//div[@class='ui-grid-header-cell-row']/descendant::Div[@class='ui-grid-cell-contents']" ;
-String Agent_table_data_end = "/span[1]";
+/**
+ * Calling Before Test for navigating to particular view3.
+ * @param browser
+ * @throws Exception
+ * @author NMakkar
+ */
 	@BeforeTest
 	@Parameters({ "browser" })
-	public void Before_Test(@Optional("Chrome") String browser) throws Exception {
+	public void Before_Test(@Optional("Chrome") String browser) {
+		
+		//Initialize
 		helper = new Helper();
-
-		String path = System.getProperty("user.dir");
-		if (browser.equalsIgnoreCase("firefox")) {
-			// create firefox instance
-			driver = new FirefoxDriver();
-			driver.manage().window().maximize();
-
-		}
-
-		else if (browser.equalsIgnoreCase("Chrome")) {
-			// set path to chromedriver.exe
-			System.out.println(path + "\\main\\resources\\Drivers_executable\\chromedriver.exe");
-			System.setProperty("webdriver.chrome.driver", path + "\\src\\main\\resources\\Drivers_executable\\chromedriver.exe");
-
-			driver = new ChromeDriver();
-			driver.manage().window().maximize();
-
-		}
-
-		else if (browser.equalsIgnoreCase("ie")) {
-			System.setProperty("webdriver.ie.driver", path + "\\src\\main\\resources\\Drivers_executable\\IEDriverServer.exe");
-			driver = new InternetExplorerDriver();
-			driver.manage().window().maximize();
-
-		}
-
-		else {
-			// If no browser passed throw exception
-			throw new Exception("Browser is not correct");
-		}
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		System.out.println("------Before Test------");
-	}
-
-	@Test
-	public void view3_current_table_test() throws Exception {
-
+		
+		//Navigating to URL.
 		driver.get(Properties_Reader.readProperty("URL"));
+		
+		//Handling PopUP with AutoIT , Need to have this screen as active when this method is being executed.
 		helper.handle_popup();
+		
+		//Login and Navigating to View
 		driver.findElement(user_name).sendKeys(Properties_Reader.readProperty("Username"));
 		driver.findElement(pword).sendKeys(Properties_Reader.readProperty("Password"));
 		driver.findElement(submit_login).click();
 		driver.findElement(View).click();
 		driver.findElement(Queue_And_Agent_Overview).click();
 		driver.findElement(View3).click();
-		helper.validate_table_columns( curr_data_table , driver , "" , "Test_Login" , "view3_curr_data" );	
 		
+		
+		System.out.println("------Before Test------");
+	}
+/**
+ * Validating Table and Column data.
+ * @author NMakkar
+ */
+	@Test
+	public void view3_validate_table_data()  {
+		helper.validate_table_names( driver.findElement(view3_curr_data) ,  "Test_View3" , "view3_curr_data" );	
+		helper.validate_table_columns( view3_curr_data_table , driver , "" , "Test_View3" , "view3_curr_data_table" );	
+
+		helper.validate_table_names( driver.findElement(view3_today_data) ,  "Test_View3" , "view3_today_data" );
+		helper.validate_table_columns( view3_today_data_table , driver , "" , "Test_View3" , "view3_today_data_table" );
+
+		helper.validate_table_names( driver.findElement(view3_curr_agent_stats_tbl) ,  "Test_View3" , "view3_curr_agent_stats_tbl" );
+		helper.validate_table_columns( view3_curr_agent_stats_col , driver , "" , "Test_View3" , "view3_curr_agent_stats_col" );
+	
+		helper.validate_table_names( driver.findElement(view3_agent_details) ,  "Test_View3" , "view3_agent_details" );	
+		helper.validate_table_columns( view3_Agent_table_data_start , driver , view3_Agent_table_data_end , "Test_View3" , "view3_Agent_table_data" );		
 	}
 	
-	
-
-
+/**
+ * Closing Browser After Test.
+ */
 	@AfterTest
 	public void After_Test() {
-		System.out.println("------End Test------");
 		driver.close();
+		System.out.println("------End Test------");
 	}
 
 

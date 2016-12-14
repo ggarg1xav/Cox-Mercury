@@ -3,7 +3,10 @@ package com.xavient.pages;
 import org.openqa.selenium.By;
 
 public interface DashBoardView {
-
+/**
+ * Locators for All Pages
+ * 
+ */
 	By pword = By.id("pword");
 	By user_name = 	By.id("username");
 	By submit_login = By.name("go");
@@ -29,10 +32,14 @@ public interface DashBoardView {
 	 */
 	By view3_curr_data = By.xpath(".//*[contains(text(),'Current Data')]");
 	By view3_today_data = By.xpath(".//*[contains(text(),\"Today's Data\")]");
-	By view3_curr_agent_stats = By.xpath(".//*[contains(text(),'Current Agents Statistics for all COEs')]");
+	By view3_curr_agent_stats_tbl = By.xpath(".//*[contains(text(),'Current Agents Statistics for all COEs')]");
 	By view3_agent_details = By.xpath(".//*[@id='tableCtrl']/div/div[3]/div/div[1]/div/h4");
 	
-	
+	String view3_curr_data_table  = ".//*[@id='VIEW_3_table-first1']/thead/tr/th"; 
+	String view3_Agent_table_data_start = "//div[@class='ui-grid-header-cell-row']/descendant::Div[@class='ui-grid-cell-contents']" ;
+	String view3_Agent_table_data_end = "/span[1]";
+	String view3_today_data_table = ".//*[@id='VIEW_3_table-second1']/thead/tr/th"; 
+		String view3_curr_agent_stats_col = ".//*[@id='VIEW_3_table-third1']/thead/tr/th";	
 	/*
 	 * ToolTip locator
 	 */

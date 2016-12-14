@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
+
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -18,7 +19,6 @@ import org.apache.poi.ss.usermodel.Row;
  * @author nkumar9
  * This class contains the methods for reading the expected data from excel.
  */
-
 
 public class ExcelCache {
 
@@ -32,8 +32,8 @@ public class ExcelCache {
 
 		FileInputStream file = null;
 		try {
-				file = new FileInputStream(new File(System.getProperty("user.dir")
-						+ "\\src\\test\\resources\\testData\\TestData.xls"));
+				file = new FileInputStream(new File(System.getProperty("user.dir")+Properties_Reader.readProperty("XLS_file")));
+					
 		} catch (FileNotFoundException e) {
 
 			e.printStackTrace();
@@ -66,7 +66,7 @@ public class ExcelCache {
 	 * @logicalName this is the object logical name
 	 */
 	public static List<String> getExpectedListData(String pageName,
-			String logicalName) throws IOException {
+			String logicalName)  {
 		ArrayList<String> expectData = new ArrayList<String>();
 		Set<String> objectNames = map.keySet();
 		for (String object : objectNames) {
@@ -99,7 +99,7 @@ public class ExcelCache {
 	 */
 	
 	public static String getExpectedData(String pageName, String logicalName)
-			throws IOException {
+			 {
 		Set<String> objectNames = map.keySet();
 		String expectedValue = null;
 		for (String object : objectNames) {
@@ -108,7 +108,7 @@ public class ExcelCache {
 				map2 = (HashMap<String, String>) map.get(object);
 				Set<String> objectTypeSet = map2.keySet();
 				for (String objectType : objectTypeSet) {
-					if (objectType.equalsIgnoreCase("lebel")) {
+					if (objectType.equalsIgnoreCase("label")) {
 						expectedValue = (String) map2.get(objectType);
 					}
 

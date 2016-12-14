@@ -4,19 +4,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.Properties;
-
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.Test;
 
 public class Properties_Reader {
 
+	/**
+	 * Method is fetching values from config files.
+	 * @param key
+	 * @return String value based on key.
+	 * @author NMakkar
+	 */
 	public static String readProperty(String key) {
-
-		File file = new File(System.getProperty("user.dir")
-				+ "\\src\\test\\resources\\testData\\dataFile.properties");
-		System.out.println(file);
+		//Initialize.
+		File file = new File(System.getProperty("user.dir")	+ "\\src\\test\\resources\\testData\\dataFile.properties");
 		Properties prop = new Properties();
 		FileInputStream inputFile = null;
 		{
@@ -25,17 +25,15 @@ public class Properties_Reader {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-
-			
 			try {
+				//Loading file
 				prop.load(inputFile);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			//Returning value.
 			return prop.getProperty(key);
 		}
-	}
-	
+	}	
 }
