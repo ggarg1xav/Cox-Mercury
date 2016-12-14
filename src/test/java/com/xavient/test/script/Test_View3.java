@@ -8,11 +8,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import com.xavient.pages.DashBoardView;
+import com.xavient.util.BaseClass;
 import com.xavient.util.Helper;
 import com.xavient.util.Properties_Reader;
 
-public class Test_View3 implements  DashBoardView {
+public class Test_View3 extends BaseClass implements  DashBoardView {
 
 WebDriver driver;
  Helper helper;
@@ -20,13 +22,12 @@ WebDriver driver;
 /**
  * Calling Before Test for navigating to particular view3.
  * @param browser
- * @throws Exception
  * @author NMakkar
  */
 	@BeforeTest
 	@Parameters({ "browser" })
 	public void Before_Test(@Optional("Chrome") String browser) {
-		
+		driver = Browser_Selection(browser);
 		//Initialize
 		helper = new Helper();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -65,6 +66,10 @@ WebDriver driver;
 	
 		helper.validate_table_names( driver.findElement(view3_agent_details) ,  "Test_View3" , "view3_agent_details" );	
 		helper.validate_table_columns( view3_Agent_table_data_start , driver , view3_Agent_table_data_end , "Test_View3" , "view3_Agent_table_data" );		
+	}
+	
+	public void view3_validate_graph_data()  {
+		
 	}
 	
 /**

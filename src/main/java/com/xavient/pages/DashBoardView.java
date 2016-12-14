@@ -39,7 +39,11 @@ public interface DashBoardView {
 	String view3_Agent_table_data_start = "//div[@class='ui-grid-header-cell-row']/descendant::Div[@class='ui-grid-cell-contents']" ;
 	String view3_Agent_table_data_end = "/span[1]";
 	String view3_today_data_table = ".//*[@id='VIEW_3_table-second1']/thead/tr/th"; 
-		String view3_curr_agent_stats_col = ".//*[@id='VIEW_3_table-third1']/thead/tr/th";	
+	String view3_curr_agent_stats_col = ".//*[@id='VIEW_3_table-third1']/thead/tr/th";	
+	/*
+	 view 3 - Line Chart.
+	 */
+	By view3_Line_Chart_link = By.id("ChartCombineLine");
 	/*
 	 * ToolTip locator
 	 */

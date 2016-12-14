@@ -32,7 +32,8 @@ public class ExcelCache {
 
 		FileInputStream file = null;
 		try {
-				file = new FileInputStream(new File(System.getProperty("user.dir")+Properties_Reader.readProperty("XLS_file")));
+			file = new FileInputStream(new File(System.getProperty("user.dir")
+					+ Properties_Reader.readProperty("XLS_file")));
 					
 		} catch (FileNotFoundException e) {
 
