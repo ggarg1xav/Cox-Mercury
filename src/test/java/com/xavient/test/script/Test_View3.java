@@ -70,23 +70,42 @@ WebDriver driver;
 		helper.validate_table_names( driver.findElement(view3_agent_details) ,  "Test_View3" , "view3_agent_details" );	
 		helper.validate_table_columns( view3_Agent_table_data_start , driver , view3_Agent_table_data_end , "Test_View3" , "view3_Agent_table_data" );		
 	}
+	
 	/**
-	 * 
+	 * @author NMakkar
+	 * Method is validating static data set of line graph 
 	 */
 	@Test
-	public void view3_validate_graph_data()  {
-		
+	public void view3_validate_line_graph_data()  {
+	
+		//Navigating to line chart page. 	
 	wait.until(ExpectedConditions.visibilityOf(driver.findElement(lineChartToolTip)));
 	driver.findElement(lineChartToolTip).click();
 	wait.until(ExpectedConditions.visibilityOf(driver.findElement(view3_line_graph_title)));
+	
+	//Validating all static data.
 	helper.validate_table_names(driver.findElement(view3_line_graph_title), "Test_View3", "view3_line_graph_title");
 	helper.validate_table_names(driver.findElement(view3_line_graph_y_axis), "Test_View3", "view3_line_graph_y_axis");
 	helper.validate_table_names(driver.findElement(view3_line_graph_header), "Test_View3", "view3_line_graph_header");
-	helper.validate_list_data(view3_line_graph_x_axis, driver , "Test_View3" , "view3_line_graph_x_axis" );
-
-
-
-		
+	helper.validate_list_data(view3_line_graph_x_axis, driver , "Test_View3" , "view3_line_graph_x_axis" );	
+	}
+	
+	/**
+	 * Method is validating static data set of bar graph 
+	 * @author NMakkar
+	 */
+	@Test
+	public void view3_validate_bar_graph_data()  {
+		//Navigating to Bar chart page. 
+	wait.until(ExpectedConditions.visibilityOf(driver.findElement(barGraphToolTip)));
+	driver.findElement(barGraphToolTip).click();
+	wait.until(ExpectedConditions.visibilityOf(driver.findElement(view3_bar_graph_title)));
+	
+	//Validating all static data.
+	helper.validate_table_names(driver.findElement(view3_bar_graph_title), "Test_View3", "view3_bar_graph_title");
+	helper.validate_table_names(driver.findElement(view3_bar_graph_y_axis), "Test_View3", "view3_bar_graph_y_axis");
+	helper.validate_table_names(driver.findElement(view3_bar_graph_header), "Test_View3", "view3_bar_graph_header");
+	helper.validate_list_data(view3_bar_graph_x_axis, driver , "Test_View3" , "view3_bar_graph_x_axis" );
 	}
 /**
  * Closing Browser After Test.
