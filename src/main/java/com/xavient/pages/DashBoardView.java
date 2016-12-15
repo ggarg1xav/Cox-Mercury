@@ -81,4 +81,10 @@ public interface DashBoardView {
 	By subFunctionalGroupsFilterList = By.xpath(".//*[@id='subFunGroupHandller']/option");
 	By languageFilterList = By.xpath(".//*[@id='langHandller']/option");
 	By timeZoneFilterList = By.xpath(".//*[@id='tzHandller']/option");
+	
+	/*
+	 * View 3 table data
+	 */
+	By view3_agent_details_data = By.xpath("//div[@class='ui-grid-canvas']/div");
+
 }
