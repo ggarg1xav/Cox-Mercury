@@ -33,7 +33,7 @@ WebDriver driver;
 		driver = Browser_Selection(browser);
 		//Initialize
 		helper = new Helper();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
 		//Navigating to URL.
 		driver.get(Properties_Reader.readProperty("URL"));
@@ -56,7 +56,7 @@ WebDriver driver;
  * Validating Table and Column data.
  * @author NMakkar
  */
-	@Test
+	@Test(enabled= false)
 	public void view3_validate_table_data()  {
 		helper.validate_table_names( driver.findElement(view3_curr_data) ,  "Test_View3" , "view3_curr_data" );	
 		helper.validate_table_columns( view3_curr_data_table , driver , "" , "Test_View3" , "view3_curr_data_table" );	
@@ -73,7 +73,7 @@ WebDriver driver;
 	/**
 	 * 
 	 */
-	@Test
+	@Test(enabled=false)
 	public void view3_validate_graph_data()  {
 		
 	wait.until(ExpectedConditions.visibilityOf(driver.findElement(lineChartToolTip)));
@@ -83,11 +83,27 @@ WebDriver driver;
 	helper.validate_table_names(driver.findElement(view3_line_graph_y_axis), "Test_View3", "view3_line_graph_y_axis");
 	helper.validate_table_names(driver.findElement(view3_line_graph_header), "Test_View3", "view3_line_graph_header");
 	helper.validate_list_data(view3_line_graph_x_axis, driver , "Test_View3" , "view3_line_graph_x_axis" );
-
-
-
 		
 	}
+	
+	/**
+	 * Validate pie chart data 
+	 * 
+	 */
+	
+	@Test(enabled=true)
+	public void view3_validate_piechart_data()  {
+		
+	wait.until(ExpectedConditions.visibilityOf(driver.findElement(lineChartToolTip)));
+	driver.findElement(lineChartToolTip).click();
+	wait.until(ExpectedConditions.visibilityOf(driver.findElement(view3_line_graph_title)));
+	helper.validate_table_names(driver.findElement(view3_piechart_graph_header), "Test_View3", "view3_pie_chart_header");
+	wait.until(ExpectedConditions.visibilityOf(driver.findElement(view3_piechart_labels)));
+	helper.validate_list_data(view3_piechart_labels, driver, "Test_View3", "view3_piechart_labels");	
+	helper.validate_table_names(driver.findElement(view3_piechart_Total_Agents_label), "Test_View3", "view3_piechart_Total_Agents_label");
+	helper.validate_table_names(driver.findElement(view3_piechart_Agents_Staffed_label), "Test_View3", "view3_piechart_Agents_Staffed_label");
+	}
+	
 /**
  * Closing Browser After Test.
  */

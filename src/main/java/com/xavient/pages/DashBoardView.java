@@ -49,10 +49,13 @@ public interface DashBoardView {
 	By view3_line_graph_x_axis = By.xpath(".//*[contains(text(),'Agents Break ')]/parent::*/parent::*/child::*/child::*");
 	
 	
-	
-	
-	
-	
+	/*
+	 * View 3 - Pie Chart
+	 */
+	By view3_piechart_graph_header = By.xpath("//h4[text()='Agent Status']");
+	By view3_piechart_labels = By.xpath("//*[text()='Agents Available']/parent::*/parent::*/parent::*/child::*/child::*[3]");
+	By view3_piechart_Total_Agents_label =  By.xpath("//label[text()='Total Agents']");
+	By view3_piechart_Agents_Staffed_label =  By.xpath("//label[text()='Agents Staffed']");
 	/*
 	 * ToolTip locator
 	 */
