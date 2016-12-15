@@ -3,6 +3,8 @@ package com.xavient.test.script;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
@@ -18,6 +20,7 @@ public class Test_View3 extends BaseClass implements  DashBoardView {
 
 WebDriver driver;
  Helper helper;
+ WebDriverWait wait;
  
 /**
  * Calling Before Test for navigating to particular view3.
@@ -46,7 +49,7 @@ WebDriver driver;
 		driver.findElement(Queue_And_Agent_Overview).click();
 		driver.findElement(View3).click();
 		
-		
+		 wait = new WebDriverWait(driver , 5);
 		System.out.println("------Before Test------");
 	}
 /**
@@ -67,11 +70,24 @@ WebDriver driver;
 		helper.validate_table_names( driver.findElement(view3_agent_details) ,  "Test_View3" , "view3_agent_details" );	
 		helper.validate_table_columns( view3_Agent_table_data_start , driver , view3_Agent_table_data_end , "Test_View3" , "view3_Agent_table_data" );		
 	}
-	
+	/**
+	 * 
+	 */
+	@Test
 	public void view3_validate_graph_data()  {
 		
+	wait.until(ExpectedConditions.visibilityOf(driver.findElement(lineChartToolTip)));
+	driver.findElement(lineChartToolTip).click();
+	wait.until(ExpectedConditions.visibilityOf(driver.findElement(view3_line_graph_title)));
+	helper.validate_table_names(driver.findElement(view3_line_graph_title), "Test_View3", "view3_line_graph_title");
+	helper.validate_table_names(driver.findElement(view3_line_graph_y_axis), "Test_View3", "view3_line_graph_y_axis");
+	helper.validate_table_names(driver.findElement(view3_line_graph_header), "Test_View3", "view3_line_graph_header");
+	helper.validate_list_data(view3_line_graph_x_axis, driver , "Test_View3" , "view3_line_graph_x_axis" );
+
+
+
+		
 	}
-	
 /**
  * Closing Browser After Test.
  */

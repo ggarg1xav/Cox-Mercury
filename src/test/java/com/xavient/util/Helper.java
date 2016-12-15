@@ -52,7 +52,6 @@ public class Helper {
 		for (int i = 1 ;  i <= rows ; i ++)
 		{
 			String locator = element_start +"[" + i + "]" + element_end;
-			System.out.println(driver.findElement(By.xpath(locator)).getText());
 			ui_col_names.add(driver.findElement(By.xpath(locator)).getText());
 		}
 		//Comparing List (Column Names)
@@ -74,5 +73,16 @@ public class Helper {
 		String xls_table_name = ExcelCache.getExpectedData(class_name , table_element);
 		//Comparing String.
 		Assert.assertEquals(ui_col_names, xls_table_name , "Table Names are different");
+	}
+	public void validate_list_data( By element  , WebDriver driver  , String class_name , String table_element)
+	{
+		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
+		ArrayList<String> ui_col_names = new ArrayList<String>();	
+		List<WebElement> listelement = driver.findElements(element);
+		for (WebElement webelement : listelement)
+		{
+			ui_col_names.add(webelement.getText());
+		}
+		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
 	}
 }

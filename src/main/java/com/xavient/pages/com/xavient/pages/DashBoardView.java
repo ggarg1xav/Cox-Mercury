@@ -43,14 +43,23 @@ public interface DashBoardView {
 	/*
 	 view 3 - Line Chart.
 	 */
-	By view3_Line_Chart_link = By.id("ChartCombineLine");
+	By view3_line_graph_title = By.xpath(".//*[contains(text(),'Current Agent Statistics For all COEs')]");
+	By view3_line_graph_header = By.xpath(".//*[contains(text(),'Agent AUX State Detail')]");
+	By view3_line_graph_y_axis = By.xpath(".//*[contains(text(),'Agent Count')]");
+	By view3_line_graph_x_axis = By.xpath(".//*[contains(text(),'Agents Break ')]/parent::*/parent::*/child::*/child::*");
+	
+	
+	
+	
+	
+	
 	/*
 	 * ToolTip locator
 	 */
 	By popOutToolTip = By.id("fullScrExpand");
 	By pauseToolTip = By.id("clickPause");
 	By tabularViewToolTip = By.xpath(".//*[@id='fullscrnhide']/i[@tooltip=\"Tabular View\"]");
-	By lineChartToolTip = By.id("ChartCombineLine");
+	By lineChartToolTip = By.xpath(".//*[@id='ChartCombineLine']");
 	By barGraphToolTip = By.id("ChartCombineBar");
 	By saveMyViewToolTip = By.id("saveMyView");
 
