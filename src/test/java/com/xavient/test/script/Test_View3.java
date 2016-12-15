@@ -1,10 +1,16 @@
 package com.xavient.test.script;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
@@ -107,6 +113,77 @@ WebDriver driver;
 	helper.validate_table_names(driver.findElement(view3_bar_graph_header), "Test_View3", "view3_bar_graph_header");
 	helper.validate_list_data(view3_bar_graph_x_axis, driver , "Test_View3" , "view3_bar_graph_x_axis" );
 	}
+	
+	/**
+	 * @author guneet
+	 * Method is validating table sorting
+	 */
+	@Test
+	public void view3_table_sorting() {
+		LinkedList<String>  tableData = new LinkedList<String>();
+		int tableComtentCount = helper.getWebelentSize(view3_agent_details_data, driver);
+		int totalTableCount = helper.getWebelentSize(By.xpath(view3_Agent_table_data_start), driver);
+		if (tableComtentCount > 0) {
+			for (int i = 1; i <= totalTableCount; i++) {
+				for (int j = 0; j < 2; j++) {
+					driver.findElement(By.xpath(view3_Agent_table_data_start + "[" + i + "]" + view3_Agent_table_data_sort_arrow)).click();
+					for (int i1 = 1; i1 <= tableComtentCount; i1++) {
+						List<WebElement> el = driver.findElements(By.xpath("//div[@class='ui-grid-canvas']/div[" + i1 + "]//div[@role='gridcell']/div"));
+						tableData.add(el.get(i - 1).getText().toString());
+					}
+					if(j==0)
+						helper.validateListIsSorted(tableData,"asc");
+					else if(j==1)
+						helper.validateListIsSorted(tableData,"desc");
+					tableData.clear();
+				}
+			}
+		}
+	}
+	
+	/**
+	 * @author guneet
+	 * Method is validating table pagination
+	 */
+	@Test
+	public void  view3_table_pagination() {
+		Select select = new Select(driver.findElement(pagerPageDrop));
+
+		String count=driver.findElement(pagerGridCount).getText();
+		Object[] pagerGridCountList = count.split(" "); 
+		
+		//Validating text 
+		Assert.assertEquals("of", pagerGridCountList[1]);
+		Assert.assertEquals("items", pagerGridCountList[3]);		
+		Assert.assertEquals(" items per page", driver.findElement(pagerPageDropText).getText());
+		
+		count = count.split(" ")[2];
+		if(Integer.parseInt(count)>5){
+
+			//Checking pagination first and previous is disabled
+			Assert.assertEquals("true", driver.findElement(pagerFirst).getAttribute("disabled"),"Pagination first must be disabled");
+			Assert.assertEquals("true", driver.findElement(pagerPrevious).getAttribute("disabled"),"Pagination Previous must be disabled");
+			
+			//clicking pagination last button
+			driver.findElement(pagerLast).click();
+			
+			Assert.assertEquals("true", driver.findElement(pagerLast).getAttribute("disabled"),"Pagination Last must be disabled");
+			Assert.assertEquals("true", driver.findElement(pagerNext).getAttribute("disabled"),"Pagination Next must be disabled");
+			
+			driver.findElement(pagerPrevious).click();
+
+			//Validating pagination dropdown value
+			Select select2 = new Select(driver.findElement(pagerPageDrop));
+			List<WebElement> dCount = select2.getOptions();
+			int dropList[] = {5,10,25,50,100};
+			for (int i = 0; i < dCount.size(); i++) {
+				select.selectByIndex(i);
+				Assert.assertEquals(dropList[i], Integer.parseInt(select2.getFirstSelectedOption().getText()));
+			}
+		}
+	}
+	
+	
 /**
  * Closing Browser After Test.
  */

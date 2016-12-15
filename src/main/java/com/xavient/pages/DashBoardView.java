@@ -40,6 +40,8 @@ public interface DashBoardView {
 	String view3_Agent_table_data_end = "/span[1]";
 	String view3_today_data_table = ".//*[@id='VIEW_3_table-second1']/thead/tr/th"; 
 	String view3_curr_agent_stats_col = ".//*[@id='VIEW_3_table-third1']/thead/tr/th";	
+	String view3_Agent_table_data_sort_arrow = "/span[2]";
+
 	/*
 	 view 3 - Line Chart.
 	 */
@@ -107,4 +109,9 @@ public interface DashBoardView {
 	By subFunctionalGroupsFilterList = By.xpath(".//*[@id='subFunGroupHandller']/option");
 	By languageFilterList = By.xpath(".//*[@id='langHandller']/option");
 	By timeZoneFilterList = By.xpath(".//*[@id='tzHandller']/option");
+	
+	/*
+	 * View 3 table data
+	 */
+	By view3_agent_details_data = By.xpath("//div[@class='ui-grid-canvas']/div");
 }
