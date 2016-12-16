@@ -1,9 +1,6 @@
 package com.xavient.test.script;
 
 import java.util.concurrent.TimeUnit;
-
-import javax.servlet.jsp.tagext.TryCatchFinally;
-
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
