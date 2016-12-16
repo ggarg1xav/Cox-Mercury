@@ -74,7 +74,6 @@ public class Helper {
 		//Comparing String.
 		Assert.assertEquals(ui_col_names, xls_table_name , "Table Names are different");
 	}
-	
 	public void validate_list_data( By element  , WebDriver driver  , String class_name , String table_element)
 	{
 		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );

@@ -2,6 +2,9 @@ package com.xavient.test.script;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.servlet.jsp.tagext.TryCatchFinally;
+
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,7 +13,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import com.xavient.pages.DashBoardView;
 import com.xavient.util.BaseClass;
 import com.xavient.util.Helper;
@@ -18,9 +20,10 @@ import com.xavient.util.Properties_Reader;
 
 public class Test_View3 extends BaseClass implements  DashBoardView {
 
-WebDriver driver;
+ WebDriver driver;
  Helper helper;
  WebDriverWait wait;
+ private static Logger logger = Logger.getLogger(Test_View3.class.getName());
  
 /**
  * Calling Before Test for navigating to particular view3.
@@ -31,6 +34,7 @@ WebDriver driver;
 	@Parameters({ "browser" })
 	public void Before_Test(@Optional("Chrome") String browser) {
 		driver = Browser_Selection(browser);
+		logger.info(browser+ " is opened successfully");
 		//Initialize
 		helper = new Helper();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -96,6 +100,7 @@ WebDriver driver;
 		
 	wait.until(ExpectedConditions.visibilityOf(driver.findElement(lineChartToolTip)));
 	driver.findElement(lineChartToolTip).click();
+	logger.info("Click on the Line Chart Tool tip");
 	wait.until(ExpectedConditions.visibilityOf(driver.findElement(view3_line_graph_title)));
 	helper.validate_table_names(driver.findElement(view3_piechart_graph_header), "Test_View3", "view3_pie_chart_header");
 	wait.until(ExpectedConditions.visibilityOf(driver.findElement(view3_piechart_labels)));
