@@ -2,6 +2,7 @@ package com.xavient.util;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -9,9 +10,11 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import com.xavient.pages.DashBoardView;
+
 public class BaseClass {
 	WebDriver driver;
-
+	Logger logger = Logger.getLogger(BaseClass.class);
 	/**
 	 * Method is initalizing driver with defined browser properties.
 	 * @author AJameel
@@ -58,10 +61,12 @@ public class BaseClass {
 			driver = new InternetExplorerDriver(capabilities);
 			driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 			driver.manage().window().maximize();
+			logger.info("Browser launched successfully");
 		}
 
 		else {
 			// If no browser passed throw exception
+			logger.info("Browser is not correct");
 			try {
 				throw new Exception("Browser is not correct");
 			} catch (Exception e) {

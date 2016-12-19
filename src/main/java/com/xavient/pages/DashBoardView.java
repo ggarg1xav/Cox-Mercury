@@ -1,6 +1,9 @@
 package com.xavient.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+
+import com.xavient.test.script.Test_View3;
 
 public interface DashBoardView {
 /**
@@ -40,15 +43,25 @@ public interface DashBoardView {
 	String view3_Agent_table_data_end = "/span[1]";
 	String view3_today_data_table = ".//*[@id='VIEW_3_table-second1']/thead/tr/th"; 
 	String view3_curr_agent_stats_col = ".//*[@id='VIEW_3_table-third1']/thead/tr/th";	
+	String view3_Agent_table_data_sort_arrow = "/span[2]";
+
 	/*
 	 view 3 - Line Chart.
 	 */
 	By view3_line_graph_title = By.xpath(".//*[contains(text(),'Current Agent Statistics For all COEs')]");
 	By view3_line_graph_header = By.xpath(".//*[contains(text(),'Agent AUX State Detail')]");
 	By view3_line_graph_y_axis = By.xpath(".//*[contains(text(),'Agent Count')]");
-	By view3_line_graph_x_axis = By.xpath(".//*[contains(text(),'Agents Break ')]/parent::*/parent::*/child::*/child::*");
+	//By view3_line_graph_x_axis = By.xpath(".//*[contains(text(),'Agents Break ')]/parent::*/parent::*/child::*/child::*");
+	 By view3_graph_x_axis = By.xpath("//*[contains(text(),'Agents Break ')]/parent::*/parent::*/child::*");
 	
 	
+	/*
+	 view 3 - Bar Chart.
+	 */
+	By view3_bar_graph_title = By.xpath(".//*[contains(text(),'Current Agent Statistics For all COEs')]");
+	By view3_bar_graph_header = By.xpath(".//*[contains(text(),'Agent AUX State Detail')]");
+	By view3_bar_graph_y_axis = By.xpath(".//*[contains(text(),'Agent Count')]");
+	By view3_bar_graph_x_axis = By.xpath(".//*[contains(text(),'Agents Break ')]/parent::*/parent::*/child::*/child::*");
 	/*
 	 * View 3 - Pie Chart
 	 */
@@ -63,7 +76,7 @@ public interface DashBoardView {
 	By pauseToolTip = By.id("clickPause");
 	By tabularViewToolTip = By.xpath(".//*[@id='fullscrnhide']/i[@tooltip=\"Tabular View\"]");
 	By lineChartToolTip = By.xpath(".//*[@id='ChartCombineLine']");
-	By barGraphToolTip = By.id("ChartCombineBar");
+	By barGraphToolTip = By.xpath(".//*[@id='ChartCombineBar']");
 	By saveMyViewToolTip = By.id("saveMyView");
 
 	/*
@@ -111,4 +124,9 @@ public interface DashBoardView {
 	 */
 	 By view15_today_data = By.xpath("//*[@id='tableCtrl']//h4");
 	 String view15_today_data_table  = "//table[@id='VIEW_15_table-first1']//th"; 
+	
+	/*
+	 * View 3 table data
+	 */
+	By view3_agent_details_data = By.xpath("//div[@class='ui-grid-canvas']/div");
 }
