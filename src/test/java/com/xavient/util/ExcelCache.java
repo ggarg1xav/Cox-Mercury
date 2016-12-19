@@ -81,7 +81,7 @@ public class ExcelCache {
 						String[] listValues = listValue.split("\\$\\$");
 						for (int i = 0; i < listValues.length; i++) {
 
-							expectData.add(listValues[i]);
+							expectData.add(listValues[i].trim());
 						}
 					}
 

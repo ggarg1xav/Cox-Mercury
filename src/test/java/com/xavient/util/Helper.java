@@ -63,7 +63,7 @@ public class Helper {
 		for (int i = 1 ;  i <= rows ; i ++)
 		{
 			String locator = element_start +"[" + i + "]" + element_end;
-			ui_col_names.add(driver.findElement(By.xpath(locator)).getText());
+			ui_col_names.add(driver.findElement(By.xpath(locator)).getText().trim());
 		}
 		//Comparing List (Column Names)
 		logger.info("Actual table columns names from UI: "+ui_col_names);

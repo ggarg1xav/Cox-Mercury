@@ -123,6 +123,9 @@ public interface DashBoardView {
 	 By view15_today_data = By.xpath("//*[@id='tableCtrl']//h4");
 	 String view15_today_data_table  = "//table[@id='VIEW_15_table-first1']//th"; 
 	 By view15_current_data = By.xpath("//h4[text()='Current Data']");
+	 String view15_current_data_table  = "//*[@id='VIEW_15_table-second1']//th"; 
+	 By view15_Half_Hour_data = By.xpath("//h4[text()='Half Hour Data']");
+	 String view15_Half_Hour_data_table  = "//*[@id='VIEW_15_table-third1']//th";
 	 
 	/*
 	 * View 3 table data
