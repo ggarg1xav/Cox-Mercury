@@ -68,7 +68,7 @@ WebDriver driver;
  * Validating Table and Column data.
  * @author NMakkar
  */
-	@Test(enabled=false, priority =1)
+	@Test(enabled=true, priority =1)
 	public void view3_validate_table_data()  {
 		logger.info("-----Start test case execution for :view3_validate_table_data------");
 		helper.validate_table_names( driver.findElement(view3_curr_data) ,  "Test_View3" , "view3_curr_data" );	
@@ -89,7 +89,7 @@ WebDriver driver;
 	 * @author NMakkar
 	 * Method is validating static data set of line graph 
 	 */
-	@Test(enabled=false,priority=4)
+	@Test(enabled=true,priority=4)
 	public void view3_validate_line_graph_data()  {
 	logger.info("-----Start test case execution for :view3_validate_line_graph_data------");
 		//Navigating to line chart page. 	
@@ -109,7 +109,7 @@ WebDriver driver;
 	 * Method is validating static data set of bar graph 
 	 * @author NMakkar
 	 */
-	@Test(enabled=false,priority =5)
+	@Test(enabled=true,priority =5)
 	public void view3_validate_bar_graph_data()  {
 		logger.info("-----Start test case execution for :view3_validate_bar_graph_data------");
 		//Navigating to Bar chart page. 
@@ -129,7 +129,7 @@ WebDriver driver;
 	 * @author guneet
 	 * Method is validating table sorting
 	 */
-	@Test(enabled=false,priority =2)
+	@Test(enabled=true,priority =2)
 	public void view3_table_sorting() {
 		logger.info("-----Start test case execution for :view3_table_sorting------");
 		LinkedList<String>  tableData = new LinkedList<String>();
@@ -159,7 +159,7 @@ WebDriver driver;
 	 * @author guneet
 	 * Method is validating table pagination
 	 */
-	@Test(enabled=false, priority = 3)
+	@Test(enabled=true, priority = 3)
 	public void  view3_table_pagination() {
 		logger.info("-----Start test case execution for :view3_table_pagination------");
 		Select select = new Select(driver.findElement(pagerPageDrop));
