@@ -7,8 +7,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -37,7 +39,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh5
 	 */
 	
-	@BeforeClass
+	@BeforeMethod
 	@Parameters({ "browser" })
 	public void Before_Test(@Optional("Chrome") String browser) {
 		
@@ -83,7 +85,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	/**
 	 * Closing Browser After Test.
 	 */
-		@AfterClass
+		@AfterMethod
 		public void After_Test() {
 			driver.close();
 			System.out.println("------End Test------");
