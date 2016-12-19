@@ -3,8 +3,6 @@ package com.xavient.pages;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
-import com.xavient.test.script.Test_View3;
-
 public interface DashBoardView {
 /**
  * Locators for All Pages
