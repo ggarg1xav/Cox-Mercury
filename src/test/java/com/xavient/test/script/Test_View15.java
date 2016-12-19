@@ -25,7 +25,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	WebDriver driver;
 	Helper helper;
 	WebDriverWait wait;
-	private static Logger logger = Logger.getLogger(Test_View15.class.getName());
+	Logger logger = Logger.getLogger(Test_View15.class);
 
 	
 	/**
@@ -70,11 +70,11 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh5
 	 */
 	@Test(enabled = true, priority = 1)
-	public void view3_validate_table_data() {
-		
+	public void view15_validate_table_data() {
+		logger.info("-----Start test case execution for :view15_validate_table_data------");
 			helper.validate_table_names(driver.findElement(view15_today_data), "Test_View15", "view15_todays_data_details");
 			helper.validate_table_columns(view15_today_data_table, driver, "", "Test_View15", "view15_today_data_table");
-
+			helper.validate_table_names(driver.findElement(view15_current_data), "Test_View15", "view15_current_data_details");
 	}
 	
 	/**
