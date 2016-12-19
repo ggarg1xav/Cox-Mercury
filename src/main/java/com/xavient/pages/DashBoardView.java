@@ -27,7 +27,7 @@ public interface DashBoardView {
 	By View = By.cssSelector(".fa.fa-file-text-o");
 	By View3 = By.xpath(".//*[contains(text(),'LOB Queue & Agent Overview With COE Agent Drilldown View')]");
 	By Queue_And_Agent_Overview = By.xpath(".//*[contains(text(),'Queue And Agent Overview')]");
-
+	By View15 = By.xpath("//*[@class='nav nav-pills nav-stacked']//*[contains(text(),'COE With Agent View')]");
 	
 	
 	/*
@@ -62,9 +62,13 @@ public interface DashBoardView {
 	By view3_bar_graph_header = By.xpath(".//*[contains(text(),'Agent AUX State Detail')]");
 	By view3_bar_graph_y_axis = By.xpath(".//*[contains(text(),'Agent Count')]");
 	By view3_bar_graph_x_axis = By.xpath(".//*[contains(text(),'Agents Break ')]/parent::*/parent::*/child::*/child::*");
-	
-	
-	
+	/*
+	 * View 3 - Pie Chart
+	 */
+	By view3_piechart_graph_header = By.xpath("//h4[text()='Agent Status']");
+	By view3_piechart_labels = By.xpath("//*[text()='Agents Available']/parent::*/parent::*/parent::*/child::*/child::*[3]");
+	By view3_piechart_Total_Agents_label =  By.xpath("//label[text()='Total Agents']");
+	By view3_piechart_Agents_Staffed_label =  By.xpath("//label[text()='Agents Staffed']");
 	/*
 	 * ToolTip locator
 	 */
@@ -113,6 +117,13 @@ public interface DashBoardView {
 	By subFunctionalGroupsFilterList = By.xpath(".//*[@id='subFunGroupHandller']/option");
 	By languageFilterList = By.xpath(".//*[@id='langHandller']/option");
 	By timeZoneFilterList = By.xpath(".//*[@id='tzHandller']/option");
+	
+	/*
+	 * View 15
+	 * 
+	 */
+	 By view15_today_data = By.xpath("//*[@id='tableCtrl']//h4");
+	 String view15_today_data_table  = "//table[@id='VIEW_15_table-first1']//th"; 
 	
 	/*
 	 * View 3 table data
