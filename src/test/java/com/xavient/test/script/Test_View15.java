@@ -74,7 +74,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * 
 	 * @author csingh5
 	 */
-	@Test(enabled = true,priority=1)
+	@Test(enabled = true)
 	public void view3_validate_table_data() {
 		
 			helper.validate_table_names(driver.findElement(view15_today_data), "Test_View15", "view15_todays_data_details");
