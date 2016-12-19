@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,6 +28,7 @@ public class Test_View3 extends BaseClass implements  DashBoardView {
 WebDriver driver;
  Helper helper;
  WebDriverWait wait;
+ Logger logger = Logger.getLogger(Test_View3.class);
  
 /**
  * Calling Before Test for navigating to particular view3.
@@ -34,13 +36,14 @@ WebDriver driver;
  * @author NMakkar
  */
 	@BeforeTest
-	@Parameters({ "browser" })
+	@Parameters({ "browser"})
 	public void Before_Test(@Optional("Chrome") String browser) {
+		
 		driver = Browser_Selection(browser);
 		//Initialize
 		helper = new Helper();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
+		wait = new WebDriverWait(driver , 5);
 		//Navigating to URL.
 		driver.get(Properties_Reader.readProperty("URL"));
 		
@@ -48,22 +51,26 @@ WebDriver driver;
 		helper.handle_popup();
 		
 		//Login and Navigating to View
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(user_name)));
 		driver.findElement(user_name).sendKeys(Properties_Reader.readProperty("Username"));
 		driver.findElement(pword).sendKeys(Properties_Reader.readProperty("Password"));
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(submit_login)));
 		driver.findElement(submit_login).click();
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(View)));
 		driver.findElement(View).click();
 		driver.findElement(Queue_And_Agent_Overview).click();
 		driver.findElement(View3).click();
 		
-		 wait = new WebDriverWait(driver , 5);
+		
 		System.out.println("------Before Test------");
 	}
 /**
  * Validating Table and Column data.
  * @author NMakkar
  */
-	@Test
+	@Test(enabled=true, priority =1)
 	public void view3_validate_table_data()  {
+		logger.info("-----Start test case execution for :view3_validate_table_data------");
 		helper.validate_table_names( driver.findElement(view3_curr_data) ,  "Test_View3" , "view3_curr_data" );	
 		helper.validate_table_columns( view3_curr_data_table , driver , "" , "Test_View3" , "view3_curr_data_table" );	
 
@@ -74,16 +81,17 @@ WebDriver driver;
 		helper.validate_table_columns( view3_curr_agent_stats_col , driver , "" , "Test_View3" , "view3_curr_agent_stats_col" );
 	
 		helper.validate_table_names( driver.findElement(view3_agent_details) ,  "Test_View3" , "view3_agent_details" );	
-		helper.validate_table_columns( view3_Agent_table_data_start , driver , view3_Agent_table_data_end , "Test_View3" , "view3_Agent_table_data" );		
+		helper.validate_table_columns( view3_Agent_table_data_start , driver , view3_Agent_table_data_end , "Test_View3" , "view3_Agent_table_data" );
+		logger.info("-----End of test case execution for :view3_validate_table_data------");
 	}
 	
 	/**
 	 * @author NMakkar
 	 * Method is validating static data set of line graph 
 	 */
-	@Test
+	@Test(enabled=true,priority=4)
 	public void view3_validate_line_graph_data()  {
-	
+	logger.info("-----Start test case execution for :view3_validate_line_graph_data------");
 		//Navigating to line chart page. 	
 	wait.until(ExpectedConditions.visibilityOf(driver.findElement(lineChartToolTip)));
 	driver.findElement(lineChartToolTip).click();
@@ -93,15 +101,17 @@ WebDriver driver;
 	helper.validate_table_names(driver.findElement(view3_line_graph_title), "Test_View3", "view3_line_graph_title");
 	helper.validate_table_names(driver.findElement(view3_line_graph_y_axis), "Test_View3", "view3_line_graph_y_axis");
 	helper.validate_table_names(driver.findElement(view3_line_graph_header), "Test_View3", "view3_line_graph_header");
-	helper.validate_list_data(view3_line_graph_x_axis, driver , "Test_View3" , "view3_line_graph_x_axis" );	
+	helper.validate_list_data_axis(view3_graph_x_axis, driver , "Test_View3" , "view3_line_graph_x_axis" );	
+	logger.info("-----End of test case execution for :view3_validate_line_graph_data------");
 	}
 	
 	/**
 	 * Method is validating static data set of bar graph 
 	 * @author NMakkar
 	 */
-	@Test
+	@Test(enabled=true,priority =5)
 	public void view3_validate_bar_graph_data()  {
+		logger.info("-----Start test case execution for :view3_validate_bar_graph_data------");
 		//Navigating to Bar chart page. 
 	wait.until(ExpectedConditions.visibilityOf(driver.findElement(barGraphToolTip)));
 	driver.findElement(barGraphToolTip).click();
@@ -111,17 +121,20 @@ WebDriver driver;
 	helper.validate_table_names(driver.findElement(view3_bar_graph_title), "Test_View3", "view3_bar_graph_title");
 	helper.validate_table_names(driver.findElement(view3_bar_graph_y_axis), "Test_View3", "view3_bar_graph_y_axis");
 	helper.validate_table_names(driver.findElement(view3_bar_graph_header), "Test_View3", "view3_bar_graph_header");
-	helper.validate_list_data(view3_bar_graph_x_axis, driver , "Test_View3" , "view3_bar_graph_x_axis" );
+	helper.validate_list_data_axis(view3_graph_x_axis, driver , "Test_View3" , "view3_bar_graph_x_axis" );
+	logger.info("-----End of test case execution for :view3_validate_bar_graph_data------");
 	}
 	
 	/**
 	 * @author guneet
 	 * Method is validating table sorting
 	 */
-	@Test
+	@Test(enabled=true,priority =2)
 	public void view3_table_sorting() {
+		logger.info("-----Start test case execution for :view3_table_sorting------");
 		LinkedList<String>  tableData = new LinkedList<String>();
 		int tableComtentCount = helper.getWebelentSize(view3_agent_details_data, driver);
+		logger.info("Agent details table ");
 		int totalTableCount = helper.getWebelentSize(By.xpath(view3_Agent_table_data_start), driver);
 		if (tableComtentCount > 0) {
 			for (int i = 1; i <= totalTableCount; i++) {
@@ -139,16 +152,19 @@ WebDriver driver;
 				}
 			}
 		}
+		logger.info("-----End of test case execution for :view3_table_sorting------");
 	}
 	
 	/**
 	 * @author guneet
 	 * Method is validating table pagination
 	 */
-	@Test
+	@Test(enabled=true, priority = 3)
 	public void  view3_table_pagination() {
+		logger.info("-----Start test case execution for :view3_table_pagination------");
 		Select select = new Select(driver.findElement(pagerPageDrop));
 
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(pagerGridCount)));
 		String count=driver.findElement(pagerGridCount).getText();
 		Object[] pagerGridCountList = count.split(" "); 
 		
@@ -176,11 +192,12 @@ WebDriver driver;
 			Select select2 = new Select(driver.findElement(pagerPageDrop));
 			List<WebElement> dCount = select2.getOptions();
 			int dropList[] = {5,10,25,50,100};
-			for (int i = 0; i < dCount.size(); i++) {
+			for (int i = 0; i < dCount.size()-1; i++) {
 				select.selectByIndex(i);
 				Assert.assertEquals(dropList[i], Integer.parseInt(select2.getFirstSelectedOption().getText()));
 			}
 		}
+		logger.info("-----End of test case execution for :view3_table_pagination------");
 	}
 	
 	

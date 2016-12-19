@@ -14,10 +14,10 @@
 
 
 
-	<test name="Login">
+	<test name="Test_View3">
 		<parameter name="browser" value="Chrome" />
 		<classes>
-			<class name="com.xavient.test.script.Test_Login" />
+			<class name="com.xavient.test.script.Test_View3" />
 		</classes>
 	</test>
 </suite>

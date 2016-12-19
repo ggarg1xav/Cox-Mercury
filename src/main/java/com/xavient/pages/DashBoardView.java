@@ -1,6 +1,9 @@
 package com.xavient.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+
+import com.xavient.test.script.Test_View3;
 
 public interface DashBoardView {
 /**
@@ -48,7 +51,8 @@ public interface DashBoardView {
 	By view3_line_graph_title = By.xpath(".//*[contains(text(),'Current Agent Statistics For all COEs')]");
 	By view3_line_graph_header = By.xpath(".//*[contains(text(),'Agent AUX State Detail')]");
 	By view3_line_graph_y_axis = By.xpath(".//*[contains(text(),'Agent Count')]");
-	By view3_line_graph_x_axis = By.xpath(".//*[contains(text(),'Agents Break ')]/parent::*/parent::*/child::*/child::*");
+	//By view3_line_graph_x_axis = By.xpath(".//*[contains(text(),'Agents Break ')]/parent::*/parent::*/child::*/child::*");
+	 By view3_graph_x_axis = By.xpath("//*[contains(text(),'Agents Break ')]/parent::*/parent::*/child::*");
 	
 	
 	/*

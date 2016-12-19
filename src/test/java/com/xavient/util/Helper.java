@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -19,6 +20,8 @@ public class Helper {
 	 * Handling Browser pop-up with AutoIT.
 	 * @author NMakkar
 	 */
+	
+	Logger logger = Logger.getLogger(Helper.class);
 	public void handle_popup()
 	{
 		try {
@@ -31,6 +34,7 @@ public class Helper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		logger.info("Alert pop is closed");
 	}
 	/**
 	 * Method is fetching and comparing data from XLS and UI for multiple values. 
@@ -49,7 +53,11 @@ public class Helper {
 		int rows = driver.findElements(By.xpath(element_start+element_end)).size();
 
 		//Comparing No of columns
+		logger.info("-----Comparing the table columns size----- ");
+		logger.info("Actual table columns size from UI: "+rows);
+		logger.info("Expected table columns size from Excel: "+xls_col_names.size());
 		Assert.assertEquals(rows, xls_col_names.size() , "No of columns are not same");
+		
 
 		//Iterating for fetching elements from UI.
 		for (int i = 1 ;  i <= rows ; i ++)
@@ -58,6 +66,8 @@ public class Helper {
 			ui_col_names.add(driver.findElement(By.xpath(locator)).getText());
 		}
 		//Comparing List (Column Names)
+		logger.info("Actual table columns names from UI: "+ui_col_names);
+		logger.info("Expected table columns names from Excel: "+xls_col_names);
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All Column Names does not match");		
 	}
 	/**
@@ -72,8 +82,10 @@ public class Helper {
 	{
 		//XLS data.
 		String ui_col_names = element.getText();
+		logger.info("Actual table columns from UI: "+ui_col_names);
 		//UI Element data.
 		String xls_table_name = ExcelCache.getExpectedData(class_name , table_element);
+		logger.info("Expected table columns from excel: "+xls_table_name);
 		//Comparing String.
 		Assert.assertEquals(ui_col_names, xls_table_name , "Table Names are different");
 	}
@@ -86,6 +98,35 @@ public class Helper {
 		{
 			ui_col_names.add(webelement.getText());
 		}
+		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
+	}
+	
+	public void validate_list_data_axis( By element  , WebDriver driver  , String class_name , String table_element)
+	{
+		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
+		ArrayList<String> ui_col_names = new ArrayList<String>();	
+		String ui_innerlist="";
+		List<WebElement> listelement = driver.findElements(element);
+		for (WebElement webelement : listelement)
+		{
+			List<WebElement> listText=webelement.findElements(By.tagName("tspan"));
+			if (listText.size()>1)
+			{
+			for(WebElement textobject:listText)
+			{
+				ui_innerlist=ui_innerlist+textobject.getText()+" ";
+				
+			}
+			String ui_innerlistTrim = ui_innerlist.trim();
+			ui_col_names.add(ui_innerlistTrim);
+			}
+			else
+			{
+			String ele = webelement.findElement(By.tagName("tspan")).getText();
+			ui_col_names.add(ele);
+			}
+		}
+		System.out.println("Ui Values:"+ui_col_names);
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
 	}
 	
@@ -177,16 +218,21 @@ public class Helper {
 	 * @param order
 	 */
 	public void validateListIsSorted(LinkedList<String> tableData2, String order) {
+		
 		LinkedList<String> sortedData = new LinkedList<>(tableData2);
 		LinkedList<String> sortedData1 = new LinkedList<>(tableData2);
 		if (order.equalsIgnoreCase("asc"))
+		{
 			Collections.sort(sortedData);
+		logger.info("List data in ascending order :-  "+sortedData);
+		}
 		else if (order.equalsIgnoreCase("desc")) {
 			Collections.sort(sortedData1);
 			sortedData.clear();
 			for (int yy = sortedData1.size() - 1; yy >= 0; yy--) {
 				sortedData.add(sortedData1.get(yy).toString());
 			}
+			logger.info("List data in descending order :-  "+sortedData);
 		}
 		for (int i = 0; i < tableData2.size(); i++) {
 			Assert.assertEquals(sortedData.get(i), tableData2.get(i));
