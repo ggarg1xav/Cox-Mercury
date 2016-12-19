@@ -68,7 +68,7 @@ WebDriver driver;
  * Validating Table and Column data.
  * @author NMakkar
  */
-	@Test(enabled=true, priority =1)
+	@Test(enabled=false, priority =1)
 	public void view3_validate_table_data()  {
 		logger.info("-----Start test case execution for :view3_validate_table_data------");
 		helper.validate_table_names( driver.findElement(view3_curr_data) ,  "Test_View3" , "view3_curr_data" );	
@@ -89,7 +89,7 @@ WebDriver driver;
 	 * @author NMakkar
 	 * Method is validating static data set of line graph 
 	 */
-	@Test(enabled=true,priority=4)
+	@Test(enabled=false,priority=4)
 	public void view3_validate_line_graph_data()  {
 	logger.info("-----Start test case execution for :view3_validate_line_graph_data------");
 		//Navigating to line chart page. 	
@@ -109,7 +109,7 @@ WebDriver driver;
 	 * Method is validating static data set of bar graph 
 	 * @author NMakkar
 	 */
-	@Test(enabled=true,priority =5)
+	@Test(enabled=false,priority =5)
 	public void view3_validate_bar_graph_data()  {
 		logger.info("-----Start test case execution for :view3_validate_bar_graph_data------");
 		//Navigating to Bar chart page. 
@@ -129,7 +129,7 @@ WebDriver driver;
 	 * @author guneet
 	 * Method is validating table sorting
 	 */
-	@Test(enabled=true,priority =2)
+	@Test(enabled=false,priority =2)
 	public void view3_table_sorting() {
 		logger.info("-----Start test case execution for :view3_table_sorting------");
 		LinkedList<String>  tableData = new LinkedList<String>();
@@ -159,7 +159,7 @@ WebDriver driver;
 	 * @author guneet
 	 * Method is validating table pagination
 	 */
-	@Test(enabled=true, priority = 3)
+	@Test(enabled=false, priority = 3)
 	public void  view3_table_pagination() {
 		logger.info("-----Start test case execution for :view3_table_pagination------");
 		Select select = new Select(driver.findElement(pagerPageDrop));
@@ -200,6 +200,24 @@ WebDriver driver;
 		logger.info("-----End of test case execution for :view3_table_pagination------");
 	}
 	
+	/**
+	 * Validate pie chart data 
+	 * 
+	 */
+	
+	@Test(enabled=true,priority = 6)
+	public void view3_validate_piechart_data()  {
+		
+	wait.until(ExpectedConditions.visibilityOf(driver.findElement(lineChartToolTip)));
+	driver.findElement(lineChartToolTip).click();
+	logger.info("Click on the Line Chart Tool tip");
+	wait.until(ExpectedConditions.visibilityOf(driver.findElement(view3_line_graph_title)));
+	helper.validate_table_names(driver.findElement(view3_piechart_graph_header), "Test_View3", "view3_pie_chart_header");
+	wait.until(ExpectedConditions.visibilityOf(driver.findElement(view3_piechart_labels)));
+	helper.validate_list_data(view3_piechart_labels, driver, "Test_View3", "view3_piechart_labels");	
+	helper.validate_table_names(driver.findElement(view3_piechart_Total_Agents_label), "Test_View3", "view3_piechart_Total_Agents_label");
+	helper.validate_table_names(driver.findElement(view3_piechart_Agents_Staffed_label), "Test_View3", "view3_piechart_Agents_Staffed_label");
+	}
 	
 /**
  * Closing Browser After Test.
