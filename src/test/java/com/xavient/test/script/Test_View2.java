@@ -71,7 +71,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * @author nkumar9 
 	 * Method is validating static data set of Agent Count graph under line graph
 	 */
-	@Test(enabled = false, priority =1)
+	@Test(enabled = true, priority =1)
 	public void view2_linegraph_validate_AgentCount_data() {
 		logger.info("-----Start test case execution for :view2_linegraph_validate_AgentCount_data------");
 		WebDriverWait wait = new WebDriverWait(driver, 60);
@@ -86,10 +86,10 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		logger.info("Validating the X-axis labels of Agent Count graph");
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(view2_AgentCount_x_axis)));
-		helper.validate_list_data_axis(view2_AgentCount_x_axis, driver,"View2", "view2_AgentCount_x_axis");
+		helper.validate_list_data_axis(view2_AgentCount_x_axis, driver,"Test_View2", "view2_AgentCount_x_axis");
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(view2_AgentCount_y_axis)));
-		helper.validate_graph_data_yaxis(view2_AgentCount_y_axis, driver,"View2", "view2_AgentCount_y_axis");
+		helper.validate_graph_data_yaxis(view2_AgentCount_y_axis, driver,"Test_View2", "view2_AgentCount_y_axis");
 		logger.info("-----End of test case execution for :view2_linegraph_validate_AgentCount_data------");
 	}
 
@@ -97,7 +97,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * @author nkumar9 
 	 * Method is validating static data set of percentage graph under line graph
 	 */
-	@Test(enabled = false, priority =2)
+	@Test(enabled = true, priority =2)
 	public void view2_linegraph_validate_PencetageGraph_data() {
 		logger.info("-----Start test case execution for :view2_linegraph_validate_PencetageGraph_data------");
 
@@ -119,7 +119,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		logger.info("Validating the Y-axis labels of Percentage graph");
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(view2_Percentage_y_axis)));
-		helper.validate_graph_data_yaxis(view2_Percentage_y_axis, driver,"View2", "view2_Percentage_y_axis");
+		helper.validate_graph_data_yaxis(view2_Percentage_y_axis, driver,"Test_View2", "view2_Percentage_y_axis");
 		logger.info("-----End of test case execution for :view2_linegraph_validate_PencetageGraph_data------");
 	}
 
@@ -127,7 +127,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * @author nkumar9 
 	 * Method is validating static data set of Time graph under line graph
 	 */
-	@Test(enabled = false , priority =3)
+	@Test(enabled = true , priority =3)
 	public void view2_linegraph_validate_TimeGraph_data() {
 		logger.info("-----Start test case execution for :view2_linegraph_validate_TimeGraph_data------");
 		WebDriverWait wait = new WebDriverWait(driver, 60);
@@ -147,7 +147,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		logger.info("Validating the Y-axis labels of Time graph");
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(view2_Time_y_axis)));
-		helper.validate_graph_data_yaxis(view2_Time_y_axis, driver,"View2", "view2_Time_y_axis");
+		helper.validate_graph_data_yaxis(view2_Time_y_axis, driver,"Test_View2", "view2_Time_y_axis");
 		logger.info("-----End of test case execution for :view2_linegraph_validate_TimeGraph_data------");
 	}
 	
@@ -173,10 +173,10 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		logger.info("Validating the X-axis labels of Agent Count graph");
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(view2_AgentCount_x_axis)));
-		helper.validate_list_data_axis(view2_AgentCount_x_axis, driver,"View2", "view2_AgentCount_x_axis");
+		helper.validate_list_data_axis(view2_AgentCount_x_axis, driver,"Test_View2", "view2_AgentCount_x_axis");
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(view2_AgentCount_y_axis)));
-		helper.validate_graph_data_yaxis(view2_AgentCount_y_axis, driver,"View2", "view2_AgentCount_y_axis");
+		helper.validate_graph_data_yaxis(view2_AgentCount_y_axis, driver,"Test_View2", "view2_AgentCount_y_axis");
 		logger.info("-----End of test case execution for :view2_bargraph_validate_AgentCount_data------");
 	}
 
@@ -184,7 +184,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * @author nkumar9 
 	 * Method is validating static data set of percentage graph under bar graph
 	 */
-	@Test(enabled = false , priority =5)
+	@Test(enabled = true , priority =5)
 	public void view2_bargraph_validate_PencetageGraph_data() {
 		logger.info("-----Start test case execution for :view2_bargraph_validate_PencetageGraph_data------");
 
@@ -202,7 +202,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		helper.validate_list_data_axis(view2_Percentage_x_axis,
 				driver, "View2", "view2_Percentage_x_axis");
 		logger.info("Validating the Y-axis labels of Percentage graph");
-		helper.validate_graph_data_yaxis(view2_Percentage_y_axis, driver,"View2", "view2_Percentage_y_axis");
+		helper.validate_graph_data_yaxis(view2_Percentage_y_axis, driver,"Test_View2", "view2_Percentage_y_axis");
 		logger.info("-----End of test case execution for :view2_bargraph_validate_PencetageGraph_data------");
 	}
 
@@ -210,7 +210,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * @author nkumar9 
 	 * Method is validating static data set of Time graph under bar graph
 	 */
-	@Test(enabled = false , priority =6)
+	@Test(enabled = true , priority =6)
 	public void view2_bargraph_validate_TimeGraph_data() {
 		logger.info("-----Start test case execution for :view2_bargraph_validate_TimeGraph_data------");
 		WebDriverWait wait = new WebDriverWait(driver, 60);
@@ -228,7 +228,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		helper.validate_list_data_axis(view2_Time_x_axis, driver,
 				"View2", "view2_Time_x_axis");
 		logger.info("Validating the Y-axis labels of Time graph");
-		helper.validate_graph_data_yaxis(view2_Time_y_axis, driver,"View2", "view2_Time_y_axis");
+		helper.validate_graph_data_yaxis(view2_Time_y_axis, driver,"Test_View2", "view2_Time_y_axis");
 		logger.info("-----End of test case execution for :view2_bargraph_validate_TimeGraph_data------");
 	}
 
