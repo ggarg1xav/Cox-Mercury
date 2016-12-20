@@ -52,10 +52,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 			helper.handle_popup();
 
 			// Login and Navigating to View
-			driver.findElement(user_name).sendKeys(Properties_Reader.readProperty("Username"));
-			driver.findElement(pword).sendKeys(Properties_Reader.readProperty("Password"));
-			wait.until(ExpectedConditions.visibilityOf(driver.findElement(submit_login)));
-			driver.findElement(submit_login).click();
+			helper.login(driver);
 			wait.until(ExpectedConditions.visibilityOf(driver.findElement(View)));
 			driver.findElement(View).click();
 			driver.findElement(Queue_And_Agent_Overview).click();

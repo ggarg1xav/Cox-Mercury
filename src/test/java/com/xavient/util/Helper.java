@@ -13,15 +13,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-public class Helper {
+import com.xavient.pages.DashBoardView;
+
+public class Helper implements DashBoardView{
 	/**
 	 * Handling Browser pop-up with AutoIT.
 	 * @author NMakkar
 	 */
 	
 	Logger logger = Logger.getLogger(Helper.class);
+	
 	public void handle_popup()
 	{
 		try {
@@ -238,5 +243,39 @@ public class Helper {
 			Assert.assertEquals(sortedData.get(i), tableData2.get(i));
 		}
 
+	}
+	
+	public void login(WebDriver driver)
+	{
+		WebDriverWait wait = new WebDriverWait(driver, 5);
+		driver.findElement(user_name).sendKeys(Properties_Reader.readProperty("Username"));
+		driver.findElement(pword).sendKeys(Properties_Reader.readProperty("Password"));
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(submit_login)));
+		//driver.findElement(submit_login).click();
+		clickByJavascript(driver, driver.findElement(submit_login));
+		Boolean viewPresent = isElementPresent(driver, View);
+		if(!viewPresent)
+		{
+			clickByJavascript(driver, driver.findElement(submit_login));
+			logger.info("Clicked login button at second attempt");
+		}
+	}
+	
+	public void clickByJavascript(WebDriver driver, WebElement ele)
+	{
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", ele);
+	}
+	
+	public boolean isElementPresent(WebDriver driver,By ele)
+	{
+		boolean flag = false;
+		try {
+			driver.findElement(ele);
+			flag = true;
+		} catch (Exception e) {
+			flag = false;
+		}
+		return flag;
 	}
 }
