@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -16,7 +15,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
 import com.xavient.pages.DashBoardView;
 
 public class Helper implements DashBoardView{
@@ -245,6 +243,12 @@ public class Helper implements DashBoardView{
 
 	}
 	
+
+	/**
+	 * Login Method 
+	 * @param driver
+	 * @author csingh5
+	 */
 	public void login(WebDriver driver)
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -261,12 +265,25 @@ public class Helper implements DashBoardView{
 		}
 	}
 	
+	/**
+	 * Click By Java script
+	 * @param driver
+	 * @param ele
+	 * @author csingh5
+	 */
 	public void clickByJavascript(WebDriver driver, WebElement ele)
 	{
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", ele);
 	}
 	
+	/**
+	 * Verify Element is present or not
+	 * @author csingh5
+	 * @param driver
+	 * @param ele
+	 * @return
+	 */
 	public boolean isElementPresent(WebDriver driver,By ele)
 	{
 		boolean flag = false;
@@ -278,4 +295,24 @@ public class Helper implements DashBoardView{
 		}
 		return flag;
 	}
+
+	/**
+	 * Handling table drill-down operation.
+	 * @author guneet
+	 */	
+	public void validate_drilldown(String view2Table, String view2DrillStart, String view2DrillEnd, WebDriver driver) {
+		waitForBrowserToLoadCompletely(driver);
+		int count = driver.findElements(By.xpath(view2Table)).size();
+		int i = 1;
+		if (count > 0) {
+			List<WebElement> dr = driver.findElements(By.xpath(view2DrillStart + i + view2DrillEnd));
+			while (dr.get(dr.size() - 1).getAttribute("class").toString()
+					.equalsIgnoreCase("treegrid-expander treegrid-expander-collapsed drilling")) {
+				dr.get(dr.size() - 1).click();
+				i++;
+				dr = driver.findElements(By.xpath(view2DrillStart + i + view2DrillEnd));
+			}
+		}
+	}	
+
 }
