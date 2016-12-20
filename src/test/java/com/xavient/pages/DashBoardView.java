@@ -131,7 +131,8 @@ public interface DashBoardView {
 	 By view15_Site_Detail_data = By.xpath("//h4[text()='Site Detail']");
 	 String view15_Site_Detail_data_table  = "//*[@id='VIEW_15_table-fifth1']//th";
 	 By view15_Agent_Detail_data = By.xpath("//h4[text()='Agent Detail']");
-	 String view15_Agent_Detail_data_table  = "//*[@class='ui-grid-cell-contents']/span[1]";
+	 String view15_Agent_Detail_data_table_start  = "//*[@class='ui-grid-cell-contents']";
+	 String view15_Agent_Detail_data_table_end  = "/span[1]";
 	 
 	/*
 	 * View 3 table data

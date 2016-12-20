@@ -82,7 +82,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		helper.validate_table_names(driver.findElement(view15_Site_Detail_data), "Test_View15", "view15_Site_Detail_data");
 		helper.validate_table_columns(view15_Site_Detail_data_table, driver, "", "Test_View15", "view15_Site_Detail_data_table");
 		helper.validate_table_names(driver.findElement(view15_Agent_Detail_data), "Test_View15", "view15_Agent_Detail_data");
-		helper.validate_table_columns(view15_Agent_Detail_data_table, driver, "", "Test_View15", "view15_Agent_Detail_data_table");
+		helper.validate_table_columns(view15_Agent_Detail_data_table_start, driver, view15_Agent_Detail_data_table_end, "Test_View15", "view15_Agent_Detail_data_table");
 	}
 
 	/**
