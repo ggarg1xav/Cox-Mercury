@@ -15,7 +15,7 @@
 
 
 	<test name="Login">
-		<parameter name="browser" value="Chrome" />
+		<parameter name="browser" value="ie" />
 		<classes>
 			<class name="com.xavient.test.script.Test_View1" />
 		</classes>

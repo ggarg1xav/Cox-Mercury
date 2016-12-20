@@ -10,13 +10,12 @@ public interface DashBoardView {
 	By pword = By.id("pword");
 	By user_name = 	By.id("username");
 	By submit_login = By.name("go");
-	
 	By alertBtn = By.xpath("//button[contains(@ng-click,'getNotification')]");
 	By loginUserName = By.className("");
 	By signOut = By.xpath("//i[@tooltip='LogOut']");
 
 	By headerTitle = By.xpath("//div[@class=\"panel-heading\"]/h4/span");
-	
+	By IECertificate = By.id("overridelink");
 	/*
 	 Home Page 
 	 */
