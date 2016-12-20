@@ -272,21 +272,11 @@ public class Helper implements DashBoardView{
 		}
 	}
 	
-	/**
-	 * Click by JS.
-	 * @author csingh5
-	 */
-	
 	public void clickByJavascript(WebDriver driver, WebElement ele)
 	{
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", ele);
 	}
-	
-	/**
-	 * Verify Element is present or not.
-	 * @author csingh5
-	 */
 	
 	public boolean isElementPresent(WebDriver driver,By ele)
 	{
@@ -389,4 +379,28 @@ public class Helper implements DashBoardView{
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names), true, "All values does not match");
 	}
 
+	
+	/**
+	 * Method is fetching and comparing data from XLS and UI for Y-axis values from the graph values.
+	 * @author nkumar9
+	 * @param element
+	 * @param class_name
+	 * @param table_element
+	 */
+	public void validate_DropDownListData( By element, WebDriver driver, String class_name, String table_element)
+	{
+		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
+		ArrayList<String> ui_col_names = new ArrayList<String>();	
+		
+		List<WebElement> listelement = driver.findElements(element);
+		for(WebElement object :listelement)
+		{
+			String value = object.getText();
+			ui_col_names.add(value);
+		}
+		
+		logger.info("Actual drop down Values from UI:"+ui_col_names);
+		logger.info("Expected drop down values from Excel Sheet:"+xls_col_names);
+		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
+	}
 }
