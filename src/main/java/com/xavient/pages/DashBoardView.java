@@ -24,6 +24,10 @@ public interface DashBoardView {
 	By View = By.cssSelector(".fa.fa-file-text-o");
 	By View3 = By.xpath(".//*[contains(text(),'LOB Queue & Agent Overview With COE Agent Drilldown View')]");
 	By Queue_And_Agent_Overview = By.xpath(".//*[contains(text(),'Queue And Agent Overview')]");
+	
+	By Queue_Summary_EMC = By.xpath(".//*[contains(text(),'Queue Summary - EMC')]");
+	By View2 = By.xpath(".//*[contains(text(),' LOB Summary View')]"); 
+
 
 	
 	
@@ -114,4 +118,24 @@ public interface DashBoardView {
 	 * View 3 table data
 	 */
 	By view3_agent_details_data = By.xpath("//div[@class='ui-grid-canvas']/div");
+	
+	/*
+	 view2 - Line Chart.
+	 */
+	By view2_line_graph_header = By.xpath(".//a[contains(text(),'  LOB Summary View')]");
+	By view2_AgentCount_y_axis_label = By.xpath(".//*[contains(text(),'Agent Count')]");
+	By view2_AgentCount_x_axis = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'Current Calls Offered')]/parent::*/parent::*/child::*");
+	By view2_AgentCount_y_axis = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'Agent Count')]/parent::*/parent::*/child::*");
+	
+	
+	By view2_Percentage_y_axis_label = By.xpath(".//*[contains(text(),'Percentage')]");
+	By view2_Percentage_x_axis = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'ABN')]/parent::*/parent::*/child::*");
+	By view2_Percentage_y_axis = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'Percentage')]/parent::*/parent::*/child::*");
+	
+	By view2_Time_y_axis_label = By.xpath("//*[name()='svg']//*[name()='g']//*[contains(text(),'Time')]");
+	By view2_Time_x_axis = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'AWBA')]/parent::*/parent::*/child::*");
+	By view2_Time_y_axis = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'Time')]/parent::*/parent::*/child::*");
+	
+	
+	
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -19,6 +20,7 @@ public class Helper {
 	 * Handling Browser pop-up with AutoIT.
 	 * @author NMakkar
 	 */
+	public static Logger logger = Logger.getLogger(Helper.class.getName());
 	public void handle_popup()
 	{
 		try {
@@ -86,6 +88,87 @@ public class Helper {
 		{
 			ui_col_names.add(webelement.getText());
 		}
+		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
+	}
+	/**
+	 * Method is fetching and comparing data from XLS and UI for X-axis values from the graph values.
+	 * @author nkumar9
+	 * @param element
+	 * @param class_name
+	 * @param table_element
+	 */
+	public void validate_list_data_axis( By element  , WebDriver driver  , String class_name , String table_element)
+	{
+		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
+		ArrayList<String> ui_col_names = new ArrayList<String>();	
+		
+		List<WebElement> listelement = driver.findElements(element);
+		for (int i=0;i<listelement.size();i++)
+		{   
+			WebElement webelement= listelement.get(i);
+			String ui_innerlist="";
+			List<WebElement> listText=webelement.findElements(By.tagName("tspan"));
+			if (listText.size()>1)
+			{
+				listText=webelement.findElements(By.tagName("tspan"));
+			for(WebElement textobject:listText)
+			{
+				ui_innerlist=ui_innerlist+textobject.getText()+" ";
+				
+			}
+			String ui_innerlistTrim = ui_innerlist.trim();
+			ui_col_names.add(ui_innerlistTrim);
+			}
+			else
+			{
+			webelement= listelement.get(i);
+			String ele = webelement.findElement(By.tagName("tspan")).getText();
+			ui_col_names.add(ele);
+			}
+		}
+		logger.info("Actual Values from UI:"+ui_col_names);
+		logger.info("Expected values from Excel Sheet:"+xls_col_names);
+		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
+	}
+	
+	/**
+	 * Method is fetching and comparing data from XLS and UI for Y-axis values from the graph values.
+	 * @author nkumar9
+	 * @param element
+	 * @param class_name
+	 * @param table_element
+	 */
+	public void validate_graph_data_yaxis( By element  , WebDriver driver  , String class_name , String table_element)
+	{
+		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
+		ArrayList<String> ui_col_names = new ArrayList<String>();	
+		
+		List<WebElement> listelement = driver.findElements(element);
+		for (int i=0;i<listelement.size()-1;i++)
+		{
+			WebElement elmt= listelement.get(i);
+			String ui_innerlist="";
+			List<WebElement> listText=elmt.findElements(By.tagName("tspan"));
+			if (listText.size()>1)
+			{
+				
+			for(WebElement textobject:listText)
+			{
+				ui_innerlist=ui_innerlist+textobject.getText()+" ";
+				
+			}
+			String ui_innerlistTrim = ui_innerlist.trim();
+			ui_col_names.add(ui_innerlistTrim);
+			}
+			else
+			{
+			elmt= listelement.get(i);
+			String ele = elmt.findElement(By.tagName("tspan")).getText();
+			ui_col_names.add(ele);
+			}
+		}
+		logger.info("Actual Values from UI:"+ui_col_names);
+		logger.info("Expected values from Excel Sheet:"+xls_col_names);
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
 	}
 	
