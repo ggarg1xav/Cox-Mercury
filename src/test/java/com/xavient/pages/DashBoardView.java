@@ -126,6 +126,10 @@ public interface DashBoardView {
 	 String view15_current_data_table  = "//*[@id='VIEW_15_table-second1']//th"; 
 	 By view15_Half_Hour_data = By.xpath("//h4[text()='Half Hour Data']");
 	 String view15_Half_Hour_data_table  = "//*[@id='VIEW_15_table-third1']//th";
+	 By view15_Agents_Statistics_data = By.xpath("//h4[text()='Agents Statistics for all COEs']");
+	 String view15_Agents_Statistics_data_table  = "//*[@id='VIEW_15_table-four1']//th";
+	 By view15_Site_Detail_data = By.xpath("//h4[text()='Site Detail']");
+	 String view15_Site_Detail_data_table  = "//*[@id='VIEW_15_table-fifth1']//th";
 	 
 	/*
 	 * View 3 table data
