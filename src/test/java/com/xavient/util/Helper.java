@@ -14,6 +14,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -102,6 +103,7 @@ public class Helper implements DashBoardView{
 		for (WebElement webelement : listelement)
 		{
 			ui_col_names.add(webelement.getText());
+
 		}
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
 	}
@@ -312,4 +314,35 @@ public class Helper implements DashBoardView{
 			}
 		}
 	}	
+	
+	/**
+	 * Validating filter heading
+	 * @author guneet
+	 */	
+	public void validate_filter_data(By element, WebDriver driver, String class_name, String table_element) {
+		List<String> xls_col_names = ExcelCache.getExpectedListData(class_name, table_element);
+		ArrayList<String> ui_col_names = new ArrayList<String>();
+		List<WebElement> listelement = driver.findElements(element);
+		for (int i = 0; i < listelement.size() - 2; i++) {
+			ui_col_names.add(listelement.get(i).getText());
+		}
+		Assert.assertEquals(xls_col_names.containsAll(ui_col_names), true, "All values does not match");
+	}
+
+	/**
+	 * Validating dropdown values
+	 * @author guneet
+	 */	
+	public void validate_filter_dropdown_data(By element, WebDriver driver, String class_name, String table_element) {
+		List<String> xls_col_names = ExcelCache.getExpectedListData(class_name, table_element);
+		Select select = new Select(driver.findElement(element));
+		ArrayList<String> ui_col_names = new ArrayList<String>();
+		List<WebElement> elementCount = select.getOptions();
+
+		for (int i = 0; i < elementCount.size() - 1; i++) {
+			ui_col_names.add(elementCount.get(i).getAttribute("label").toString());
+		}
+		Assert.assertEquals(xls_col_names.containsAll(ui_col_names), true, "All values does not match");
+	}
+	
 }
