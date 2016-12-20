@@ -78,6 +78,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 			helper.validate_table_columns(view15_current_data_table, driver, "", "Test_View15", "view15_current_data_table");
 			helper.validate_table_names(driver.findElement(view15_Half_Hour_data), "Test_View15", "view15_view15_Half_Hour_data_details");
 			helper.validate_table_columns(view15_Half_Hour_data_table, driver, "", "Test_View15", "view15_view15_Half_Hour_data_table");
+			System.out.println("Test");
 	}
 	
 	/**
