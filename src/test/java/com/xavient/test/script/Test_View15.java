@@ -186,7 +186,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		logger.info("-----End of test case execution for :view15_table_sorting------");
 	}
 	
-	// Graph test cases are not completed as we are facing the java script error on the graphs
+	// Graph test cases are not completed as we are facing the java script error on the graphs.
 	
 	/**
 	 * @author csingh
