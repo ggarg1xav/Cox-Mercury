@@ -4,30 +4,30 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
 public interface DashBoardView {
-/**
- * Locators for All Pages
- * 
- */
+	/**
+	 * Locators for All Pages
+	 * 
+	 */
 	By pword = By.id("pword");
 	By user_name = 	By.id("username");
 	By submit_login = By.name("go");
-	
+
 	By alertBtn = By.xpath("//button[contains(@ng-click,'getNotification')]");
 	By loginUserName = By.className("");
 	By signOut = By.xpath("//i[@tooltip='LogOut']");
 
 	By headerTitle = By.xpath("//div[@class=\"panel-heading\"]/h4/span");
-	
+
 	/*
 	 Home Page 
 	 */
-	
+
 	By View = By.cssSelector(".fa.fa-file-text-o");
 	By View3 = By.xpath(".//*[contains(text(),'LOB Queue & Agent Overview With COE Agent Drilldown View')]");
 	By Queue_And_Agent_Overview = By.xpath(".//*[contains(text(),'Queue And Agent Overview')]");
 	By View15 = By.xpath("//*[@class='nav nav-pills nav-stacked']//*[contains(text(),'COE With Agent View')]");
-	
-	
+
+
 	/*
 	 view 3 - Table Names
 	 */
@@ -35,7 +35,7 @@ public interface DashBoardView {
 	By view3_today_data = By.xpath(".//*[contains(text(),\"Today's Data\")]");
 	By view3_curr_agent_stats_tbl = By.xpath(".//*[contains(text(),'Current Agents Statistics for all COEs')]");
 	By view3_agent_details = By.xpath(".//*[@id='tableCtrl']/div/div[3]/div/div[1]/div/h4");
-	
+
 	String view3_curr_data_table  = ".//*[@id='VIEW_3_table-first1']/thead/tr/th"; 
 	String view3_Agent_table_data_start = "//div[@class='ui-grid-header-cell-row']/descendant::Div[@class='ui-grid-cell-contents']" ;
 	String view3_Agent_table_data_end = "/span[1]";
@@ -50,9 +50,9 @@ public interface DashBoardView {
 	By view3_line_graph_header = By.xpath(".//*[contains(text(),'Agent AUX State Detail')]");
 	By view3_line_graph_y_axis = By.xpath(".//*[contains(text(),'Agent Count')]");
 	//By view3_line_graph_x_axis = By.xpath(".//*[contains(text(),'Agents Break ')]/parent::*/parent::*/child::*/child::*");
-	 By view3_graph_x_axis = By.xpath("//*[contains(text(),'Agents Break ')]/parent::*/parent::*/child::*");
-	
-	
+	By view3_graph_x_axis = By.xpath("//*[contains(text(),'Agents Break ')]/parent::*/parent::*/child::*");
+
+
 	/*
 	 view 3 - Bar Chart.
 	 */
@@ -91,6 +91,7 @@ public interface DashBoardView {
 	By pagerGridCount = By.xpath("//div[@class=\"ui-grid-pager-count\"]/span");
 
 	By searchTextBox = By.xpath("//input[contains(@placeholder,'Search')]");
+	By noRecordData = By.xpath("//div[@class='alert alert-danger noDataGrid']");
 
 	/*
 	 * Filter
@@ -115,24 +116,29 @@ public interface DashBoardView {
 	By subFunctionalGroupsFilterList = By.xpath(".//*[@id='subFunGroupHandller']/option");
 	By languageFilterList = By.xpath(".//*[@id='langHandller']/option");
 	By timeZoneFilterList = By.xpath(".//*[@id='tzHandller']/option");
-	
+
 	/*
 	 * View 15
 	 * 
 	 */
-	 By view15_today_data = By.xpath("//*[@id='tableCtrl']//h4");
-	 String view15_today_data_table  = "//table[@id='VIEW_15_table-first1']//th"; 
-	 By view15_current_data = By.xpath("//h4[text()='Current Data']");
-	 String view15_current_data_table  = "//*[@id='VIEW_15_table-second1']//th"; 
-	 By view15_Half_Hour_data = By.xpath("//h4[text()='Half Hour Data']");
-	 String view15_Half_Hour_data_table  = "//*[@id='VIEW_15_table-third1']//th";
-	 By view15_Agents_Statistics_data = By.xpath("//h4[text()='Agents Statistics for all COEs']");
-	 String view15_Agents_Statistics_data_table  = "//*[@id='VIEW_15_table-four1']//th";
-	 By view15_Site_Detail_data = By.xpath("//h4[text()='Site Detail']");
-	 String view15_Site_Detail_data_table  = "//*[@id='VIEW_15_table-fifth1']//th";
-	 By view15_Agent_Detail_data = By.xpath("//h4[text()='Agent Detail']");
-	 String view15_Agent_Detail_data_table  = "//*[@class='ui-grid-cell-contents']/span[1]";
-	 
+	By view15_today_data = By.xpath("//*[@id='tableCtrl']//h4");
+	String view15_today_data_table  = "//table[@id='VIEW_15_table-first1']//th"; 
+	By view15_current_data = By.xpath("//h4[text()='Current Data']");
+	String view15_current_data_table  = "//*[@id='VIEW_15_table-second1']//th"; 
+	By view15_Half_Hour_data = By.xpath("//h4[text()='Half Hour Data']");
+	String view15_Half_Hour_data_table  = "//*[@id='VIEW_15_table-third1']//th";
+	By view15_Agents_Statistics_data = By.xpath("//h4[text()='Agents Statistics for all COEs']");
+	String view15_Agents_Statistics_data_table  = "//*[@id='VIEW_15_table-four1']//th";
+	By view15_Site_Detail_data = By.xpath("//h4[text()='Site Detail']");
+	String view15_Site_Detail_data_table  = "//*[@id='VIEW_15_table-fifth1']//th";
+	By view15_Agent_Detail_data = By.xpath("//h4[text()='Agent Detail']");
+	String view15_Agent_Detail_data_table  = "//*[@class='ui-grid-cell-contents']/span[1]";
+
+	/*
+	 * view 15 - Line Chart.
+	 */
+	
+	
 	/*
 	 * View 3 table data
 	 */
