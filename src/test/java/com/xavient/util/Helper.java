@@ -245,6 +245,11 @@ public class Helper implements DashBoardView{
 
 	}
 	
+	/**
+	 * Login method.
+	 * @author csingh5
+	 */
+	
 	public void login(WebDriver driver)
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -261,11 +266,21 @@ public class Helper implements DashBoardView{
 		}
 	}
 	
+	/**
+	 * Click by JS.
+	 * @author csingh5
+	 */
+	
 	public void clickByJavascript(WebDriver driver, WebElement ele)
 	{
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", ele);
 	}
+	
+	/**
+	 * Verify Element is present or not.
+	 * @author csingh5
+	 */
 	
 	public boolean isElementPresent(WebDriver driver,By ele)
 	{
