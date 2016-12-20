@@ -82,7 +82,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		logger.info("Successfully clicked on Line Chart image");
 		// Validating all static data.
 		logger.info("Validating the Y-axis labels of Agent Count graph");
-		helper.validate_table_names(driver.findElement(view2_AgentCount_y_axis_label), "View2","view2_AgentCount_y_axis_label");
+		helper.validate_table_names(driver.findElement(view2_AgentCount_y_axis_label), "Test_View2","view2_AgentCount_y_axis_label");
 		logger.info("Validating the X-axis labels of Agent Count graph");
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(view2_AgentCount_x_axis)));
@@ -109,13 +109,13 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		// Validating all static data of percentage graph.
 		logger.info("Validating the Y-axis labels of Percentage graph");
 		helper.validate_table_names(
-				driver.findElement(view2_Percentage_y_axis_label), "View2",
+				driver.findElement(view2_Percentage_y_axis_label), "Test_View2",
 				"view2_Percentage_y_axis_label");
 		logger.info("Validating the X-axis labels of Percentage graph");
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(view2_Percentage_x_axis)));
 		helper.validate_list_data_axis(view2_Percentage_x_axis,
-				driver, "View2", "view2_Percentage_x_axis");
+				driver, "Test_View2", "view2_Percentage_x_axis");
 		logger.info("Validating the Y-axis labels of Percentage graph");
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(view2_Percentage_y_axis)));
@@ -137,13 +137,13 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		// Validating all static data of Time graph.
 		logger.info("Validating the Y-axis labels of Time graph");
 		helper.validate_table_names(
-				driver.findElement(view2_Time_y_axis_label), "View2",
+				driver.findElement(view2_Time_y_axis_label), "Test_View2",
 				"view2_Time_y_axis_label");
 		logger.info("Validating the X-axis labels of Time graph");
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(view2_Time_x_axis)));
 		helper.validate_list_data_axis(view2_Time_x_axis, driver,
-				"View2", "view2_Time_x_axis");
+				"Test_View2", "view2_Time_x_axis");
 		logger.info("Validating the Y-axis labels of Time graph");
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(view2_Time_y_axis)));
@@ -169,7 +169,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 				.findElement(view2_AgentCount_y_axis_label))));
 		// Validating all static data.
 		logger.info("Validating the Y-axis labels of Agent Count graph");
-		helper.validate_table_names(driver.findElement(view2_AgentCount_y_axis_label), "View2","view2_AgentCount_y_axis_label");
+		helper.validate_table_names(driver.findElement(view2_AgentCount_y_axis_label), "Test_View2","view2_AgentCount_y_axis_label");
 		logger.info("Validating the X-axis labels of Agent Count graph");
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(view2_AgentCount_x_axis)));
@@ -196,11 +196,11 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		// Validating all static data of percentage graph.
 		logger.info("Validating the Y-axis labels of Percentage graph");
 		helper.validate_table_names(
-				driver.findElement(view2_Percentage_y_axis_label), "View2",
+				driver.findElement(view2_Percentage_y_axis_label), "Test_View2",
 				"view2_Percentage_y_axis_label");
 		logger.info("Validating the X-axis labels of Percentage graph");
 		helper.validate_list_data_axis(view2_Percentage_x_axis,
-				driver, "View2", "view2_Percentage_x_axis");
+				driver, "Test_View2", "view2_Percentage_x_axis");
 		logger.info("Validating the Y-axis labels of Percentage graph");
 		helper.validate_graph_data_yaxis(view2_Percentage_y_axis, driver,"Test_View2", "view2_Percentage_y_axis");
 		logger.info("-----End of test case execution for :view2_bargraph_validate_PencetageGraph_data------");
@@ -220,13 +220,13 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		// Validating all static data of Time graph.
 		logger.info("Validating the Y-axis labels of Time graph");
 		helper.validate_table_names(
-				driver.findElement(view2_Time_y_axis_label), "View2",
+				driver.findElement(view2_Time_y_axis_label), "Test_View2",
 				"view2_Time_y_axis_label");
 		logger.info("Validating the X-axis labels of Time graph");
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(view2_Time_x_axis)));
 		helper.validate_list_data_axis(view2_Time_x_axis, driver,
-				"View2", "view2_Time_x_axis");
+				"Test_View2", "view2_Time_x_axis");
 		logger.info("Validating the Y-axis labels of Time graph");
 		helper.validate_graph_data_yaxis(view2_Time_y_axis, driver,"Test_View2", "view2_Time_y_axis");
 		logger.info("-----End of test case execution for :view2_bargraph_validate_TimeGraph_data------");
