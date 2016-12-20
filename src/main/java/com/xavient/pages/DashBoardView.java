@@ -24,8 +24,10 @@ public interface DashBoardView {
 	By View = By.cssSelector(".fa.fa-file-text-o");
 	By View3 = By.xpath(".//*[contains(text(),'LOB Queue & Agent Overview With COE Agent Drilldown View')]");
 	By Queue_And_Agent_Overview = By.xpath(".//*[contains(text(),'Queue And Agent Overview')]");
-
+//view 1
 	
+	By Queue_Summary = By.xpath(".//*[contains(text(),'Queue Summary')]");	
+	By View1 = By.xpath(".//*[contains(text(),'Residential EMC Summary View')]");
 	
 	/*
 	 view 3 - Table Names
