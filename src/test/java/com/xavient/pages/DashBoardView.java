@@ -158,4 +158,7 @@ public interface DashBoardView {
 	By view2_Time_x_axis = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'AWBA')]/parent::*/parent::*/child::*");
 	By view2_Time_y_axis = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'Time')]/parent::*/parent::*/child::*");
 	
+	By lst_chart_dd =By.xpath(".//*[@id='div_first']/div[1]/div/div[2]/ul/li");
+	By icon_lst_chart_dd= By.xpath("//*[@id='div_first']/div[1]/div/div[2]/button");
+	
 }

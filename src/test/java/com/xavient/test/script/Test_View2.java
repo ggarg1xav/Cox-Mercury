@@ -3,6 +3,7 @@ package com.xavient.test.script;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -80,6 +81,8 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 				.findElement(lineChartToolTip)));
 		driver.findElement(lineChartToolTip).click();
 		logger.info("Successfully clicked on Line Chart image");
+		driver.findElement(pauseToolTip).click();
+		logger.info("Successfully clicked on pause button");
 		// Validating all static data.
 		logger.info("Validating the Y-axis labels of Agent Count graph");
 		helper.validate_table_names(driver.findElement(view2_AgentCount_y_axis_label), "Test_View2","view2_AgentCount_y_axis_label");
@@ -153,9 +156,23 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	
 	/**
 	 * @author nkumar9 
-	 * Method is validating static data set of Agent Count graph under bar graph
+	 * Method is to validate the drop down list values in line chart
 	 */
 	@Test(enabled = true , priority =4)
+	public void view2_line_graph_chart_validate_dropdown() {
+		logger.info("-----Start test case execution for :view2_line_graph_chart_validate_dropdown------");
+		driver.findElement(icon_lst_chart_dd).click();
+		logger.info("Successfully clicked on chart drop down list icon");
+		helper.validate_DropDownListData(lst_chart_dd, driver, "Test_View2", "lst_chart_dd");
+		driver.findElement(icon_lst_chart_dd).click();
+		logger.info("-----End of test case execution for :view2_line_graph_chart_validate_dropdown------");
+	
+	}
+	/**
+	 * @author nkumar9 
+	 * Method is validating static data set of Agent Count graph under bar graph
+	 */
+	@Test(enabled = true , priority =5)
 	public void view2_bargraph_validate_AgentCount_data() {
 		logger.info("-----Start test case execution for :view2_bargraph_validate_AgentCount_data------");
 		WebDriverWait wait = new WebDriverWait(driver, 60);
@@ -184,7 +201,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * @author nkumar9 
 	 * Method is validating static data set of percentage graph under bar graph
 	 */
-	@Test(enabled = true , priority =5)
+	@Test(enabled = true , priority =6)
 	public void view2_bargraph_validate_PencetageGraph_data() {
 		logger.info("-----Start test case execution for :view2_bargraph_validate_PencetageGraph_data------");
 
@@ -210,7 +227,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * @author nkumar9 
 	 * Method is validating static data set of Time graph under bar graph
 	 */
-	@Test(enabled = true , priority =6)
+	@Test(enabled = true , priority =7)
 	public void view2_bargraph_validate_TimeGraph_data() {
 		logger.info("-----Start test case execution for :view2_bargraph_validate_TimeGraph_data------");
 		WebDriverWait wait = new WebDriverWait(driver, 60);
@@ -230,6 +247,20 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		logger.info("Validating the Y-axis labels of Time graph");
 		helper.validate_graph_data_yaxis(view2_Time_y_axis, driver,"Test_View2", "view2_Time_y_axis");
 		logger.info("-----End of test case execution for :view2_bargraph_validate_TimeGraph_data------");
+	}
+	/**
+	 * @author nkumar9 
+	 * Method is to validate the drop down list values in bar chart
+	 */
+	@Test(enabled = true , priority =8)
+	public void view2_bargraph_chart_validate_dropdown() {
+		logger.info("-----Start test case execution for :view2_bargraph_chart_validate_dropdown------");
+		driver.findElement(icon_lst_chart_dd).click();
+		logger.info("Successfully clicked on chart drop down list icon");
+		helper.validate_DropDownListData(lst_chart_dd, driver, "Test_View2", "lst_chart_dd");
+		driver.findElement(icon_lst_chart_dd).click();
+		logger.info("-----End of test case execution for :view2_bargraph_chart_validate_dropdown------");
+	
 	}
 
 
