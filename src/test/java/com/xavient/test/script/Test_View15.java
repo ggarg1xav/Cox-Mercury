@@ -187,6 +187,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	}
 	
 	// Graph test cases are not completed as we are facing the java script error on the graphs
+	
 	/**
 	 * @author csingh
 	 * Method is validating static data set of line graph 
