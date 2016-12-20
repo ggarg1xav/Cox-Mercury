@@ -314,11 +314,12 @@ public class Helper implements DashBoardView{
 			}
 		}
 	}	
-	
+
 	/**
 	 * Validating filter heading
+	 * 
 	 * @author guneet
-	 */	
+	 */
 	public void validate_filter_data(By element, WebDriver driver, String class_name, String table_element) {
 		List<String> xls_col_names = ExcelCache.getExpectedListData(class_name, table_element);
 		ArrayList<String> ui_col_names = new ArrayList<String>();
@@ -331,8 +332,9 @@ public class Helper implements DashBoardView{
 
 	/**
 	 * Validating dropdown values
+	 * 
 	 * @author guneet
-	 */	
+	 */
 	public void validate_filter_dropdown_data(By element, WebDriver driver, String class_name, String table_element) {
 		List<String> xls_col_names = ExcelCache.getExpectedListData(class_name, table_element);
 		Select select = new Select(driver.findElement(element));
@@ -344,5 +346,5 @@ public class Helper implements DashBoardView{
 		}
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names), true, "All values does not match");
 	}
-	
+
 }
