@@ -278,4 +278,23 @@ public class Helper implements DashBoardView{
 		}
 		return flag;
 	}
+	
+	/**
+	 * Handling table drill-down operation.
+	 * @author guneet
+	 */	
+	public void validate_drilldown(String view2Table, String view2DrillStart, String view2DrillEnd, WebDriver driver) {
+		waitForBrowserToLoadCompletely(driver);
+		int count = driver.findElements(By.xpath(view2Table)).size();
+		int i = 1;
+		if (count > 0) {
+			List<WebElement> dr = driver.findElements(By.xpath(view2DrillStart + i + view2DrillEnd));
+			while (dr.get(dr.size() - 1).getAttribute("class").toString()
+					.equalsIgnoreCase("treegrid-expander treegrid-expander-collapsed drilling")) {
+				dr.get(dr.size() - 1).click();
+				i++;
+				dr = driver.findElements(By.xpath(view2DrillStart + i + view2DrillEnd));
+			}
+		}
+	}	
 }
