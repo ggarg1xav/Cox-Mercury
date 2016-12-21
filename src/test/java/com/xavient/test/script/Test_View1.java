@@ -31,7 +31,7 @@ public class Test_View1 extends BaseClass implements  DashBoardView{
 			helper = new Helper();
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			
-			//Navigating to URLs.
+			//Navigating to URL.
 			
 			//Handling PopUP with AutoIT , Need to have this screen as active when this method is being executed.
 			helper.handle_popup();
