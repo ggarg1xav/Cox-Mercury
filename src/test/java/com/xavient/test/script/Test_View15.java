@@ -237,7 +237,6 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		helper.validate_filter_dropdown_data(languageFilterList, driver, "Test_View15", "view15_Filter_languageFilterList_data");
 		// Validate Time Zone FilterList
 		helper.validate_filter_dropdown_data(timeZoneFilterList, driver, "Test_View15", "view15_Filter_timeZoneFilterList_data");
-		
 		logger.info("-----End test case execution for :view15_validate_filter_dropdown------");
 	}
 	
