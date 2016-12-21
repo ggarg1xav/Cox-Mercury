@@ -27,10 +27,9 @@ public interface DashBoardView {
 	By Queue_And_Agent_Overview = By.xpath(".//*[contains(text(),'Queue And Agent Overview')]");
 	By View15 = By.xpath("//*[@class='nav nav-pills nav-stacked']//*[contains(text(),'COE With Agent View')]");
 
-	
 	By Queue_Summary_EMC = By.xpath(".//*[contains(text(),'Queue Summary - EMC')]");
 	By View2 = By.xpath(".//*[contains(text(),' LOB Summary View')]"); 
-	
+
 	/*
 	 view 3 - Table Names
 	 */
@@ -101,7 +100,7 @@ public interface DashBoardView {
 	 */
 	By filterBtn = By.xpath("//i[@tooltip=\"Filter\"]");
 	By filterTxt = By.xpath("//div[@class='filter-panel']/descendant::div[@class='filter-body']//following-sibling::label");
-	
+
 	By organizationFilterTxt = By.xpath("//div[@class='filter-panel']/child::*/div[@class='row']/div/label[text()='Organization']");
 	By coeFilterTxt = By.xpath("//div[@class='filter-panel']/child::*/div[@class='row']/div/label[text()='COE']");
 	By lobFilterTxt = By.xpath("//div[@class='filter-panel']/child::*/div[@class='row']/div/label[text()='LOB']");
@@ -110,7 +109,17 @@ public interface DashBoardView {
 	By subFunctionalGroupsFilterTxt = By.xpath("//div[@class='filter-panel']/child::*/div[@class='row']/div/label[text()='Sub Functional Groups']");
 	By languageFilterTxt = By.xpath("//div[@class='filter-panel']/child::*/div[@class='row']/div/label[text()='Language']");
 	By timeZoneFilterTxt = By.xpath("//div[@class='filter-panel']/child::*/div[@class='row']/div/label[text()='Time Zone']");
-	
+
+	//Retrieve value using attribute-label
+	By organizationFilterList = By.xpath(".//*[@id='orgHandller']");
+	By coeFilterList = By.xpath("//select[@id='coeHandller']");
+	By lobFilterList = By.xpath("//select[@id='lobHandller']");
+	By subLobFilterList = By.xpath("//select[@id='subLobListHandller']");
+	By functionalGroupsFilterList = By.xpath(".//*[@id='funGroupHandller']");
+	By subFunctionalGroupsFilterList = By.xpath(".//*[@id='subFunGroupHandller']");
+	By languageFilterList = By.xpath(".//*[@id='langHandller']");
+	By timeZoneFilterList = By.xpath(".//*[@id='tzHandller']");
+
 	/*
 	 * View 15
 	 * 

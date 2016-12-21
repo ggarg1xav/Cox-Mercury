@@ -114,7 +114,7 @@ public class Helper implements DashBoardView{
 		
 		List<WebElement> listelement = driver.findElements(element);
 		for (int i=0;i<listelement.size();i++)
-		{   
+		{
 			WebElement webelement= listelement.get(i);
 			String ui_innerlist="";
 			List<WebElement> listText=webelement.findElements(By.tagName("tspan"));
@@ -251,7 +251,6 @@ public class Helper implements DashBoardView{
 
 	}
 	
-
 	/**
 	 * Login method.
 	 * @author csingh5
