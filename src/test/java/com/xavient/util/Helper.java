@@ -373,9 +373,14 @@ public class Helper implements DashBoardView{
 		Select select = new Select(driver.findElement(element));
 		ArrayList<String> ui_col_names = new ArrayList<String>();
 		List<WebElement> elementCount = select.getOptions();
-		for (int i = 0; i < elementCount.size() - 1; i++) {
+		
+		for (int i = 0; i <=elementCount.size() - 1; i++) {
 			ui_col_names.add(elementCount.get(i).getAttribute("label").toString());
 		}
+		logger.info("Actual Size from UI:"+ui_col_names.size());
+		logger.info("Expected Size from Excel Sheet:"+xls_col_names.size());
+		logger.info("Actual Values from UI:"+ui_col_names);
+		logger.info("Expected values from Excel Sheet:"+xls_col_names);
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names), true, "All values does not match");
 	}
 

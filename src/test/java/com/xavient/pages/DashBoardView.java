@@ -119,7 +119,7 @@ public interface DashBoardView {
 	By subFunctionalGroupsFilterList = By.xpath(".//*[@id='subFunGroupHandller']");
 	By languageFilterList = By.xpath(".//*[@id='langHandller']");
 	By timeZoneFilterList = By.xpath(".//*[@id='tzHandller']");
-
+	By customerRegionList = By.xpath("//select[@id='regionHandller']"); 
 	/*
 	 * View 15
 	 * 
