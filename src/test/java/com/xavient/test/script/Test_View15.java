@@ -219,7 +219,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	
 	/**
 	 * @author csingh
-	 * Method is validating filter value 
+	 * Method is validating filter value.
 	 */
 	
 	@Test(enabled=true)
