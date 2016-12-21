@@ -141,6 +141,10 @@ public interface DashBoardView {
 	 * view 15 - Line Chart.
 	 */
 	
+	//view 1
+	
+		By Queue_Summary = By.xpath(".//*[contains(text(),'Queue Summary')]");	
+		By View1 = By.xpath(".//*[contains(text(),'Residential EMC Summary View')]");
 	
 	
 	/*
@@ -167,10 +171,5 @@ public interface DashBoardView {
 	
 	By lst_chart_dd =By.xpath(".//*[@id='div_first']/div[1]/div/div[2]/ul/li");
 	By icon_lst_chart_dd= By.xpath("//*[@id='div_first']/div[1]/div/div[2]/button");
-	
-	//view 1
-	
-		By Queue_Summary = By.xpath(".//*[contains(text(),'Queue Summary')]");	
-		By View1 = By.xpath(".//*[contains(text(),'Residential EMC Summary View')]");
 	
 }

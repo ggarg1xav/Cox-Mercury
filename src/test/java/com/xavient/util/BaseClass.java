@@ -67,7 +67,7 @@ public class BaseClass implements DashBoardView{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//driver.findElement(IECertificate).click();
+			driver.findElement(IECertificate).click();
 
 		}
 
