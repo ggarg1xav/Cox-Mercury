@@ -25,7 +25,7 @@ public class BaseClass implements DashBoardView{
 
 		String path = System.getProperty("user.dir");
 		System.out.println("driver path is"+path);
-		if (browser.equalsIgnoreCase("firefox")) {
+		if (browser.equalsIgnoreCase("firefox")) {	
 			// create firefox instance
 			driver = new FirefoxDriver();
 			driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
@@ -67,7 +67,7 @@ public class BaseClass implements DashBoardView{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			driver.findElement(IECertificate).click();
+			//driver.findElement(IECertificate).click();
 
 		}
 
