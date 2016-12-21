@@ -203,6 +203,10 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	logger.info("-----End of test case execution for :view_validate_line_graph_data------");
 	}
 	
+	/**
+	 * @author csingh
+	 * Method is validating filter name
+	 */
 	@Test(enabled=false)
 	public void view15_validate_filter_name()
 	{
@@ -212,6 +216,11 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		helper.validate_filter_data(filterTxt, driver, "Test_View15", "view15_FilterName_data");
 		logger.info("-----End test case execution for :view15_validate_filter_name------");
 	}
+	
+	/**
+	 * @author csingh
+	 * Method is validating filter value 
+	 */
 	
 	@Test(enabled=true)
 	public void view15_validate_filter_dropdown()
