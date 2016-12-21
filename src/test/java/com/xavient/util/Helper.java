@@ -14,6 +14,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -110,13 +111,16 @@ public class Helper implements DashBoardView{
 	{
 		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
 		ArrayList<String> ui_col_names = new ArrayList<String>();	
-		String ui_innerlist="";
+		
 		List<WebElement> listelement = driver.findElements(element);
-		for (WebElement webelement : listelement)
-		{
+		for (int i=0;i<listelement.size();i++)
+		{   
+			WebElement webelement= listelement.get(i);
+			String ui_innerlist="";
 			List<WebElement> listText=webelement.findElements(By.tagName("tspan"));
 			if (listText.size()>1)
 			{
+				listText=webelement.findElements(By.tagName("tspan"));
 			for(WebElement textobject:listText)
 			{
 				ui_innerlist=ui_innerlist+textobject.getText()+" ";
@@ -127,11 +131,13 @@ public class Helper implements DashBoardView{
 			}
 			else
 			{
+			webelement= listelement.get(i);
 			String ele = webelement.findElement(By.tagName("tspan")).getText();
 			ui_col_names.add(ele);
 			}
 		}
-		System.out.println("Ui Values:"+ui_col_names);
+		logger.info("Actual Values from UI:"+ui_col_names);
+		logger.info("Expected values from Excel Sheet:"+xls_col_names);
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
 	}
 	
@@ -245,6 +251,12 @@ public class Helper implements DashBoardView{
 
 	}
 	
+
+	/**
+	 * Login method.
+	 * @author csingh5
+	 */
+	
 	public void login(WebDriver driver)
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -297,4 +309,99 @@ public class Helper implements DashBoardView{
 			}
 		}
 	}	
+	
+	/**
+	 * Method is fetching and comparing data from XLS and UI for Y-axis values from the graph values.
+	 * @author nkumar9
+	 * @param element
+	 * @param class_name
+	 * @param table_element
+	 */
+	public void validate_graph_data_yaxis( By element  , WebDriver driver  , String class_name , String table_element)
+	{
+		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
+		ArrayList<String> ui_col_names = new ArrayList<String>();	
+		
+		List<WebElement> listelement = driver.findElements(element);
+		for (int i=0;i<listelement.size()-1;i++)
+		{
+			WebElement elmt= listelement.get(i);
+			String ui_innerlist="";
+			List<WebElement> listText=elmt.findElements(By.tagName("tspan"));
+			if (listText.size()>1)
+			{
+				
+			for(WebElement textobject:listText)
+			{
+				ui_innerlist=ui_innerlist+textobject.getText()+" ";
+				
+			}
+			String ui_innerlistTrim = ui_innerlist.trim();
+			ui_col_names.add(ui_innerlistTrim);
+			}
+			else
+			{
+			elmt= listelement.get(i);
+			String ele = elmt.findElement(By.tagName("tspan")).getText();
+			ui_col_names.add(ele);
+			}
+		}
+		logger.info("Actual Values from UI:"+ui_col_names);
+		logger.info("Expected values from Excel Sheet:"+xls_col_names);
+		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
+	}
+	
+	/*
+	 * Validating filter heading
+	 * @author guneet
+	 */
+	public void validate_filter_data(By element, WebDriver driver, String class_name, String table_element) {
+		List<String> xls_col_names = ExcelCache.getExpectedListData(class_name, table_element);
+		ArrayList<String> ui_col_names = new ArrayList<String>();
+		List<WebElement> listelement = driver.findElements(element);
+		for (int i = 0; i < listelement.size() - 2; i++) {
+			ui_col_names.add(listelement.get(i).getText());
+		}
+		Assert.assertEquals(xls_col_names.containsAll(ui_col_names), true, "All values does not match");
+	}
+
+	/**
+	 * Validating dropdown values
+	 * @author guneet
+	 */
+	public void validate_filter_dropdown_data(By element, WebDriver driver, String class_name, String table_element) {
+		List<String> xls_col_names = ExcelCache.getExpectedListData(class_name, table_element);
+		Select select = new Select(driver.findElement(element));
+		ArrayList<String> ui_col_names = new ArrayList<String>();
+		List<WebElement> elementCount = select.getOptions();
+		for (int i = 0; i < elementCount.size() - 1; i++) {
+			ui_col_names.add(elementCount.get(i).getAttribute("label").toString());
+		}
+		Assert.assertEquals(xls_col_names.containsAll(ui_col_names), true, "All values does not match");
+	}
+
+	
+	/**
+	 * Method is fetching and comparing data from XLS and UI for Y-axis values from the graph values.
+	 * @author nkumar9
+	 * @param element
+	 * @param class_name
+	 * @param table_element
+	 */
+	public void validate_DropDownListData( By element, WebDriver driver, String class_name, String table_element)
+	{
+		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
+		ArrayList<String> ui_col_names = new ArrayList<String>();	
+		
+		List<WebElement> listelement = driver.findElements(element);
+		for(WebElement object :listelement)
+		{
+			String value = object.getText();
+			ui_col_names.add(value);
+		}
+		
+		logger.info("Actual drop down Values from UI:"+ui_col_names);
+		logger.info("Expected drop down values from Excel Sheet:"+xls_col_names);
+		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
+	}
 }

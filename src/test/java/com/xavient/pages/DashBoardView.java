@@ -27,7 +27,10 @@ public interface DashBoardView {
 	By Queue_And_Agent_Overview = By.xpath(".//*[contains(text(),'Queue And Agent Overview')]");
 	By View15 = By.xpath("//*[@class='nav nav-pills nav-stacked']//*[contains(text(),'COE With Agent View')]");
 
-
+	
+	By Queue_Summary_EMC = By.xpath(".//*[contains(text(),'Queue Summary - EMC')]");
+	By View2 = By.xpath(".//*[contains(text(),' LOB Summary View')]"); 
+	
 	/*
 	 view 3 - Table Names
 	 */
@@ -97,7 +100,8 @@ public interface DashBoardView {
 	 * Filter
 	 */
 	By filterBtn = By.xpath("//i[@tooltip=\"Filter\"]");
-
+	By filterTxt = By.xpath("//div[@class='filter-panel']/descendant::div[@class='filter-body']//following-sibling::label");
+	
 	By organizationFilterTxt = By.xpath("//div[@class='filter-panel']/child::*/div[@class='row']/div/label[text()='Organization']");
 	By coeFilterTxt = By.xpath("//div[@class='filter-panel']/child::*/div[@class='row']/div/label[text()='COE']");
 	By lobFilterTxt = By.xpath("//div[@class='filter-panel']/child::*/div[@class='row']/div/label[text()='LOB']");
@@ -106,17 +110,7 @@ public interface DashBoardView {
 	By subFunctionalGroupsFilterTxt = By.xpath("//div[@class='filter-panel']/child::*/div[@class='row']/div/label[text()='Sub Functional Groups']");
 	By languageFilterTxt = By.xpath("//div[@class='filter-panel']/child::*/div[@class='row']/div/label[text()='Language']");
 	By timeZoneFilterTxt = By.xpath("//div[@class='filter-panel']/child::*/div[@class='row']/div/label[text()='Time Zone']");
-
-	//Retrieve value using attribute-label
-	By organizationFilterList = By.xpath(".//*[@id='orgHandller']/option");
-	By coeFilterList = By.xpath("//select[@id='coeHandller']/option");
-	By lobFilterList = By.xpath("//select[@id='lobHandller']/option");
-	By subLobFilterList = By.xpath("//select[@id='subLobListHandller']/option");
-	By functionalGroupsFilterList = By.xpath(".//*[@id='funGroupHandller']/option");
-	By subFunctionalGroupsFilterList = By.xpath(".//*[@id='subFunGroupHandller']/option");
-	By languageFilterList = By.xpath(".//*[@id='langHandller']/option");
-	By timeZoneFilterList = By.xpath(".//*[@id='tzHandller']/option");
-
+	
 	/*
 	 * View 15
 	 * 
@@ -143,4 +137,25 @@ public interface DashBoardView {
 	 * View 3 table data
 	 */
 	By view3_agent_details_data = By.xpath("//div[@class='ui-grid-canvas']/div");
+	
+	/*
+	 view2 - Line Chart.
+	 */
+	By view2_line_graph_header = By.xpath(".//a[contains(text(),'  LOB Summary View')]");
+	By view2_AgentCount_y_axis_label = By.xpath(".//*[contains(text(),'Agent Count')]");
+	By view2_AgentCount_x_axis = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'Current Calls Offered')]/parent::*/parent::*/child::*");
+	By view2_AgentCount_y_axis = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'Agent Count')]/parent::*/parent::*/child::*");
+	
+	
+	By view2_Percentage_y_axis_label = By.xpath(".//*[contains(text(),'Percentage')]");
+	By view2_Percentage_x_axis = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'ABN')]/parent::*/parent::*/child::*");
+	By view2_Percentage_y_axis = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'Percentage')]/parent::*/parent::*/child::*");
+	
+	By view2_Time_y_axis_label = By.xpath("//*[name()='svg']//*[name()='g']//*[contains(text(),'Time')]");
+	By view2_Time_x_axis = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'AWBA')]/parent::*/parent::*/child::*");
+	By view2_Time_y_axis = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'Time')]/parent::*/parent::*/child::*");
+	
+	By lst_chart_dd =By.xpath(".//*[@id='div_first']/div[1]/div/div[2]/ul/li");
+	By icon_lst_chart_dd= By.xpath("//*[@id='div_first']/div[1]/div/div[2]/button");
+	
 }
