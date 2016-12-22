@@ -44,14 +44,16 @@ WebDriver driver;
 		helper = new Helper();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		wait = new WebDriverWait(driver , 5);
-		//Navigating to URL.
-		driver.get(Properties_Reader.readProperty("URL"));
 		
 		//Handling PopUP with AutoIT , Need to have this screen as active when this method is being executed.
 		helper.handle_popup();
 		
 		//Login and Navigating to View
-		helper.login(driver);
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(user_name)));
+		driver.findElement(user_name).sendKeys(Properties_Reader.readProperty("Username"));
+		driver.findElement(pword).sendKeys(Properties_Reader.readProperty("Password"));
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(submit_login)));
+		driver.findElement(submit_login).click();
 		wait.until(ExpectedConditions.visibilityOf(driver.findElement(View)));
 		driver.findElement(View).click();
 		driver.findElement(Queue_And_Agent_Overview).click();
@@ -64,7 +66,7 @@ WebDriver driver;
  * Validating Table and Column data.
  * @author NMakkar
  */
-	@Test(enabled=true)
+	@Test(enabled=true, priority =1)
 	public void view3_validate_table_data()  {
 		logger.info("-----Start test case execution for :view3_validate_table_data------");
 		helper.validate_table_names( driver.findElement(view3_curr_data) ,  "Test_View3" , "view3_curr_data" );	
@@ -85,7 +87,7 @@ WebDriver driver;
 	 * @author NMakkar
 	 * Method is validating static data set of line graph 
 	 */
-	@Test(enabled=true)
+	@Test(enabled=true,priority=4)
 	public void view3_validate_line_graph_data()  {
 	logger.info("-----Start test case execution for :view3_validate_line_graph_data------");
 		//Navigating to line chart page. 	
@@ -105,7 +107,7 @@ WebDriver driver;
 	 * Method is validating static data set of bar graph 
 	 * @author NMakkar
 	 */
-	@Test(enabled=true)
+	@Test(enabled=true,priority =5)
 	public void view3_validate_bar_graph_data()  {
 		logger.info("-----Start test case execution for :view3_validate_bar_graph_data------");
 		//Navigating to Bar chart page. 
@@ -125,7 +127,7 @@ WebDriver driver;
 	 * @author guneet
 	 * Method is validating table sorting
 	 */
-	@Test(enabled=true)
+	@Test(enabled=true,priority =2)
 	public void view3_table_sorting() {
 		logger.info("-----Start test case execution for :view3_table_sorting------");
 		LinkedList<String>  tableData = new LinkedList<String>();
@@ -155,7 +157,7 @@ WebDriver driver;
 	 * @author guneet
 	 * Method is validating table pagination
 	 */
-	@Test(enabled=true)
+	@Test(enabled=true, priority = 3)
 	public void  view3_table_pagination() {
 		logger.info("-----Start test case execution for :view3_table_pagination------");
 		Select select = new Select(driver.findElement(pagerPageDrop));
@@ -201,7 +203,7 @@ WebDriver driver;
 	 * 
 	 */
 	
-	@Test(enabled=true)
+	@Test(enabled=true,priority = 6)
 	public void view3_validate_piechart_data()  {
 		
 	wait.until(ExpectedConditions.visibilityOf(driver.findElement(lineChartToolTip)));
@@ -223,7 +225,5 @@ WebDriver driver;
 		driver.close();
 		System.out.println("------End Test------");
 	}
-
 }
-
 

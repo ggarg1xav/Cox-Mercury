@@ -493,4 +493,21 @@ public class Helper implements DashBoardView{
 		}
 		return data_of_table;
 	}
+
+	/**
+	 * @author guneet
+	 * Method is waiting for loader to get invisible
+	 */
+	public void waitloader(WebDriver driver) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		for (int i = 0; i < 10; i++) {
+			try {
+				wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(loader));
+			} catch (Exception e) {
+				break;
+			}
+		}
+	}
+
+	
 }
