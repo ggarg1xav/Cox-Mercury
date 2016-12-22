@@ -51,9 +51,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		helper = new Helper();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		wait = new WebDriverWait(driver, 30);
-		// Navigating to URL.
-		driver.get(Properties_Reader.readProperty("URL"));
-
+		
 		// Handling PopUP with AutoIT , Need to have this screen as active
 		// when this method is being executed.
 		helper.handle_popup();
@@ -97,6 +95,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		//Validating Agent details data tables
 		helper.validate_table_names(driver.findElement(view15_Agent_Detail_data), "Test_View15", "view15_Agent_Detail_data");
 		helper.validate_table_columns(view15_Agent_Detail_data_table, driver, "", "Test_View15", "view15_Agent_Detail_data_table");
+		logger.info("-----End test case execution for :view15_validate_table_data------");
 	}
 
 	/**
