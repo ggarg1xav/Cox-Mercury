@@ -44,8 +44,6 @@ WebDriver driver;
 		helper = new Helper();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		wait = new WebDriverWait(driver , 5);
-		//Navigating to URL.
-		driver.get(Properties_Reader.readProperty("URL"));
 		
 		//Handling PopUP with AutoIT , Need to have this screen as active when this method is being executed.
 		helper.handle_popup();
