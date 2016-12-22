@@ -432,4 +432,60 @@ public class Helper implements DashBoardView{
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
+	
+	
+	/**
+	 * @author NMakkar
+	 * @param driver
+	 * @param col_of_table
+	 * @param data_of_table
+	 * @param key
+	 */
+	public void data_validate_Down(WebDriver driver, String key,List<WebElement> col_data, List<WebElement> data_of_table) {
+		
+		int index = 0;
+		
+		//Validating Key data.
+		for (int i = 0; i < col_data.size(); i++) {
+			if (col_data.get(i).getText().equalsIgnoreCase(key)) {
+				index = i;
+				break;
+			}
+		}
+			
+		//Validating values based on Key.
+		if (data_of_table.get(index).getText().matches("[-+]?\\d*\\.?\\d+")) {
+			for (WebElement element_data : data_of_table)
+				Assert.assertEquals(element_data.getText().matches("[-+]?\\d*\\.?\\d+"),true);
+		} else if (data_of_table.get(index).getText().matches("N/A")) {
+			for (WebElement element_data : data_of_table)
+				Assert.assertEquals(element_data.getText().equals(key), true);
+		}
+	}
+	
+	/**
+	 * @author NMakkar
+	 * @param col_of_table
+	 * @param data_of_table
+	 * @param check_text
+	 */
+	public List<WebElement> modify_cols_data_of_table(List<WebElement> col_of_table,List<WebElement> data_of_table, String check_text) {
+		// TODO Auto-generated method stub
+		LinkedList<Integer> index = new LinkedList<Integer>();
+		
+		//Finding Index of columns to be removed.
+		for (int i = 0; i < col_of_table.size(); i++) {
+			if (col_of_table.get(i).getText().contains(check_text)) {
+				index.add(i);
+			}
+		}
+
+		//Removing Data for those columns.
+		if (index.size() > 0) {
+			for (int ind : index) {
+				data_of_table.remove(ind);
+			}
+		}
+		return data_of_table;
+	}
 }

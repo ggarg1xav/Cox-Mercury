@@ -1,6 +1,5 @@
 package com.xavient.pages;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
 public interface DashBoardView {
@@ -171,5 +170,17 @@ public interface DashBoardView {
 	
 	By lst_chart_dd =By.xpath(".//*[@id='div_first']/div[1]/div/div[2]/ul/li");
 	By icon_lst_chart_dd= By.xpath("//*[@id='div_first']/div[1]/div/div[2]/button");
+	
+	/*
+	 * View 3 Table Data in rows.
+	 */
+	
+	
+	By view3_Current_table_data_val = By.xpath(".//*[@id='VIEW_3_table-first1_0']/td");
+	By view3_todays_table_data_val = By.xpath(".//*[@id='VIEW_3_table-second1_0']/td");
+	By view3_COEs_table_data_val = By.xpath(".//*[@id='VIEW_3_table-third1_0']/td");
+
+
+	
 	
 }

@@ -44,12 +44,11 @@ WebDriver driver;
 		helper = new Helper();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		wait = new WebDriverWait(driver , 5);
-		//Navigating to URL.
-		driver.get(Properties_Reader.readProperty("URL"));
+
 		
 		//Handling PopUP with AutoIT , Need to have this screen as active when this method is being executed.
 		helper.handle_popup();
-		
+
 		//Login and Navigating to View
 		wait.until(ExpectedConditions.visibilityOf(driver.findElement(user_name)));
 		driver.findElement(user_name).sendKeys(Properties_Reader.readProperty("Username"));
@@ -218,6 +217,21 @@ WebDriver driver;
 	helper.validate_table_names(driver.findElement(view3_piechart_Total_Agents_label), "Test_View3", "view3_piechart_Total_Agents_label");
 	helper.validate_table_names(driver.findElement(view3_piechart_Agents_Staffed_label), "Test_View3", "view3_piechart_Agents_Staffed_label");
 	}
+	
+	@Test
+	public void view3_COEs_table_data_validation()
+	{	
+		String key = "Calls In Queue";
+		String check_text = "Agents";
+		List<WebElement> data_of_table  = driver.findElements(view3_COEs_table_data_val);
+		List<WebElement> 	 col_of_table = driver.findElements(By.xpath(view3_curr_data_table));
+		List<WebElement> 	updated_col_data  = helper.modify_cols_data_of_table(col_of_table, data_of_table, check_text);
+		helper.data_validate_Down(driver, key , updated_col_data, data_of_table  );
+		}
+		
+	
+		
+	
 	
 /**
  * Closing Browser After Test.
