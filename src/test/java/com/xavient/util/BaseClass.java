@@ -2,7 +2,6 @@ package com.xavient.util;
 
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,9 +11,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.xavient.pages.DashBoardView;
 
-public class BaseClass {
+public class BaseClass implements DashBoardView{
 	WebDriver driver;
-	Logger logger = Logger.getLogger(BaseClass.class);
+
 	/**
 	 * Method is initalizing driver with defined browser properties.
 	 * @author AJameel
@@ -24,11 +23,14 @@ public class BaseClass {
 	public  WebDriver Browser_Selection(String browser)  {
 
 		String path = System.getProperty("user.dir");
-		if (browser.equalsIgnoreCase("firefox")) {
+		System.out.println("driver path is"+path);
+		if (browser.equalsIgnoreCase("firefox")) {	
 			// create firefox instance
 			driver = new FirefoxDriver();
 			driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 			driver.manage().window().maximize();
+			driver.get(Properties_Reader.readProperty("URL"));
+
 		}
 
 		else if (browser.equalsIgnoreCase("Chrome")) {
@@ -42,31 +44,34 @@ public class BaseClass {
 			driver = new ChromeDriver();
 			driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 			driver.manage().window().maximize();
+			driver.get(Properties_Reader.readProperty("URL"));
+
 		}
 
 		else if (browser.equalsIgnoreCase("ie")) {
 
 			DesiredCapabilities capabilities = new DesiredCapabilities();
-			capabilities
-			.setCapability(
-					InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
-					true);
+			capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 			capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
 
 			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-			System.setProperty(
-					"webdriver.ie.driver",
-					path
-					+ Properties_Reader.readProperty("ie_driver"));
+			System.setProperty("webdriver.ie.driver", path + Properties_Reader.readProperty("ie_driver"));
 			driver = new InternetExplorerDriver(capabilities);
-			driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			driver.manage().window().maximize();
-			logger.info("Browser launched successfully");
+			driver.get(Properties_Reader.readProperty("URL"));
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			driver.findElement(IECertificate).click();
+
 		}
 
 		else {
 			// If no browser passed throw exception
-			logger.info("Browser is not correct");
 			try {
 				throw new Exception("Browser is not correct");
 			} catch (Exception e) {

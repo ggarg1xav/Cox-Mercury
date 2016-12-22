@@ -25,9 +25,9 @@ public class Helper implements DashBoardView{
 	 * Handling Browser pop-up with AutoIT.
 	 * @author NMakkar
 	 */
-	
+
 	Logger logger = Logger.getLogger(Helper.class);
-	
+
 	public void handle_popup()
 	{
 		try {
@@ -63,7 +63,7 @@ public class Helper implements DashBoardView{
 		logger.info("Actual table columns size from UI: "+rows);
 		logger.info("Expected table columns size from Excel: "+xls_col_names.size());
 		Assert.assertEquals(rows, xls_col_names.size() , "No of columns are not same");
-		
+
 
 		//Iterating for fetching elements from UI.
 		for (int i = 1 ;  i <= rows ; i ++)
@@ -106,12 +106,12 @@ public class Helper implements DashBoardView{
 		}
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
 	}
-	
+
 	public void validate_list_data_axis( By element  , WebDriver driver  , String class_name , String table_element)
 	{
 		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
 		ArrayList<String> ui_col_names = new ArrayList<String>();	
-		
+
 		List<WebElement> listelement = driver.findElements(element);
 		for (int i=0;i<listelement.size();i++)
 		{
@@ -121,26 +121,26 @@ public class Helper implements DashBoardView{
 			if (listText.size()>1)
 			{
 				listText=webelement.findElements(By.tagName("tspan"));
-			for(WebElement textobject:listText)
-			{
-				ui_innerlist=ui_innerlist+textobject.getText()+" ";
-				
-			}
-			String ui_innerlistTrim = ui_innerlist.trim();
-			ui_col_names.add(ui_innerlistTrim);
+				for(WebElement textobject:listText)
+				{
+					ui_innerlist=ui_innerlist+textobject.getText()+" ";
+
+				}
+				String ui_innerlistTrim = ui_innerlist.trim();
+				ui_col_names.add(ui_innerlistTrim);
 			}
 			else
 			{
-			webelement= listelement.get(i);
-			String ele = webelement.findElement(By.tagName("tspan")).getText();
-			ui_col_names.add(ele);
+				webelement= listelement.get(i);
+				String ele = webelement.findElement(By.tagName("tspan")).getText();
+				ui_col_names.add(ele);
 			}
 		}
 		logger.info("Actual Values from UI:"+ui_col_names);
 		logger.info("Expected values from Excel Sheet:"+xls_col_names);
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
 	}
-	
+
 	/*
 	 * Waiting for browser loading to complete
 	 * @author: guneet
@@ -220,8 +220,8 @@ public class Helper implements DashBoardView{
 	public int getWebelentSize(By loc, WebDriver driver){
 		return driver.findElements(loc).size();
 	}
-	
-	
+
+
 	/*
 	 * Validate List is sorted
 	 * @author: guneet
@@ -229,13 +229,13 @@ public class Helper implements DashBoardView{
 	 * @param order
 	 */
 	public void validateListIsSorted(LinkedList<String> tableData2, String order) {
-		
+
 		LinkedList<String> sortedData = new LinkedList<>(tableData2);
 		LinkedList<String> sortedData1 = new LinkedList<>(tableData2);
 		if (order.equalsIgnoreCase("asc"))
 		{
 			Collections.sort(sortedData);
-		logger.info("List data in ascending order :-  "+sortedData);
+			logger.info("List data in ascending order :-  "+sortedData);
 		}
 		else if (order.equalsIgnoreCase("desc")) {
 			Collections.sort(sortedData1);
@@ -250,12 +250,12 @@ public class Helper implements DashBoardView{
 		}
 
 	}
-	
+
 	/**
 	 * Login method.
 	 * @author csingh5
 	 */
-	
+
 	public void login(WebDriver driver)
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -271,13 +271,13 @@ public class Helper implements DashBoardView{
 			logger.info("Clicked login button at second attempt");
 		}
 	}
-	
+
 	public void clickByJavascript(WebDriver driver, WebElement ele)
 	{
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", ele);
 	}
-	
+
 	public boolean isElementPresent(WebDriver driver,By ele)
 	{
 		boolean flag = false;
@@ -289,7 +289,7 @@ public class Helper implements DashBoardView{
 		}
 		return flag;
 	}
-	
+
 	/**
 	 * Handling table drill-down operation.
 	 * @author guneet
@@ -308,7 +308,7 @@ public class Helper implements DashBoardView{
 			}
 		}
 	}	
-	
+
 	/**
 	 * Method is fetching and comparing data from XLS and UI for Y-axis values from the graph values.
 	 * @author nkumar9
@@ -320,7 +320,7 @@ public class Helper implements DashBoardView{
 	{
 		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
 		ArrayList<String> ui_col_names = new ArrayList<String>();	
-		
+
 		List<WebElement> listelement = driver.findElements(element);
 		for (int i=0;i<listelement.size()-1;i++)
 		{
@@ -329,27 +329,27 @@ public class Helper implements DashBoardView{
 			List<WebElement> listText=elmt.findElements(By.tagName("tspan"));
 			if (listText.size()>1)
 			{
-				
-			for(WebElement textobject:listText)
-			{
-				ui_innerlist=ui_innerlist+textobject.getText()+" ";
-				
-			}
-			String ui_innerlistTrim = ui_innerlist.trim();
-			ui_col_names.add(ui_innerlistTrim);
+
+				for(WebElement textobject:listText)
+				{
+					ui_innerlist=ui_innerlist+textobject.getText()+" ";
+
+				}
+				String ui_innerlistTrim = ui_innerlist.trim();
+				ui_col_names.add(ui_innerlistTrim);
 			}
 			else
 			{
-			elmt= listelement.get(i);
-			String ele = elmt.findElement(By.tagName("tspan")).getText();
-			ui_col_names.add(ele);
+				elmt= listelement.get(i);
+				String ele = elmt.findElement(By.tagName("tspan")).getText();
+				ui_col_names.add(ele);
 			}
 		}
 		logger.info("Actual Values from UI:"+ui_col_names);
 		logger.info("Expected values from Excel Sheet:"+xls_col_names);
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
 	}
-	
+
 	/*
 	 * Validating filter heading
 	 * @author guneet
@@ -384,7 +384,7 @@ public class Helper implements DashBoardView{
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names), true, "All values does not match");
 	}
 
-	
+
 	/**
 	 * Method is fetching and comparing data from XLS and UI for Y-axis values from the graph values.
 	 * @author nkumar9
@@ -396,16 +396,101 @@ public class Helper implements DashBoardView{
 	{
 		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
 		ArrayList<String> ui_col_names = new ArrayList<String>();	
-		
+
 		List<WebElement> listelement = driver.findElements(element);
 		for(WebElement object :listelement)
 		{
 			String value = object.getText();
 			ui_col_names.add(value);
 		}
-		
+
 		logger.info("Actual drop down Values from UI:"+ui_col_names);
 		logger.info("Expected drop down values from Excel Sheet:"+xls_col_names);
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
+	}
+
+	public void drillDown(WebDriver driver) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+
+		int i = 1;
+		WebElement drill1 = driver.findElement(
+				By.xpath(".//*[@id='VIEW_1_table-first']/tbody/tr[1]/td/span[contains(@class,'drilling')]"));
+		wait.until(ExpectedConditions.elementToBeClickable(drill1));
+		String drill1_text = drill1.getAttribute("class").toString();
+		System.out.println("The row text is" + " " + drill1_text);
+		javaScriptExecutor(driver, drill1);
+		while (drill1_text.contains("expander-collapsed drilling")) {
+
+			i++;
+
+			WebElement drill2 = driver.findElement(By
+					.xpath(".//*[@id='VIEW_1_table-first']/tbody/tr[" + i + "]/td/span[contains(@class,'drilling')]"));
+			wait.until(ExpectedConditions.elementToBeClickable(drill2));
+			String drill2_text = drill2.getAttribute("class").toString();
+			javaScriptExecutor(driver, drill2);
+			drill1_text = drill2_text;
+		}
+
+	}
+
+	public void javaScriptExecutor(WebDriver driver, WebElement element) {
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
+	
+	/**
+	 * @author NMakkar
+	 * @param driver
+	 * @param col_of_table
+	 * @param data_of_table
+	 * @param key
+	 */
+	public void data_validate_Down(WebDriver driver, String key,List<WebElement> col_data, List<WebElement> data_of_table) {
+		
+		int index = 0;
+		
+		//Validating Key data.
+		for (int i = 0; i < col_data.size(); i++) {
+			if (col_data.get(i).getText().equalsIgnoreCase(key)) {
+				index = i;
+				break;
+			}
+		}
+			
+		//Validating values based on Key.
+		if (data_of_table.get(index).getText().matches("[-+]?\\d*\\.?\\d+")) {
+			for (WebElement element_data : data_of_table)
+				Assert.assertEquals(element_data.getText().matches("[-+]?\\d*\\.?\\d+"),true);
+		} else if (data_of_table.get(index).getText().matches("N/A")) {
+			for (WebElement element_data : data_of_table)
+				Assert.assertEquals(element_data.getText().equals(key), true);
+		}
+	}
+	
+	/**
+	 * @author NMakkar
+	 * @param col_of_table
+	 * @param data_of_table
+	 * @param check_text
+	 */
+	public List<WebElement> modify_cols_data_of_table(List<WebElement> col_of_table,List<WebElement> data_of_table, String check_text) {
+		// TODO Auto-generated method stub
+		LinkedList<Integer> index = new LinkedList<Integer>();
+		
+		//Finding Index of columns to be removed.
+		for (int i = 0; i < col_of_table.size(); i++) {
+			if (col_of_table.get(i).getText().contains(check_text)) {
+				index.add(i);
+			}
+		}
+
+		//Removing Data for those columns.
+		if (index.size() > 0) {
+			for (int ind : index) {
+				data_of_table.remove(ind);
+			}
+		}
+		return data_of_table;
 	}
 }

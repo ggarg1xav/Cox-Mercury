@@ -1,6 +1,5 @@
 package com.xavient.pages;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
 public interface DashBoardView {
@@ -17,7 +16,7 @@ public interface DashBoardView {
 	By signOut = By.xpath("//i[@tooltip='LogOut']");
 
 	By headerTitle = By.xpath("//div[@class=\"panel-heading\"]/h4/span");
-
+	By IECertificate = By.id("overridelink");
 	/*
 	 Home Page 
 	 */
@@ -141,6 +140,11 @@ public interface DashBoardView {
 	 * view 15 - Line Chart.
 	 */
 	
+	//view 1
+	
+		By Queue_Summary = By.xpath(".//*[contains(text(),'Queue Summary')]");	
+		By View1 = By.xpath(".//*[contains(text(),'Residential EMC Summary View')]");
+	
 	
 	/*
 	 * View 3 table data
@@ -166,5 +170,17 @@ public interface DashBoardView {
 	
 	By lst_chart_dd =By.xpath(".//*[@id='div_first']/div[1]/div/div[2]/ul/li");
 	By icon_lst_chart_dd= By.xpath("//*[@id='div_first']/div[1]/div/div[2]/button");
+	
+	/*
+	 * View 3 Table Data in rows.
+	 */
+	
+	
+	By view3_Current_table_data_val = By.xpath(".//*[@id='VIEW_3_table-first1_0']/td");
+	By view3_todays_table_data_val = By.xpath(".//*[@id='VIEW_3_table-second1_0']/td");
+	By view3_COEs_table_data_val = By.xpath(".//*[@id='VIEW_3_table-third1_0']/td");
+
+
+	
 	
 }
