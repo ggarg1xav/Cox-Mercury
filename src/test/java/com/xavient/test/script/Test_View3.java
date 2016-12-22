@@ -62,6 +62,14 @@ WebDriver driver;
 		
 		System.out.println("------Before Test------");
 	}
+	/**
+	 * Closing Browser After Test.
+	 */
+		@AfterMethod
+		public void After_Test() {
+			driver.close();
+			System.out.println("------End Test------");
+		}
 /**
  * Validating Table and Column data.
  * @author NMakkar
@@ -217,13 +225,34 @@ WebDriver driver;
 	helper.validate_table_names(driver.findElement(view3_piechart_Agents_Staffed_label), "Test_View3", "view3_piechart_Agents_Staffed_label");
 	}
 	
-/**
- * Closing Browser After Test.
- */
-	@AfterMethod
-	public void After_Test() {
-		driver.close();
-		System.out.println("------End Test------");
-	}
+	/**
+	 * Validating data of COEs table
+	 * @author NMakkar
+	 */
+	@Test
+	public void view3_COEs_table_data_validation()
+	{	
+		//Key on which we have to validate other values.
+		String key = "Calls In Queue";
+		//Text on which we will fetch other tables columns
+		String check_text = "Agents";
+		
+		//Initialize Elements  of tables and their columns data.
+		//Table 3 - Data .
+		List<WebElement> data_of_table3  = driver.findElements(view3_COEs_table_data_val);
+		//Table 3 - Columns
+		List<WebElement> col_of_table3 = driver.findElements(By.xpath(view3_curr_agent_stats_col));
+		//Table 1 - Data
+		List<WebElement> updated_col_table1 = driver.findElements(view3_Current_table_data_val);
+		//Table 1 - Colums
+		List<WebElement> col_of_table1 = driver.findElements(By.xpath(view3_curr_data_table));
+		
+		//Adding Column data from another table.
+		data_of_table3 = helper.modify_cols_data_of_table(col_of_table1, data_of_table3, updated_col_table1 , check_text  ,  true);
+		
+		//Validating N/A and integer for columns
+		helper.data_validate_Down(driver, key , col_of_table3, data_of_table3  );
+		}
+
 }
 
