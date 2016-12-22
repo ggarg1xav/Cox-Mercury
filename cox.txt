@@ -3,3 +3,8 @@ ggarg1xav
 https://github.com/ggarg1xav/Cox-Mercury.git
 
 git clone ggarg1xav@host:https://github.com/ggarg1xav/Cox-Mercury.git
+
+mvn clean test
+mvn site
+run mvn jetty:run
+To see a report, open http://localhost:8080 in your browser
