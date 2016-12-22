@@ -44,11 +44,10 @@ WebDriver driver;
 		helper = new Helper();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		wait = new WebDriverWait(driver , 5);
-
 		
 		//Handling PopUP with AutoIT , Need to have this screen as active when this method is being executed.
 		helper.handle_popup();
-
+		
 		//Login and Navigating to View
 		wait.until(ExpectedConditions.visibilityOf(driver.findElement(user_name)));
 		driver.findElement(user_name).sendKeys(Properties_Reader.readProperty("Username"));
@@ -217,7 +216,6 @@ WebDriver driver;
 	helper.validate_table_names(driver.findElement(view3_piechart_Total_Agents_label), "Test_View3", "view3_piechart_Total_Agents_label");
 	helper.validate_table_names(driver.findElement(view3_piechart_Agents_Staffed_label), "Test_View3", "view3_piechart_Agents_Staffed_label");
 	}
-	
 	/**
 	 * Validating data of COEs table
 	 * @author NMakkar
@@ -246,7 +244,6 @@ WebDriver driver;
 		//Validating N/A and integer for columns
 		helper.data_validate_Down(driver, key , col_of_table3, data_of_table3  );
 		}
-			
 /**
  * Closing Browser After Test.
  */
@@ -255,6 +252,5 @@ WebDriver driver;
 		driver.close();
 		System.out.println("------End Test------");
 	}
-
-
 }
+

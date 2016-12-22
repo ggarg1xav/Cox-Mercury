@@ -373,9 +373,14 @@ public class Helper implements DashBoardView{
 		Select select = new Select(driver.findElement(element));
 		ArrayList<String> ui_col_names = new ArrayList<String>();
 		List<WebElement> elementCount = select.getOptions();
-		for (int i = 0; i < elementCount.size() - 1; i++) {
+		
+		for (int i = 0; i <=elementCount.size() - 1; i++) {
 			ui_col_names.add(elementCount.get(i).getAttribute("label").toString());
 		}
+		logger.info("Actual Size from UI:"+ui_col_names.size());
+		logger.info("Expected Size from Excel Sheet:"+xls_col_names.size());
+		logger.info("Actual Values from UI:"+ui_col_names);
+		logger.info("Expected values from Excel Sheet:"+xls_col_names);
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names), true, "All values does not match");
 	}
 
@@ -487,4 +492,21 @@ public class Helper implements DashBoardView{
 		//Returning Updated data list.
 		return data_of_table;
 	}
+
+	/**
+	 * @author guneet
+	 * Method is waiting for loader to get invisible
+	 */
+	public void waitloader(WebDriver driver) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		for (int i = 0; i < 10; i++) {
+			try {
+				wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(loader));
+			} catch (Exception e) {
+				break;
+			}
+		}
+	}
+
+	
 }
