@@ -5,15 +5,15 @@
 	<parameter name="pdfngreport-properties"
 		value="src/main/resources/report_resource/pdfngreport.properties" />
 
-	<listeners>
+<!-- 	<listeners>
 		<listener class-name="com.uttesh.pdfngreport.PDFReportListener" />
-	</listeners>
+	</listeners>  
 	
 	<test name="View3">
 		<classes>
 			<class name="com.xavient.test.script.Test_View3"></class>
-		</classes>
-	</test>
+		</classes> 
+	</test> -->
 	<test name="View15">
 		<classes>
 			<class name="com.xavient.test.script.Test_View15"></class>
