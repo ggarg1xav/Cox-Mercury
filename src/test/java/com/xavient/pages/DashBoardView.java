@@ -30,6 +30,9 @@ public interface DashBoardView {
 	By Queue_Summary_EMC = By.xpath(".//*[contains(text(),'Queue Summary - EMC')]");
 	By View2 = By.xpath(".//*[contains(text(),' LOB Summary View')]"); 
 
+	By CumulativePerformance = By.xpath("//a[text()='Cumulative Performance']");
+	By View5 = By.xpath("//a[contains(text(),'Forecast Staffing By COE And Partner View')]");
+	
 	/*
 	 view 3 - Table Names
 	 */
@@ -70,7 +73,7 @@ public interface DashBoardView {
 	By view3_piechart_Total_Agents_label =  By.xpath("//label[text()='Total Agents']");
 	By view3_piechart_Agents_Staffed_label =  By.xpath("//label[text()='Agents Staffed']");
 	/*
-	 * ToolTip locator
+	 * 	Tip locator
 	 */
 	By popOutToolTip = By.id("fullScrExpand");
 	By pauseToolTip = By.id("clickPause");
@@ -78,7 +81,7 @@ public interface DashBoardView {
 	By lineChartToolTip = By.xpath(".//*[@id='ChartCombineLine']");
 	By barGraphToolTip = By.xpath(".//*[@id='ChartCombineBar']");
 	By saveMyViewToolTip = By.id("saveMyView");
-
+	By chartCombineStackToolTip = By.id("ChartCombineStack");
 	/*
 	 * Pagination
 	 */
@@ -171,5 +174,24 @@ public interface DashBoardView {
 	
 	By lst_chart_dd =By.xpath(".//*[@id='div_first']/div[1]/div/div[2]/ul/li");
 	By icon_lst_chart_dd= By.xpath("//*[@id='div_first']/div[1]/div/div[2]/button");
+	
+	/*
+	 * View 5 Stack Chart
+	 */
+	By view5_AgentCount_x_axis_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdiv']//*[name()='svg']//*[name()='g'][1]//*[name()='text'][contains(@text-anchor, 'middle')]");
+	//By view5_AgentCount_x_axis_label = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'Current Calls Offered')]/parent::*/parent::*/child::*");
+
+	By view5_AgentCount_y_axis_label = By.xpath(".//*[contains(text(),'Agent Count')]");
+	By view5_AgentCount_sub_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdiv_legend']/*[name()='svg']//*[name()='tspan']");
+	
+	By view5_Percentage_x_axis_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdivNew']//*[name()='svg']//*[name()='g'][1]//*[name()='text'][contains(@text-anchor, 'middle')]");
+	By view5_Percentage_y_axis_label = By.xpath(".//*[contains(text(),'Percentage')]");
+	By view5_Percentage_sub_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdivNew_legend']/*[name()='svg']//*[name()='tspan']");
+
+	By view5_Time_x_axis_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdivTime']//*[name()='svg']//*[name()='g'][1]//*[name()='text'][contains(@text-anchor, 'middle')]");
+	By view5_Time_y_axis_label = By.xpath("//*[name()='svg']//*[name()='g']//*[contains(text(),'Time')]");
+	By view5_Time_sub_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdivTime_legend']/*[name()='svg']//*[name()='tspan']");
+
+	By loader = By.xpath("//span[@class='fa fa-refresh fa-spin fa-4x']");
 	
 }
