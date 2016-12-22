@@ -445,7 +445,7 @@ public class Helper implements DashBoardView{
 		
 		int index = 0;
 		
-		//Validating Key data.
+		//Picking up Key index for comparing.
 		for (int i = 0; i < col_data.size(); i++) {
 			if (col_data.get(i).getText().equalsIgnoreCase(key)) {
 				index = i;
@@ -454,10 +454,10 @@ public class Helper implements DashBoardView{
 		}
 			
 		//Validating values based on Key.
-		if (data_of_table.get(index).getText().matches("[-+]?\\d*\\.?\\d+")) {
+		if (data_of_table.get(index).getText().matches(Properties_Reader.readProperty("int_regex"))) {
 			for (WebElement element_data : data_of_table)
-				Assert.assertEquals(element_data.getText().matches("[-+]?\\d*\\.?\\d+"),true);
-		} else if (data_of_table.get(index).getText().matches("N/A")) {
+				Assert.assertEquals(element_data.getText().matches(Properties_Reader.readProperty("int_regex")),true);
+		} else if (data_of_table.get(index).getText().matches(Properties_Reader.readProperty("NA"))) {
 			for (WebElement element_data : data_of_table)
 				Assert.assertEquals(element_data.getText().equals(key), true);
 		}
@@ -469,23 +469,22 @@ public class Helper implements DashBoardView{
 	 * @param data_of_table
 	 * @param check_text
 	 */
-	public List<WebElement> modify_cols_data_of_table(List<WebElement> col_of_table,List<WebElement> data_of_table, String check_text) {
+	public List<WebElement> modify_cols_data_of_table(List<WebElement> col_of_table, List<WebElement> data_of_table, List<WebElement> updated_col_data,
+			String check_text, Boolean add_remove_flag) {
 		// TODO Auto-generated method stub
-		LinkedList<Integer> index = new LinkedList<Integer>();
-		
-		//Finding Index of columns to be removed.
-		for (int i = 0; i < col_of_table.size(); i++) {
-			if (col_of_table.get(i).getText().contains(check_text)) {
-				index.add(i);
-			}
-		}
 
-		//Removing Data for those columns.
-		if (index.size() > 0) {
-			for (int ind : index) {
-				data_of_table.remove(ind);
+		// Finding Index of columns to be removed.
+		for (int i = 0; i < col_of_table.size(); i++) {
+			//Validating Text
+			if (col_of_table.get(i).getText().contains(check_text)) {
+				//Checking flag for adding / removing elements and updating list on that basis.
+				if (!add_remove_flag)
+					data_of_table.remove(i);
+				else 
+					data_of_table.add(updated_col_data.get(i));
 			}
 		}
+		//Returning Updated data list.
 		return data_of_table;
 	}
 }
