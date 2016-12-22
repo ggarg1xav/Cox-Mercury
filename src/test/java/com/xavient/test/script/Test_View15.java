@@ -51,7 +51,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		// Initialize
 		helper = new Helper();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		wait = new WebDriverWait(driver, 5);
+		wait = new WebDriverWait(driver, 30);
 		// Navigating to URL.
 		driver.get(Properties_Reader.readProperty("URL"));
 
@@ -76,7 +76,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * 
 	 * @author csingh5
 	 */
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void view15_validate_table_data() {
 		logger.info("-----Start test case execution for :view15_validate_table_data------");
 		wait.until(ExpectedConditions.visibilityOf(driver.findElement(view15_today_data)));
@@ -104,7 +104,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating table pagination
 	 */
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void  view15_table_pagination() {
 		logger.info("-----Start test case execution for :view15_table_pagination------");
 		//Validating pagination dropdown value
@@ -155,7 +155,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating table sorting
 	 */
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void view15_table_sorting() {
 		logger.info("-----Start test case execution for :view15_table_sorting------");
 		if(!helper.isElementPresent(driver, noRecordData))
@@ -194,7 +194,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating static data set of line graph 
 	 */
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void view15_validate_line_graph_data()  {
 	logger.info("-----Start test case execution for :view15_validate_line_graph_data------");
 		//Navigating to line chart page. 	
@@ -207,7 +207,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating filter name
 	 */
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void view15_validate_filter_name()
 	{
 		logger.info("-----Start test case execution for :view15_validate_filter_name------");
