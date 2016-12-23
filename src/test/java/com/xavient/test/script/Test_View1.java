@@ -72,7 +72,7 @@ public class Test_View1 extends BaseClass implements DashBoardView {
 
 		logger.info("-----table and column name validated-------------");
 	}
-	// drill down validation
+	// drill down validations
 
 	@Test(enabled = true, priority = 2)
 	public void drilldown_validation() {
