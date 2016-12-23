@@ -19,5 +19,10 @@
 			<class name="com.xavient.test.script.Test_View15"></class>
 		</classes>
 	</test>
+	<test name="View2">
+		<classes>
+			<class name="com.xavient.test.script.Test_View2"></class>
+		</classes>
+	</test>
 
 </suite>
