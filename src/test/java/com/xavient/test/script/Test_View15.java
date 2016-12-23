@@ -120,7 +120,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 			String count=driver.findElement(pagerGridCount).getText();
 			Object[] pagerGridCountList = count.split(" "); 
 			
-			//Validating text 
+			//Validating texts 
 			Assert.assertEquals("of", pagerGridCountList[1]);
 			Assert.assertEquals("items", pagerGridCountList[3]);		
 			Assert.assertEquals(" items per page", driver.findElement(pagerPageDropText).getText());
