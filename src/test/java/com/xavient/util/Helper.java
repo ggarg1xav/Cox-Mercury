@@ -5,8 +5,10 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -16,6 +18,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import com.xavient.pages.DashBoardView;
 
@@ -25,7 +28,7 @@ public class Helper implements DashBoardView{
 	 * @author NMakkar
 	 */
 	
-	Logger logger = Logger.getLogger(Helper.class);
+	static Logger logger = Logger.getLogger(Helper.class);
 	
 	public void handle_popup()
 	{
@@ -367,4 +370,96 @@ public class Helper implements DashBoardView{
 		logger.info("Expected drop down values from Excel Sheet:"+xls_col_names);
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
 	}
+	/**
+	 * Method is fetching data from XLS select the fetched value in multi-select list.
+	 * @author nkumar9
+	 * @param element
+	 * @param class_name
+	 * @param list_element
+	 */
+	public void selectCheckboxFromDD( By element, WebDriver driver, String class_name, String list_element)
+	{
+		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , list_element );
+		List<WebElement> listelement = driver.findElements(element);
+		logger.info("Selecting the following values from Column customization list :"+xls_col_names);
+		for (int i=0;i<xls_col_names.size();i++)
+		{
+			for (int j=0;j<listelement.size();j++)
+			{
+				if(listelement.get(j).getAttribute("value").equals(xls_col_names.get(i)) && !listelement.get(j).isSelected() )
+						{
+							listelement.get(j).click();
+							break;
+						}
+				
+			}
+		}	
+		
+	}
+	
+	/**
+	 * Method is fetching data from XLS de-select the fetched value in multi-select list.
+	 * @author nkumar9
+	 * @param element
+	 * @param class_name
+	 * @param list_element
+	 */
+	public void deSelectCheckboxFromDD( By element, WebDriver driver, String class_name, String list_element)
+	{
+		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , list_element );
+		List<WebElement> listelement = driver.findElements(element);
+		logger.info("Deselecting the following values from Column customization list :"+xls_col_names);
+		for (int i=0;i<xls_col_names.size();i++)
+		{
+			for (int j=0;j<listelement.size();j++)
+			{
+				if(listelement.get(j).getAttribute("value").equals(xls_col_names.get(i)) && listelement.get(j).isSelected() )
+						{
+							listelement.get(j).click();
+							break;
+						}
+				
+			}
+		}	
+		
+	}
+	
+	/**
+	 * @author nkumar9 
+	 * Method is to get table columns from UI
+	 */
+	
+	public List<String> getTableColumns( By element, WebDriver driver) {
+		System.out.println("abc");
+		List<WebElement> listelement = driver.findElements(element);
+		ArrayList<String> ui_col_names = new ArrayList<String>();
+		for (WebElement webelement : listelement)
+		{
+			ui_col_names.add(webelement.getText());
+		}
+		
+		return ui_col_names;
+		
+	
+	}
+	/**
+	 * @author nkumar9 
+	 * Method is to Compare two list
+	 */
+	public static boolean compareTwoList(List<String> list1,List<String> list2){
+		boolean value=false;
+		for(int i=0;i<list1.size();i++)
+		{
+			if(list2.contains(list1.get(i)))
+			{
+			value=true;
+			}
+			else
+				logger.error("Selected column : "+list1.get(i)+ " does not exist in UI table column list : "+list2);
+				value=false;
+		}
+		
+			return value;
+			
+		}
 }
