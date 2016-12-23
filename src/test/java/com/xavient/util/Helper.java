@@ -591,12 +591,29 @@ public class Helper implements DashBoardView{
 			value=true;
 			}
 			else
+			{
 				logger.error("Selected column : "+list1.get(i)+ " does not exist in UI table column list : "+list2);
 				value=false;
+			}
 		}
 		
 			return value;
 			
 		}
+	/**
+	 * Validating dropdown values
+	 * @author guneet
+	 */
+	public void explicitWait(WebDriver driver, int wait)
+	{
+		try {
+			wait= 1000*wait;
+		Thread.sleep(wait);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
 
 }

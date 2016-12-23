@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
@@ -23,8 +25,9 @@ import com.xavient.util.Properties_Reader;
 
 public class Test_View2 extends BaseClass implements DashBoardView {
 	public static Logger logger = Logger.getLogger(Test_View2.class.getName());
-	WebDriver driver;
+	static WebDriver driver;
 	Helper helper;
+	
 
 	/**
 	 * Calling Before Test for navigating to particular view3.
@@ -38,8 +41,9 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		logger.info("-----Start test case execution for :Setup method------");		
 		driver = Browser_Selection(browser);
 		// Initialize
-		helper = new Helper();
 		WebDriverWait wait = new WebDriverWait(driver, 60);
+		helper = new Helper();
+		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 		// Navigating to URL.
@@ -77,8 +81,9 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	@Test(enabled = true, priority =1)
 	public void view2_linegraph_validate_AgentCount_data() {
 		logger.info("-----Start test case execution for :view2_linegraph_validate_AgentCount_data------");
-		WebDriverWait wait = new WebDriverWait(driver, 60);
+		
 		// Navigating to line chart page.
+		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(lineChartToolTip)));
 		driver.findElement(lineChartToolTip).click();
@@ -107,8 +112,9 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	public void view2_linegraph_validate_PencetageGraph_data() {
 		logger.info("-----Start test case execution for :view2_linegraph_validate_PencetageGraph_data------");
 
-		WebDriverWait wait = new WebDriverWait(driver, 60);
+		
 		// Navigating to line chart page.
+		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(view2_Percentage_y_axis_label)));
 
@@ -213,8 +219,9 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		WebDriverWait wait = new WebDriverWait(driver, 60);
+		
 		// Navigating to line chart page.
+		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.visibilityOf(driver
 				.findElement(view2_Percentage_y_axis_label)));
 
@@ -300,7 +307,133 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		logger.info("-----End of test case execution for :view2_table_graph_chart_validate_ColumnCustomization------");
 	
 	}
-	
+	/* @author nkumar9
+	 * Method is validating filter value  for list Organization.
+	 */
+		
+	@Test(enabled=true, priority = 10)
+	public void view2_validate_organizationfilter_dropdown()
+	{
+		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(filterBtn)));
+		helper.clickByJavascript(driver, driver.findElement(filterBtn));
+		// Validate Organization FilterList
+		helper.validate_filter_dropdown_data(organizationFilterList, driver, "Test_View2", "view2_FilterOrganizationValue_data");
+	}
+	/* @author nkumar9
+	 * Method is validating filter value for list lob.
+	 */
+		
+	@Test(enabled=true, priority = 11)
+	public void view2_validate_lobfilter_dropdown()
+	{
+		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(filterBtn)));
+		helper.clickByJavascript(driver, driver.findElement(filterBtn));
+		helper.explicitWait(driver,2);
+		// Validate LOB FilterList
+		helper.validate_filter_dropdown_data(lobFilterList, driver, "Test_View2", "view2_Filter_lobFilterList_data");
+	}
+	/* @author nkumar9
+	 * Method is validating filter value  for list subLob.
+	 */
+		
+	@Test(enabled=true, priority = 12)
+	public void view2_validate_sublobfilter_dropdown()
+	{
+		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(filterBtn)));
+		helper.clickByJavascript(driver, driver.findElement(filterBtn));
+		helper.explicitWait(driver,2);
+		// Validate SUB LOB FilterList
+		helper.validate_filter_dropdown_data(subLobFilterList, driver, "Test_View2", "view2_Filter_subLobFilterList_data");
+	}
+	/* @author nkumar9
+	 * Method is validating filter value for list groups.
+	 */
+		
+	@Test(enabled=true, priority = 13)
+	public void view2_validate_groupsfilter_dropdown()
+	{
+		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(filterBtn)));
+		helper.clickByJavascript(driver, driver.findElement(filterBtn));
+		helper.explicitWait(driver,2);
+		// Validate Functional Groups FilterList
+		helper.validate_filter_dropdown_data(functionalGroupsFilterList, driver, "Test_View2", "view2_Filter_functionalGroupsFilterList_data");
+	}
+	/* @author nkumar9
+	 * Method is validating filter value for list Sub Functional groups.
+	 */
+		
+	@Test(enabled=true, priority = 14)
+	public void view2_validate_subFunctionalGroupsfilter_dropdown()
+	{
+		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(filterBtn)));
+		helper.clickByJavascript(driver, driver.findElement(filterBtn));
+		helper.explicitWait(driver,2);
+		// Validate Sub Functional Groups FilterList
+		helper.validate_filter_dropdown_data(subFunctionalGroupsFilterList, driver, "Test_View2", "view2_Filter_subFunctionalGroupsFilterList_data");
+	}
+	/* @author nkumar9
+	 * Method is validating filter value for list Functions.
+	 */
+		
+	@Test(enabled=true, priority = 15)
+	public void view2_validate_functionsfilter_dropdown()
+	{
+		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(filterBtn)));
+		helper.clickByJavascript(driver, driver.findElement(filterBtn));
+		helper.explicitWait(driver,2);
+		// Validate Functions FilterList
+		helper.validate_filter_dropdown_data(functionFilterList, driver, "Test_View2", "view2_functionsFilterList_data");
+	}
+	/* @author nkumar9
+	 * Method is validating filter value for list language.
+	 */
+		
+	@Test(enabled=true, priority = 16)
+	public void view2_validate_languagefilter_dropdown()
+	{
+		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(filterBtn)));
+		helper.clickByJavascript(driver, driver.findElement(filterBtn));
+		helper.explicitWait(driver,2);
+		// Validate Language FilterList
+		helper.validate_filter_dropdown_data(languageFilterList, driver, "Test_View2", "view2_Filter_languageFilterList_data");
+	}
+	/* @author nkumar9
+	 * Method is validating filter value for list Time Zone.
+	 */
+		
+	@Test(enabled=true, priority = 17)
+	public void view2_validate_timezonefilter_dropdown()
+	{
+		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(filterBtn)));
+		helper.clickByJavascript(driver, driver.findElement(filterBtn));
+		helper.explicitWait(driver,2);
+		// Validate Time Zone FilterList
+		helper.validate_filter_dropdown_data(timeZoneFilterList, driver, "Test_View2", "view2_Filter_timeZoneFilterList_data");
+	}
+	/**
+	 * Closing Browser After Test.
+	 */
+	@AfterClass
+	public void After_Test() {
+		driver.close();
+		System.out.println("------End Test------");
+	}
 	
 
 
