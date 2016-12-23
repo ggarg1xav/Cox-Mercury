@@ -122,6 +122,10 @@ public interface DashBoardView {
 	By languageFilterList = By.xpath(".//*[@id='langHandller']");
 	By timeZoneFilterList = By.xpath(".//*[@id='tzHandller']");
 	By customerRegionList = By.xpath("//select[@id='regionHandller']"); 
+	By functionHandllerFilterList= By.xpath("//select[@id='functionHandller']");
+	By startTimeHandllerFilterList= By.xpath("//select[@id='startTimeHandller']");
+	By endTimeHandllerFilterList= By.xpath("//select[@id='endTimeHandller']");
+
 	/*
 	 * View 15
 	 * 
@@ -201,7 +205,7 @@ public interface DashBoardView {
 	By view5_Time_x_axis_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdivTime']//*[name()='svg']//*[name()='g'][1]//*[name()='text'][contains(@text-anchor, 'middle')]");
 	By view5_Time_y_axis_label = By.xpath("//*[name()='svg']//*[name()='g']//*[contains(text(),'Time')]");
 	By view5_Time_sub_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdivTime_legend']/*[name()='svg']//*[name()='tspan']");
-
+	By view5_ForecastStaffing_table = By.xpath(".//*[@id='exRowTable_wrapper']/descendant::thead[1]/tr/th");
 	By loader = By.xpath("//span[@class='fa fa-refresh fa-spin fa-4x']");
 
 
