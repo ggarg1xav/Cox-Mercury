@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TestSuite" thread-count="3" parallel="tests">
+<suite name="TestSuite" thread-count="5" verbose="2">
 
 	<parameter name="pdfngreport-properties"
-
 		value="src/main/resources/report_resource/pdfngreport.properties" />
 
 	<listeners>
-
 		<listener class-name="com.uttesh.pdfngreport.PDFReportListener" />
-
 	</listeners>
-
-
-
-	<test name="Login">
-		<parameter name="browser" value="ie" />
+	
+	<test name="View3">
 		<classes>
-			<class name="com.xavient.test.script.Test_View1" />
+			<class name="com.xavient.test.script.Test_View3"></class>
 		</classes>
 	</test>
+	<test name="View15">
+		<classes>
+			<class name="com.xavient.test.script.Test_View15"></class>
+		</classes>
+	</test>
+
 </suite>
