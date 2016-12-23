@@ -174,6 +174,7 @@ public interface DashBoardView {
 	By lst_chart_dd =By.xpath(".//*[@id='div_first']/div[1]/div/div[2]/ul/li");
 	By icon_lst_chart_dd= By.xpath("//*[@id='div_first']/div[1]/div/div[2]/button");
 	
+
 	/*
 
 	 * View 3 Table Data in rows.
@@ -203,5 +204,12 @@ public interface DashBoardView {
 
 	By loader = By.xpath("//span[@class='fa fa-refresh fa-spin fa-4x']");
 
+
+	By lst_column_customization = By.cssSelector(".custPanelScroll div:nth-child(2) p input");
+	By lnk_cc_more =By.xpath("//*[@id='addColumns']");
 	
+	By img_column_cust =By.cssSelector("i.dropdown-toggle.fa.fa-th");
+	
+	By tbl_View2 = By.xpath(".//*[@class='fht-table table dataTable tree alert-notification']//tr/th");
+
 }
