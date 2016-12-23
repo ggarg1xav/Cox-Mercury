@@ -109,14 +109,18 @@ public interface DashBoardView {
 	By timeZoneFilterTxt = By.xpath("//div[@class='filter-panel']/child::*/div[@class='row']/div/label[text()='Time Zone']");
 
 	//Retrieve value using attribute-label
-	By organizationFilterList = By.xpath(".//*[@id='orgHandller']/option");
-	By coeFilterList = By.xpath("//select[@id='coeHandller']/option");
-	By lobFilterList = By.xpath("//select[@id='lobHandller']/option");
-	By subLobFilterList = By.xpath("//select[@id='subLobListHandller']/option");
-	By functionalGroupsFilterList = By.xpath(".//*[@id='funGroupHandller']/option");
-	By subFunctionalGroupsFilterList = By.xpath(".//*[@id='subFunGroupHandller']/option");
-	By languageFilterList = By.xpath(".//*[@id='langHandller']/option");
-	By timeZoneFilterList = By.xpath(".//*[@id='tzHandller']/option");
+	By organizationFilterList = By.xpath(".//*[@id='orgHandller']");
+	By coeFilterList = By.xpath("//select[@id='coeHandller']");
+	By lobFilterList = By.xpath("//select[@id='lobHandller']");
+	By subLobFilterList = By.xpath("//select[@id='subLobListHandller']");
+	By functionalGroupsFilterList = By.xpath(".//*[@id='funGroupHandller']");
+	By subFunctionalGroupsFilterList = By.xpath(".//*[@id='subFunGroupHandller']");
+	By languageFilterList = By.xpath(".//*[@id='langHandller']");
+	By timeZoneFilterList = By.xpath(".//*[@id='tzHandller']");
+	By customerRegionList = By.xpath("//select[@id='regionHandller']"); 
+	By functionFilterList = By.xpath("//select[@id='functionHandller']"); 
+	
+	
 	
 	/*
 	 * View 15

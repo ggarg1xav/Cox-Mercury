@@ -16,6 +16,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -455,11 +456,47 @@ public class Helper implements DashBoardView{
 			value=true;
 			}
 			else
+			{
 				logger.error("Selected column : "+list1.get(i)+ " does not exist in UI table column list : "+list2);
 				value=false;
+			}
 		}
 		
 			return value;
 			
 		}
+	/**
+	 * Validating dropdown values
+	 * @author guneet
+	 */
+	public void validate_filter_dropdown_data(By element, WebDriver driver, String class_name, String table_element) {
+		List<String> xls_col_names = ExcelCache.getExpectedListData(class_name, table_element);
+		Select select = new Select(driver.findElement(element));
+		ArrayList<String> ui_col_names = new ArrayList<String>();
+		List<WebElement> elementCount = select.getOptions();
+		
+		for (int i = 0; i <=elementCount.size() - 1; i++) {
+			ui_col_names.add(elementCount.get(i).getAttribute("label").toString().trim());
+		}
+		logger.info("Actual Size from UI:"+ui_col_names.size());
+		logger.info("Expected Size from Excel Sheet:"+xls_col_names.size());
+		logger.info("Actual Values from UI for list "+table_element + " : "+ ui_col_names);
+		logger.info("Expected values from Excel Sheet:"+xls_col_names);
+		Assert.assertEquals(xls_col_names.containsAll(ui_col_names), true, "All values does not match");
+	}
+	/**
+	 * Validating dropdown values
+	 * @author guneet
+	 */
+	public void explicitWait(WebDriver driver, int wait)
+	{
+		try {
+			wait= 1000*wait;
+		Thread.sleep(wait);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
 }
