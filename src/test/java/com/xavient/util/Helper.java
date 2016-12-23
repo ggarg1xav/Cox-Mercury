@@ -6,8 +6,11 @@ import java.awt.event.KeyEvent;
 import java.beans.Visibility;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -19,6 +22,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import com.xavient.pages.DashBoardView;
 
@@ -28,7 +32,8 @@ public class Helper implements DashBoardView{
 	 * @author NMakkar
 	 */
 
-	Logger logger = Logger.getLogger(Helper.class);
+	
+	static Logger logger = Logger.getLogger(Helper.class);
 
 	public void handle_popup()
 	{
@@ -386,9 +391,14 @@ public class Helper implements DashBoardView{
 		Select select = new Select(driver.findElement(element));
 		ArrayList<String> ui_col_names = new ArrayList<String>();
 		List<WebElement> elementCount = select.getOptions();
-		for (int i = 0; i < elementCount.size() - 1; i++) {
+		
+		for (int i = 0; i <=elementCount.size() - 1; i++) {
 			ui_col_names.add(elementCount.get(i).getAttribute("label").toString());
 		}
+		logger.info("Actual Size from UI:"+ui_col_names.size());
+		logger.info("Expected Size from Excel Sheet:"+xls_col_names.size());
+		logger.info("Actual Values from UI:"+ui_col_names);
+		logger.info("Expected values from Excel Sheet:"+xls_col_names);
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names), true, "All values does not match");
 	}
 
@@ -424,4 +434,169 @@ public class Helper implements DashBoardView{
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
+	
+	/**
+	 * @author NMakkar
+	 * @param driver
+	 * @param col_of_table
+	 * @param data_of_table
+	 * @param key
+	 */
+	public void data_validate_Down(WebDriver driver, String key,List<WebElement> col_data, List<WebElement> data_of_table) {
+		
+		int index = 0;
+		
+		//Picking up Key index for comparing.
+		for (int i = 0; i < col_data.size(); i++) {
+			if (col_data.get(i).getText().equalsIgnoreCase(key)) {
+				index = i;
+				break;
+			}
+		}
+			
+		//Validating values based on Key.
+		if (data_of_table.get(index).getText().matches(Properties_Reader.readProperty("int_regex"))) {
+			for (WebElement element_data : data_of_table)
+				Assert.assertEquals(element_data.getText().matches(Properties_Reader.readProperty("int_regex")),true);
+		} else if (data_of_table.get(index).getText().matches(Properties_Reader.readProperty("NA"))) {
+			for (WebElement element_data : data_of_table)
+				Assert.assertEquals(element_data.getText().equals(key), true);
+		}
+	}
+	
+	/**
+	 * @author NMakkar
+	 * @param col_of_table
+	 * @param data_of_table
+	 * @param check_text
+	 */
+	public List<WebElement> modify_cols_data_of_table(List<WebElement> col_of_table, List<WebElement> data_of_table, List<WebElement> updated_col_data,
+			String check_text, Boolean add_remove_flag) {
+		// TODO Auto-generated method stub
+
+		// Finding Index of columns to be removed.
+		for (int i = 0; i < col_of_table.size(); i++) {
+			//Validating Text
+			if (col_of_table.get(i).getText().contains(check_text)) {
+				//Checking flag for adding / removing elements and updating list on that basis.
+				if (!add_remove_flag)
+					data_of_table.remove(i);
+				else 
+					data_of_table.add(updated_col_data.get(i));
+			}
+		}
+		//Returning Updated data list.
+		return data_of_table;
+	}
+
+	/**
+	 * @author guneet
+	 * Method is waiting for loader to get invisible
+	 */
+	public void waitloader(WebDriver driver) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		for (int i = 0; i < 10; i++) {
+			try {
+				wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(loader));
+			} catch (Exception e) {
+				break;
+			}
+		}
+	}
+
+	
+
+	/**
+	 * Method is fetching data from XLS select the fetched value in multi-select list.
+	 * @author nkumar9
+	 * @param element
+	 * @param class_name
+	 * @param list_element
+	 */
+	public void selectCheckboxFromDD( By element, WebDriver driver, String class_name, String list_element)
+	{
+		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , list_element );
+		List<WebElement> listelement = driver.findElements(element);
+		logger.info("Selecting the following values from Column customization list :"+xls_col_names);
+		for (int i=0;i<xls_col_names.size();i++)
+		{
+			for (int j=0;j<listelement.size();j++)
+			{
+				if(listelement.get(j).getAttribute("value").equals(xls_col_names.get(i)) && !listelement.get(j).isSelected() )
+						{
+							listelement.get(j).click();
+							break;
+						}
+				
+			}
+		}	
+		
+	}
+	
+	/**
+	 * Method is fetching data from XLS de-select the fetched value in multi-select list.
+	 * @author nkumar9
+	 * @param element
+	 * @param class_name
+	 * @param list_element
+	 */
+	public void deSelectCheckboxFromDD( By element, WebDriver driver, String class_name, String list_element)
+	{
+		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , list_element );
+		List<WebElement> listelement = driver.findElements(element);
+		logger.info("Deselecting the following values from Column customization list :"+xls_col_names);
+		for (int i=0;i<xls_col_names.size();i++)
+		{
+			for (int j=0;j<listelement.size();j++)
+			{
+				if(listelement.get(j).getAttribute("value").equals(xls_col_names.get(i)) && listelement.get(j).isSelected() )
+						{
+							listelement.get(j).click();
+							break;
+						}
+				
+			}
+		}	
+		
+	}
+	
+	/**
+	 * @author nkumar9 
+	 * Method is to get table columns from UI
+	 */
+	
+	public List<String> getTableColumns( By element, WebDriver driver) {
+		System.out.println("abc");
+		List<WebElement> listelement = driver.findElements(element);
+		ArrayList<String> ui_col_names = new ArrayList<String>();
+		for (WebElement webelement : listelement)
+		{
+			ui_col_names.add(webelement.getText());
+		}
+		
+		return ui_col_names;
+		
+	
+	}
+	/**
+	 * @author nkumar9 
+	 * Method is to Compare two list
+	 */
+	public static boolean compareTwoList(List<String> list1,List<String> list2){
+		boolean value=false;
+		for(int i=0;i<list1.size();i++)
+		{
+			if(list2.contains(list1.get(i)))
+			{
+			value=true;
+			}
+			else
+				logger.error("Selected column : "+list1.get(i)+ " does not exist in UI table column list : "+list2);
+				value=false;
+		}
+		
+			return value;
+			
+		}
+
 }

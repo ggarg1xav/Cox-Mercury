@@ -50,7 +50,7 @@ public class Test_View1 extends BaseClass implements DashBoardView {
 		// this method is being executed.
 		helper.handle_popup();
 
-		// Login and Navigating to View
+		// Login and Navigating to Views
 		helper.login(driver);
 		driver.findElement(View).click();
 		driver.findElement(Queue_Summary).click();

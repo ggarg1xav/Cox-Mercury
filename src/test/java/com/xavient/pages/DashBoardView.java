@@ -1,6 +1,5 @@
 package com.xavient.pages;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
 public interface DashBoardView {
@@ -30,6 +29,9 @@ public interface DashBoardView {
 	By Queue_Summary_EMC = By.xpath(".//*[contains(text(),'Queue Summary - EMC')]");
 	By View2 = By.xpath(".//*[contains(text(),' LOB Summary View')]"); 
 
+	By CumulativePerformance = By.xpath("//a[text()='Cumulative Performance']");
+	By View5 = By.xpath("//a[contains(text(),'Forecast Staffing By COE And Partner View')]");
+	
 	/*
 	 view 3 - Table Names
 	 */
@@ -70,7 +72,7 @@ public interface DashBoardView {
 	By view3_piechart_Total_Agents_label =  By.xpath("//label[text()='Total Agents']");
 	By view3_piechart_Agents_Staffed_label =  By.xpath("//label[text()='Agents Staffed']");
 	/*
-	 * ToolTip locator
+	 * 	Tip locator
 	 */
 	By popOutToolTip = By.id("fullScrExpand");
 	By pauseToolTip = By.id("clickPause");
@@ -78,7 +80,7 @@ public interface DashBoardView {
 	By lineChartToolTip = By.xpath(".//*[@id='ChartCombineLine']");
 	By barGraphToolTip = By.xpath(".//*[@id='ChartCombineBar']");
 	By saveMyViewToolTip = By.id("saveMyView");
-
+	By chartCombineStackToolTip = By.id("ChartCombineStack");
 	/*
 	 * Pagination
 	 */
@@ -119,7 +121,7 @@ public interface DashBoardView {
 	By subFunctionalGroupsFilterList = By.xpath(".//*[@id='subFunGroupHandller']");
 	By languageFilterList = By.xpath(".//*[@id='langHandller']");
 	By timeZoneFilterList = By.xpath(".//*[@id='tzHandller']");
-
+	By customerRegionList = By.xpath("//select[@id='regionHandller']"); 
 	/*
 	 * View 15
 	 * 
@@ -172,6 +174,7 @@ public interface DashBoardView {
 	By lst_chart_dd =By.xpath(".//*[@id='div_first']/div[1]/div/div[2]/ul/li");
 	By icon_lst_chart_dd= By.xpath("//*[@id='div_first']/div[1]/div/div[2]/button");
 	
+
 	//View 1 Table name
 	 By view1_residential_summary = By.xpath(".//*[contains(text(),'Residential EMC Summary View')]");
 	 String view1_residential_summary_col = ".//*[@id='exRowTable_wrapper']//table[@class='fht-table table dataTable tree alert-notification']/thead/tr/th";
@@ -191,4 +194,43 @@ public interface DashBoardView {
     String view1DrillEnd= "]/td[1]/span";
     String view1_table_name="//*[@id='VIEW_1_table-first']/tbody/tr";
     
+
+	/*
+
+	 * View 3 Table Data in rows.
+	 */
+	
+	
+	By view3_Current_table_data_val = By.xpath(".//*[@id='VIEW_3_table-first1_0']/td");
+	By view3_todays_table_data_val = By.xpath(".//*[@id='VIEW_3_table-second1_0']/td");
+	By view3_COEs_table_data_val = By.xpath(".//*[@id='VIEW_3_table-third1_0']/td");
+
+	/*
+	 * View 5 Stack Chart
+	 */
+	By view5_AgentCount_x_axis_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdiv']//*[name()='svg']//*[name()='g'][1]//*[name()='text'][contains(@text-anchor, 'middle')]");
+	//By view5_AgentCount_x_axis_label = By.xpath(".//*[name()='svg']//*[name()='g']//*[contains(text(),'Current Calls Offered')]/parent::*/parent::*/child::*");
+
+	By view5_AgentCount_y_axis_label = By.xpath(".//*[contains(text(),'Agent Count')]");
+	By view5_AgentCount_sub_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdiv_legend']/*[name()='svg']//*[name()='tspan']");
+	
+	By view5_Percentage_x_axis_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdivNew']//*[name()='svg']//*[name()='g'][1]//*[name()='text'][contains(@text-anchor, 'middle')]");
+	By view5_Percentage_y_axis_label = By.xpath(".//*[contains(text(),'Percentage')]");
+	By view5_Percentage_sub_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdivNew_legend']/*[name()='svg']//*[name()='tspan']");
+
+	By view5_Time_x_axis_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdivTime']//*[name()='svg']//*[name()='g'][1]//*[name()='text'][contains(@text-anchor, 'middle')]");
+	By view5_Time_y_axis_label = By.xpath("//*[name()='svg']//*[name()='g']//*[contains(text(),'Time')]");
+	By view5_Time_sub_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdivTime_legend']/*[name()='svg']//*[name()='tspan']");
+
+	By loader = By.xpath("//span[@class='fa fa-refresh fa-spin fa-4x']");
+
+
+	By lst_column_customization = By.cssSelector(".custPanelScroll div:nth-child(2) p input");
+	By lnk_cc_more =By.xpath("//*[@id='addColumns']");
+	
+	By img_column_cust =By.cssSelector("i.dropdown-toggle.fa.fa-th");
+	
+	By tbl_View2 = By.xpath(".//*[@class='fht-table table dataTable tree alert-notification']//tr/th");
+
+
 }

@@ -16,6 +16,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import com.xavient.pages.DashBoardView;
 import com.xavient.util.BaseClass;
 import com.xavient.util.Helper;
@@ -49,10 +50,8 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		// Initialize
 		helper = new Helper();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		wait = new WebDriverWait(driver, 5);
-		// Navigating to URL.
-		driver.get(Properties_Reader.readProperty("URL"));
-
+		wait = new WebDriverWait(driver, 30);
+		
 		// Handling PopUP with AutoIT , Need to have this screen as active
 		// when this method is being executed.
 		helper.handle_popup();
@@ -74,7 +73,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * 
 	 * @author csingh5
 	 */
-	@Test(enabled = true, priority = 1)
+	@Test(enabled = true)
 	public void view15_validate_table_data() {
 		logger.info("-----Start test case execution for :view15_validate_table_data------");
 		wait.until(ExpectedConditions.visibilityOf(driver.findElement(view15_today_data)));
@@ -96,14 +95,15 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		//Validating Agent details data tables
 		helper.validate_table_names(driver.findElement(view15_Agent_Detail_data), "Test_View15", "view15_Agent_Detail_data");
 		helper.validate_table_columns(view15_Agent_Detail_data_table, driver, "", "Test_View15", "view15_Agent_Detail_data_table");
+		logger.info("-----End test case execution for :view15_validate_table_data------");
 	}
 
 	/**
 	 * @author csingh
 	 * Method is validating table pagination
 	 */
-	@Test(enabled=true, priority = 2)
-	public void  view3_table_pagination() {
+	@Test(enabled=true)
+	public void  view15_table_pagination() {
 		logger.info("-----Start test case execution for :view15_table_pagination------");
 		//Validating pagination dropdown value
 		Select select = new Select(driver.findElement(pagerPageDrop));
@@ -153,8 +153,8 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating table sorting
 	 */
-	@Test(enabled=true,priority =3)
-	public void view3_table_sorting() {
+	@Test(enabled=true)
+	public void view15_table_sorting() {
 		logger.info("-----Start test case execution for :view15_table_sorting------");
 		if(!helper.isElementPresent(driver, noRecordData))
 		{
@@ -192,14 +192,61 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating static data set of line graph 
 	 */
-	@Test(enabled=true,priority=4)
-	public void view3_validate_line_graph_data()  {
+	@Test(enabled=true)
+	public void view15_validate_line_graph_data()  {
 	logger.info("-----Start test case execution for :view15_validate_line_graph_data------");
 		//Navigating to line chart page. 	
 	wait.until(ExpectedConditions.visibilityOf(driver.findElement(lineChartToolTip)));
 	driver.findElement(lineChartToolTip).click();
 	logger.info("-----End of test case execution for :view_validate_line_graph_data------");
 	}
+	
+	/**
+	 * @author csingh
+	 * Method is validating filter name
+	 */
+	@Test(enabled=true)
+	public void view15_validate_filter_name()
+	{
+		logger.info("-----Start test case execution for :view15_validate_filter_name------");
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(filterBtn)));
+		helper.clickByJavascript(driver, driver.findElement(filterBtn));
+		helper.validate_filter_data(filterTxt, driver, "Test_View15", "view15_FilterName_data");
+		logger.info("-----End test case execution for :view15_validate_filter_name------");
+	}
+	
+	/**
+	 * @author csingh
+	 * Method is validating filter value.
+	 */
+	
+	@Test(enabled=true)
+	public void view15_validate_filter_dropdown()
+	{
+		logger.info("-----Start test case execution for :view15_validate_filter_dropdown------");
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(filterBtn)));
+		helper.clickByJavascript(driver, driver.findElement(filterBtn));
+		// Validate Organization FilterList
+		helper.validate_filter_dropdown_data(organizationFilterList, driver, "Test_View15", "view15_FilterOrganizationValue_data");
+		// Validate Customer Region FilterList
+		helper.validate_filter_dropdown_data(customerRegionList, driver, "Test_View15", "view15_Filter_customerRegionList_data");
+		// Validate COE FilterList
+		helper.validate_filter_dropdown_data(coeFilterList, driver, "Test_View15", "view15_Filter_coeFilterList_data");		
+		// Validate LOB FilterList
+		helper.validate_filter_dropdown_data(lobFilterList, driver, "Test_View15", "view15_Filter_lobFilterList_data");
+		// Validate SUB LOB FilterList
+		helper.validate_filter_dropdown_data(subLobFilterList, driver, "Test_View15", "view15_Filter_subLobFilterList_data");		
+		// Validate Functional Groups FilterList
+		helper.validate_filter_dropdown_data(functionalGroupsFilterList, driver, "Test_View15", "view15_Filter_functionalGroupsFilterList_data");
+		// Validate Sub Functional Groups FilterList
+		helper.validate_filter_dropdown_data(subFunctionalGroupsFilterList, driver, "Test_View15", "view15_Filter_subFunctionalGroupsFilterList_data");
+		// Validate Language FilterList
+		helper.validate_filter_dropdown_data(languageFilterList, driver, "Test_View15", "view15_Filter_languageFilterList_data");
+		// Validate Time Zone FilterList
+		helper.validate_filter_dropdown_data(timeZoneFilterList, driver, "Test_View15", "view15_Filter_timeZoneFilterList_data");
+		logger.info("-----End test case execution for :view15_validate_filter_dropdown------");
+	}
+	
 	/**
 	 * Closing Browser After Test.
 	 */
