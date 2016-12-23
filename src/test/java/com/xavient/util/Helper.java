@@ -606,5 +606,20 @@ public class Helper implements DashBoardView{
 			return value;
 			
 		}
-
+	
+	/**
+	 * @author ggarg
+	 * Method is fetching and comparing data from XLS and UI using attribute.
+	 */
+	public void validate_list_data_using_attribute( By element  , WebDriver driver  , String class_name , String table_element)
+	{
+		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
+		ArrayList<String> ui_col_names = new ArrayList<String>();	
+		List<WebElement> listelement = driver.findElements(element);
+		for (WebElement webelement : listelement)
+		{
+			ui_col_names.add(webelement.getAttribute("textContent"));
+		}
+		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
+	}
 }
