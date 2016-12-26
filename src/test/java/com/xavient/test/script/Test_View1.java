@@ -31,15 +31,14 @@ public class Test_View1 extends BaseClass implements DashBoardView {
 
 	@BeforeMethod
 	@Parameters({ "browser" })
-	public void Before_Test(@Optional("Chrome") String browser) {
+	public void Before_Test(@Optional("ie") String browser) {
 		driver = Browser_Selection(browser);
 		logger.info(browser + " is opened successfully");
 
 		// Initialize
 		wait = new WebDriverWait(driver, 50);
 		helper = new Helper();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
+		
 		// Handling PopUP with AutoIT , Need to have this screen as active when this method is being executed.
 		helper.handle_popup();
 
