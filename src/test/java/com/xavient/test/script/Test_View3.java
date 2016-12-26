@@ -45,6 +45,7 @@ public class Test_View3 extends BaseClass implements  DashBoardView {
 		helper.handle_popup();
 		
 		//Login and Navigating to View
+		helper.login(driver);
 		By[] element = { View, Queue_And_Agent_Overview, View3 };
 		helper.navigate_view(element, wait, driver);
 		logger.info("------Before Test------");
@@ -56,10 +57,10 @@ public class Test_View3 extends BaseClass implements  DashBoardView {
 		@AfterMethod
 		public void After_Test() {
 			driver.close();
-			System.out.println("------End Test------");
+			logger.info("------End Test------");
 		}
 /**
- * Validating Table and Column data.
+ * Validating Table and Column names.
  * @author NMakkar
  */
 	@Test(enabled=true, priority =1)
@@ -236,11 +237,59 @@ public class Test_View3 extends BaseClass implements  DashBoardView {
 		List<WebElement> col_of_table1 = driver.findElements(By.xpath(view3_curr_data_table));
 		
 		//Adding Column data from another table.
-		data_of_table3 = helper.modify_cols_data_of_table(col_of_table1, data_of_table3, updated_col_table1 , check_text  ,  true);
+		data_of_table3 = helper.modify_cols_data_of_table(col_of_table1, data_of_table3, updated_col_table1 , check_text  );
 		
 		//Validating N/A and integer for columns
 		helper.data_validate_Down(driver, key , col_of_table3, data_of_table3  );
 		}
+	
+	/**
+	 * Validating data of todays table
+	 * @author NMakkar
+	 */
+	@Test
+	public void view3_todays_table_data_validation()
+	{	
+		//Key on which we have to validate other values.
+		String key = "CML Service Level";
+		
+		//Initialize Elements  of tables and their columns data.
+		
+		//Table 1 - Data
+		List<WebElement> data_of_table2 = driver.findElements(view3_todays_table_data_val);
+		//Table 1 - Colums
+		List<WebElement> col_of_table2 = driver.findElements(By.xpath(view3_today_data_table));
+		
+		//Validating N/A and integer for columns
+		helper.data_validate_Down(driver, key , col_of_table2, data_of_table2  );
+		}
+	
+	/**
+	 * Validating data of Current table
+	 * @author NMakkar
+	 */
+	@Test
+	public void view3_current_table_data_validation()
+	{	
+		//Key on which we have to validate other values.
+		String key = "Calls In Queue";
+		//Text on which we will fetch other tables columns
+		String check_text = "Agents";
+		
+		//Initialize Elements  of tables and their columns data.
+		
+		//Table 1 - Data
+		List<WebElement> data_of_table1 = driver.findElements(view3_Current_table_data_val);
+		//Table 1 - Columns
+		List<WebElement> col_of_table1 = driver.findElements(By.xpath(view3_curr_data_table));
+		
+		//Adding Column data from another table.
+		data_of_table1 = helper.modify_cols_data_of_table(col_of_table1, data_of_table1  , check_text );
+		
+		//Validating N/A and integer for columns
+		helper.data_validate_Down(driver, key , col_of_table1, data_of_table1  );
+		}
+	
 	/**
 	 * @author NMakkar
 	 * Method validating creation of Custom Views.

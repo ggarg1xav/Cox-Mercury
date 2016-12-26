@@ -120,7 +120,7 @@ public class Helper implements DashBoardView{
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
 		ArrayList<String> ui_col_names = new ArrayList<String>();	
-		System.out.println("excel column names are"+" "+xls_col_names);
+		logger.info("excel column names are"+" "+xls_col_names);
 		wait.until(ExpectedConditions.presenceOfElementLocated(element));
 		List<WebElement> listelement = driver.findElements(element);
 		for (int i=0;i<listelement.size();i++)
@@ -140,7 +140,6 @@ public class Helper implements DashBoardView{
 				}
 				String ui_innerlistTrim = ui_innerlist.trim();
 				ui_col_names.add(ui_innerlistTrim);
-				//System.out.println(ui_col_names);
 			}
 			else
 			{
@@ -163,12 +162,11 @@ public class Helper implements DashBoardView{
 		String state = null;
 		String oldstate = null;
 		try {
-			System.out.print("Waiting for browser loading to complete");
+			logger.info("Waiting for browser loading to complete");
 			int i = 0;
 			while (i < 5) {
 				Thread.sleep(1000);
 				state = ((JavascriptExecutor) driver).executeScript("return document.readyState;").toString();
-				System.out.print("." + Character.toUpperCase(state.charAt(0)) + ".");
 				if (state.equals("interactive") || state.equals("loading"))
 					break;
 				/*
@@ -203,7 +201,7 @@ public class Helper implements DashBoardView{
 				 * secs. Refresh the page.
 				 */
 				if (i == 15 && state.equals("loading")) {
-					System.out.println("\nBrowser in " + state + " state since last 60 secs. So refreshing browser.");
+					logger.info("\nBrowser in " + state + " state since last 60 secs. So refreshing browser.");
 					driver.navigate().refresh();
 					System.out.print("Waiting for browser loading to complete");
 					i = 0;
@@ -275,7 +273,6 @@ public class Helper implements DashBoardView{
 		driver.findElement(user_name).sendKeys(Properties_Reader.readProperty("Username"));
 		driver.findElement(pword).sendKeys(Properties_Reader.readProperty("Password"));
 		wait.until(ExpectedConditions.visibilityOf(driver.findElement(submit_login)));
-		//driver.findElement(submit_login).click();
 		clickByJavascript(driver, driver.findElement(submit_login));
 		Boolean viewPresent = isElementPresent(driver, View);
 		if(!viewPresent)
@@ -283,6 +280,7 @@ public class Helper implements DashBoardView{
 			clickByJavascript(driver, driver.findElement(submit_login));
 			logger.info("Clicked login button at second attempt");
 		}
+		logger.info("Successfully loged on to the application");
 	}
 
 	public void clickByJavascript(WebDriver driver, WebElement ele)
@@ -466,7 +464,7 @@ public class Helper implements DashBoardView{
 	 * @param check_text
 	 */
 	public List<WebElement> modify_cols_data_of_table(List<WebElement> col_of_table, List<WebElement> data_of_table, List<WebElement> updated_col_data,
-			String check_text, Boolean add_remove_flag) {
+			String check_text) {
 		// TODO Auto-generated method stub
 
 		// Finding Index of columns to be removed.
@@ -474,12 +472,36 @@ public class Helper implements DashBoardView{
 			//Validating Text
 			if (col_of_table.get(i).getText().contains(check_text)) {
 				//Checking flag for adding / removing elements and updating list on that basis.
-				if (!add_remove_flag)
-					data_of_table.remove(i);
-				else 
+				
 					data_of_table.add(updated_col_data.get(i));
 			}
 		}
+		//Returning Updated data list.
+		return data_of_table;
+	}
+	
+	
+	/**
+	 * @author NMakkar
+	 * @param col_of_table
+	 * @param data_of_table
+	 * @param check_text
+	 */
+	public List<WebElement> modify_cols_data_of_table( List<WebElement> col_of_table, List<WebElement> data_of_table , String check_text) {
+		// TODO Auto-generated method stub
+ArrayList<WebElement> a = new 	ArrayList<WebElement>();	
+// Finding Index of columns to be removed.
+		for (int i = 0; i < col_of_table.size(); i++) {
+			//Validating Text
+			if (col_of_table.get(i).getText().contains(check_text)) {
+				//Checking flag for adding / removing elements and updating list on that basis.
+				a.add(data_of_table.get(i));
+				
+			}
+		}
+		
+		for (WebElement w : a)
+			data_of_table.remove(w);
 		//Returning Updated data list.
 		return data_of_table;
 	}
@@ -561,7 +583,6 @@ public class Helper implements DashBoardView{
 	 */
 
 	public List<String> getTableColumns( By element, WebDriver driver) {
-		System.out.println("abc");
 		List<WebElement> listelement = driver.findElements(element);
 		ArrayList<String> ui_col_names = new ArrayList<String>();
 		for (WebElement webelement : listelement)
@@ -691,7 +712,6 @@ public class Helper implements DashBoardView{
 		
 		//Navigating to Custom View and validating it.
 		driver.findElement(my_Views).click();
-		System.out.println(to_check + "===========" + my_View_table1 + custom_View_Name + my_View_table2 + "===========" + driver.findElement(By.xpath(my_View_table1 + custom_View_Name + my_View_table2)).getText());
 		Assert.assertEquals((driver.findElement(By.xpath(my_View_table1 + custom_View_Name + my_View_table2)).getText().contains(to_check)), true,"Strings dont match");
 	}
 	
@@ -708,8 +728,7 @@ public class Helper implements DashBoardView{
 		// TODO Auto-generated method stub
 		//Clicking on Elements after waiting for it.
 		for (By element : nav_elements) {
-			wait.until(ExpectedConditions.visibilityOf(driver
-					.findElement(element)));
+			wait.until(ExpectedConditions.visibilityOf(driver.findElement(element)));
 			driver.findElement(element).click();
 		}
 	}
