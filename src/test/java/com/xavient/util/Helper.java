@@ -713,6 +713,22 @@ ArrayList<WebElement> a = new 	ArrayList<WebElement>();
 		//Navigating to Custom View and validating it.
 		driver.findElement(my_Views).click();
 		Assert.assertEquals((driver.findElement(By.xpath(my_View_table1 + custom_View_Name + my_View_table2)).getText().contains(to_check)), true,"Strings dont match");
+		
+		//Deleting created View.
+		WebElement check_box = driver.findElement(By.xpath(my_View_table1 + custom_View_Name + my_View_table2_check_box));
+		while(!driver.findElement(By.xpath(".//*[@id='myView']/tbody/tr[76]/td[1]/input")).isSelected())
+			{check_box.click();
+			if (check_box.isSelected())
+				break;
+			}
+		driver.findElement(delete_View).click();
+		driver.findElement(custom_view_DELETE).click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**

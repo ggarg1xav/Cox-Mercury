@@ -2,7 +2,7 @@ package com.xavient.test.script;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,11 +16,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import com.xavient.pages.DashBoardView;
 import com.xavient.util.BaseClass;
 import com.xavient.util.Helper;
 public class Test_View3 extends BaseClass implements  DashBoardView {
 
+	//Object Declaration.
 	WebDriver driver;
 	Helper helper;
 	WebDriverWait wait;
@@ -38,7 +40,6 @@ public class Test_View3 extends BaseClass implements  DashBoardView {
 		driver = Browser_Selection(browser);
 		//Initialize
 		helper = new Helper();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		wait = new WebDriverWait(driver , 5);
 		
 		//Handling PopUP with AutoIT , Need to have this screen as active when this method is being executed.

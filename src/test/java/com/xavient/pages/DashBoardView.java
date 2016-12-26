@@ -258,7 +258,10 @@ public interface DashBoardView {
 	By custom_View_save = By.id("saveMyView");
 	By custom_View_name = By.id("text");
 	By custom_view_OK = By.xpath(".//*[contains(text(),'OK')]");
+	By custom_view_DELETE = By.xpath(".//*[contains(text(),'Delete')]");
 	By my_Views = By.xpath(".//*[@tooltip='My Views']");
 	String my_View_table1 = ".//*[contains(text(),'";
 	String my_View_table2 = "')]/../../..";
+	String my_View_table2_check_box = "')]/../../../td[1]/input";
+	By delete_View = By.xpath(".//*[@id='deleteView']/i");
 }
