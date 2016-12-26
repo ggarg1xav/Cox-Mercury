@@ -8,12 +8,21 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import com.xavient.pages.DashBoardView;
 
 public class BaseClass implements DashBoardView{
 	WebDriver driver;
-
+	public static ExtentReports extent;
+	public static ExtentTest test;
 	/**
 	 * Method is initalizing driver with defined browser properties.
 	 * @author AJameel
@@ -81,5 +90,38 @@ public class BaseClass implements DashBoardView{
 		}
 
 		return driver;
+	}
+	
+	@BeforeTest
+	public void startExecute()
+	{
+		//Reporting.deleteReport();
+		extent = Reporting.Instance();
+	}
+	
+	@AfterTest
+	public void stopExecution()
+	{
+		extent.endTest(test);
+		extent.flush();
+		//extent.close();
+	}
+	
+	@AfterMethod
+	public void getStatus(ITestResult result1)
+	{
+
+		String result = " ";
+		int newResult = 0;
+		newResult = result1.getStatus();
+		result =test.getRunStatus().toString();
+		System.out.println("Result : "+result);
+		if(result.equalsIgnoreCase("error")||result.equalsIgnoreCase("fail")||newResult==result1.FAILURE)
+		{
+			String img = test.addScreenCapture(Reporting.CaptureScreen(result1.getMethod().getMethodName(),driver));
+			System.out.println(img); 
+			test.log(LogStatus.INFO, "Image", "Screenshot below : " + img);
+		}
+		driver.close();
 	}
 }

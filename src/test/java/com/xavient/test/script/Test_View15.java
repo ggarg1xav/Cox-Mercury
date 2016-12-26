@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,11 +18,13 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.*;
 import com.xavient.pages.DashBoardView;
 import com.xavient.util.BaseClass;
 import com.xavient.util.ExcelCache;
 import com.xavient.util.Helper;
+import com.xavient.util.Reporting;
 
 
 /**
@@ -37,8 +38,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	Helper helper;
 	WebDriverWait wait;
 	Logger logger = Logger.getLogger(Test_View15.class);
-
-
+	
 	/**
 	 * Calling Before Test for navigating to particular view15.
 	 * @param browser
@@ -48,8 +48,9 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	@BeforeMethod
 	@Parameters({ "browser" })
 	public void Before_Test(@Optional("Chrome") String browser) {
-
+		test = extent.startTest("Test_View15","Verify View 15 Different Scenarios");
 		driver = Browser_Selection(browser);
+		test.log(LogStatus.INFO, browser + " is opened successfully");
 		logger.info(browser + " is opened successfully");
 		// Initialize
 		helper = new Helper();
@@ -100,6 +101,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		helper.validate_table_names(driver.findElement(view15_Agent_Detail_data), "Test_View15", "view15_Agent_Detail_data");
 		helper.validate_table_columns(view15_Agent_Detail_data_table, driver, "", "Test_View15", "view15_Agent_Detail_data_table");
 		logger.info("-----End test case execution for :view15_validate_table_data------");
+		Assert.fail();
 	}
 
 	/**
@@ -209,7 +211,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating static data set of line graph 
 	 */
-	@Test(enabled=false)
+	@Test
 	public void view15_validate_line_graph_data()  {
 	logger.info("-----Start test case execution for :view15_validate_line_graph_data------");
 		//Navigating to line chart page. 	
@@ -377,7 +379,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 */
 	@AfterMethod
 	public void After_Test() {
-		driver.close();
+		//driver.close();
 		System.out.println("------End Test------");
 	}
 }
