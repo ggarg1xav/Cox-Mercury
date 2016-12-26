@@ -3,26 +3,21 @@ package com.xavient.util;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-import java.beans.Visibility;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-
+import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 
 import com.xavient.pages.DashBoardView;
 
@@ -645,6 +640,59 @@ public class Helper implements DashBoardView{
 			e.printStackTrace();
 		}
 
+	}
+	
+	/**
+	 * Generating random character String.
+	 *
+	 * @author NMakkar
+	 * @param length
+	 * @return
+	 */
+	public String string_random(int length) {
+	//Defining characters for generating random strings.
+		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		//Initializing.
+		StringBuilder salt = new StringBuilder();
+		Random rnd = new Random();
+		
+		
+		while (salt.length() < length) {
+			int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+			salt.append(SALTCHARS.charAt(index));
+		}
+//Return string with appending automation signature.
+		return "auto" + salt.toString();
+	}
+
+	/**
+	 * Method create custom views and validate text .
+	 * 
+	 * @author NMakkar
+	 * @param driver
+	 * @param wait
+	 */
+	public void create_validate_Custom_View(WebDriver driver,WebDriverWait wait, String to_check) {
+	//Getting Custom View Name 
+		String custom_View_Name = string_random(7);
+		
+		//Creating Custom View.
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(custom_View_save)));
+		driver.findElement(custom_View_save).click();
+		driver.findElement(custom_View_name).sendKeys(custom_View_Name);
+		driver.findElement(custom_View_name).submit();
+		driver.findElement(custom_view_OK).click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//Navigating to Custom View and validating it.
+		driver.findElement(my_Views).click();
+		System.out.println(to_check + "===========" + my_View_table1 + custom_View_Name + my_View_table2 + "===========" + driver.findElement(By.xpath(my_View_table1 + custom_View_Name + my_View_table2)).getText());
+		Assert.assertEquals((driver.findElement(By.xpath(my_View_table1 + custom_View_Name + my_View_table2)).getText().contains(to_check)), true,"Strings dont match");
 	}
 
 }

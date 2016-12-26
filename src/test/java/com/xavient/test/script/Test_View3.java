@@ -253,6 +253,20 @@ WebDriver driver;
 		//Validating N/A and integer for columns
 		helper.data_validate_Down(driver, key , col_of_table3, data_of_table3  );
 		}
+	/**
+	 * @author NMakkar
+	 * Method validating creation of Custom Views.
+	 */
+	@Test
+	public void view3_Custom_Views() {
+	//Getting View3 Title to validate text in My view.
+		String string_to_validate = driver.findElement(View3).getText();
+		
+		//Calling Method for creation and validation for custom views.
+		helper.create_validate_Custom_View(driver, wait, string_to_validate);
+
+	}
+	
 
 }
 

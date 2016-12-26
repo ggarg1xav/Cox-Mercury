@@ -249,4 +249,16 @@ public interface DashBoardView {
 	By Agent_data_columnCustomization = By.xpath("//div[@tableviewid='table-four1']/i");
 	By view15_Agent_data_col  = By.xpath("//*[@id='VIEW_15_table-four1']//th");
 	By view15_Agent_lnk_cc_more =By.xpath("//div[@tableviewid='table-four1']//a[@id='addColumns']");
+	
+	
+	/*
+	 * View Customization  
+	 */
+	
+	By custom_View_save = By.id("saveMyView");
+	By custom_View_name = By.id("text");
+	By custom_view_OK = By.xpath(".//*[contains(text(),'OK')]");
+	By my_Views = By.xpath(".//*[@tooltip='My Views']");
+	String my_View_table1 = ".//*[contains(text(),'";
+	String my_View_table2 = "')]/../../..";
 }
