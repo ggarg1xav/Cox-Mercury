@@ -182,7 +182,7 @@ public interface DashBoardView {
 	
 
 	//View 1 Table name
-	 By view1_residential_summary = By.xpath(".//*[contains(text(),'Residential EMC Summary View')]");
+	 By view1_residential_summary = By.xpath("//h4/span");
 	 String view1_residential_summary_col = ".//*[@id='exRowTable_wrapper']//table[@class='fht-table table dataTable tree alert-notification']/thead/tr/th";
 
 //View 1 Line Chart
