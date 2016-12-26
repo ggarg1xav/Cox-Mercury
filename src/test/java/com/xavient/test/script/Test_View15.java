@@ -3,6 +3,7 @@ package com.xavient.test.script;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +21,6 @@ import org.testng.annotations.Test;
 import com.xavient.pages.DashBoardView;
 import com.xavient.util.BaseClass;
 import com.xavient.util.Helper;
-import com.xavient.util.Properties_Reader;
 
 
 /**
