@@ -1,5 +1,6 @@
 package com.xavient.test.script;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -19,6 +20,7 @@ import org.testng.annotations.Test;
 
 import com.xavient.pages.DashBoardView;
 import com.xavient.util.BaseClass;
+import com.xavient.util.ExcelCache;
 import com.xavient.util.Helper;
 import com.xavient.util.Properties_Reader;
 
@@ -162,22 +164,35 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 			int tableComtentCount = helper.getWebelentSize(view3_agent_details_data, driver);
 			logger.info("Agent details table ");
 			int totalTableCount = helper.getWebelentSize(By.xpath(view3_Agent_table_data_start), driver);
-			if (tableComtentCount > 0) {
-				for (int i = 1; i <= totalTableCount; i++) {
-					for (int j = 0; j < 2; j++) {
-						driver.findElement(By.xpath(view3_Agent_table_data_start + "[" + i + "]" + view3_Agent_table_data_sort_arrow)).click();
-						for (int i1 = 1; i1 <= tableComtentCount; i1++) {
-							List<WebElement> el = driver.findElements(By.xpath("//div[@class='ui-grid-canvas']/div[" + i1 + "]//div[@role='gridcell']/div"));
-							tableData.add(el.get(i - 1).getText().toString());
+			int noofRecords = driver.findElements(By.xpath("//div[@class='ui-grid-canvas']/div")).size();
+			if(noofRecords>1)
+			{
+				if (tableComtentCount > 0) {
+					for (int i = 1; i <= totalTableCount; i++) {
+						for (int j = 0; j < 2; j++) {
+							driver.findElement(By.xpath(view3_Agent_table_data_start + "[" + i + "]" + view3_Agent_table_data_sort_arrow)).click();
+							for (int i1 = 1; i1 <= tableComtentCount; i1++) {
+								List<WebElement> el = driver.findElements(By.xpath("//div[@class='ui-grid-canvas']/div[" + i1 + "]//div[@role='gridcell']/div"));
+								tableData.add(el.get(i - 1).getText().toString());
+							}
+							if(j==0)
+								helper.validateListIsSorted(tableData,"asc");
+							else if(j==1)
+								helper.validateListIsSorted(tableData,"desc");
+							tableData.clear();
 						}
-						if(j==0)
-							helper.validateListIsSorted(tableData,"asc");
-						else if(j==1)
-							helper.validateListIsSorted(tableData,"desc");
-						tableData.clear();
 					}
 				}
+				else
+				{
+					Assert.fail("----Column of the Table is not present------");
+					logger.info("----Column of the Table is not present------");
+				}
+			} else
+			{
+				logger.info("----Only one record is present so no need to sorting------");
 			}
+			
 		} else
 		{
 			logger.info("-----Data does not present for Agents Details Table------");
@@ -245,6 +260,113 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		// Validate Time Zone FilterList
 		helper.validate_filter_dropdown_data(timeZoneFilterList, driver, "Test_View15", "view15_Filter_timeZoneFilterList_data");
 		logger.info("-----End test case execution for :view15_validate_filter_dropdown------");
+	}
+	
+	/**
+	 * @author csingh 
+	 * Method is to validate the ColumnCustomization for Today's Data
+	 * 
+	 */
+	@Test(enabled = true)
+	public void view15_validate_ColumnCustomization_Today_Data(){
+		WebDriverWait wait = new WebDriverWait(driver, 100);
+		logger.info("-----Start test case execution for :view15_validate_ColumnCustomization_Today_Data------");		
+		ArrayList<String> tableColumns=(ArrayList<String>) helper.getTableColumns(view15_today_data_col, driver);
+		logger.info("Table column before customization:"+tableColumns);
+		driver.findElement(todaydata_columnCustomization).click();	
+		wait.until(ExpectedConditions.visibilityOf(driver
+				.findElement(lnk_cc_more)));
+		driver.findElement(lnk_cc_more).click();
+		helper.deSelectCheckboxFromDD(lst_column_customization, driver, "Test_View15", "view15_today_data_ds_lst_column_customization");
+		helper.selectCheckboxFromDD(lst_column_customization, driver, "Test_View15", "view15_today_data_lst_column_customization");
+		driver.findElement(img_column_cust).click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		helper.waitForLoad(5);
+		ArrayList<String> tableColumns_CC_UI=(ArrayList<String>) helper.getTableColumns(view15_today_data_col, driver);
+		tableColumns.addAll(ExcelCache.getExpectedListData("Test_View15" , "view15_today_data_lst_column_customization" ));
+		tableColumns.removeAll(ExcelCache.getExpectedListData("Test_View15" , "view15_today_data_ds_lst_column_customization" ));
+		boolean actulValue=Helper.compareTwoList(tableColumns, tableColumns_CC_UI);
+		Assert.assertEquals(actulValue, true);		
+		logger.info("-----End of test case execution for :view15_validate_ColumnCustomization_Today_Data------");
+	}
+	
+	/**
+	 * @author csingh 
+	 * Method is to validate the ColumnCustomization for Current Data
+	 * 
+	 */
+	@Test(enabled = true)
+	public void view15_validate_ColumnCustomization_Current_Data(){
+		WebDriverWait wait = new WebDriverWait(driver, 100);
+		logger.info("-----Start test case execution for :view15_validate_ColumnCustomization_Current_Data------");		
+		ArrayList<String> tableColumns=(ArrayList<String>) helper.getTableColumns(view15_current_data_col, driver);
+		logger.info("Table column before customization:"+tableColumns);
+		driver.findElement(currentdata_columnCustomization).click();	
+		helper.deSelectCheckboxFromDD(lst_column_customization, driver, "Test_View15", "view15_current_data_ds_lst_column_customization");
+		driver.findElement(currentdata_columnCustomization).click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		helper.waitForLoad(5);
+		ArrayList<String> tableColumns_CC_UI=(ArrayList<String>) helper.getTableColumns(view15_current_data_col, driver);
+		tableColumns.removeAll(ExcelCache.getExpectedListData("Test_View15" , "view15_current_data_ds_lst_column_customization" ));
+		boolean actulValue=Helper.compareTwoList(tableColumns, tableColumns_CC_UI);
+		Assert.assertEquals(actulValue, true);		
+		logger.info("-----End of test case execution for :view15_validate_ColumnCustomization_Current_Data------");
+	}
+	
+	/**
+	 * @author csingh 
+	 * Method is to validate the ColumnCustomization for Half Hour Data
+	 * 
+	 */
+	@Test(enabled = true)
+	public void view15_validate_ColumnCustomization_HalfHour_Data(){
+		WebDriverWait wait = new WebDriverWait(driver, 100);
+		logger.info("-----Start test case execution for :view15_validate_ColumnCustomization_HalfHour_Data------");		
+		ArrayList<String> tableColumns=(ArrayList<String>) helper.getTableColumns(view15_halfhour_data_col, driver);
+		logger.info("Table column before customization:"+tableColumns);
+		driver.findElement(halfhourtdata_columnCustomization).click();	
+		wait.until(ExpectedConditions.visibilityOf(driver
+				.findElement(view15_halfhour_lnk_cc_more)));
+		driver.findElement(view15_halfhour_lnk_cc_more).click();
+		helper.deSelectCheckboxFromDD(lst_column_customization, driver, "Test_View15", "view15_halfhour_data_ds_lst_column_customization");
+		helper.selectCheckboxFromDD(lst_column_customization, driver, "Test_View15", "view15_halfhour_data_lst_column_customization");
+		driver.findElement(halfhourtdata_columnCustomization).click();	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		helper.waitForLoad(5);
+		ArrayList<String> tableColumns_CC_UI=(ArrayList<String>) helper.getTableColumns(view15_halfhour_data_col, driver);
+		tableColumns.addAll(ExcelCache.getExpectedListData("Test_View15" , "view15_halfhour_data_lst_column_customization" ));
+		tableColumns.removeAll(ExcelCache.getExpectedListData("Test_View15" , "view15_halfhour_data_ds_lst_column_customization" ));
+		boolean actulValue=Helper.compareTwoList(tableColumns, tableColumns_CC_UI);
+		Assert.assertEquals(actulValue, true);		
+		logger.info("-----End of test case execution for :view15_validate_ColumnCustomization_HalfHour_Data------");
+	}
+	
+	/**
+	 * @author csingh 
+	 * Method is to validate the ColumnCustomization for Agents Statistics Data
+	 * 
+	 */
+	@Test(enabled = true)
+	public void view15_validate_ColumnCustomization_Agents_Statistics_Data(){
+		WebDriverWait wait = new WebDriverWait(driver, 100);
+		logger.info("-----Start test case execution for :view15_validate_ColumnCustomization_Agents_Statistics_Data------");		
+		ArrayList<String> tableColumns=(ArrayList<String>) helper.getTableColumns(view15_Agent_data_col, driver);
+		logger.info("Table column before customization:"+tableColumns);
+		driver.findElement(Agent_data_columnCustomization).click();	
+		wait.until(ExpectedConditions.visibilityOf(driver
+				.findElement(view15_Agent_lnk_cc_more)));
+		driver.findElement(view15_Agent_lnk_cc_more).click();
+		helper.deSelectCheckboxFromDD(lst_column_customization, driver, "Test_View15", "view15_Agent_data_ds_lst_column_customization");
+		helper.selectCheckboxFromDD(lst_column_customization, driver, "Test_View15", "view15_Agent_data_lst_column_customization");
+		driver.findElement(Agent_data_columnCustomization).click();	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		helper.waitForLoad(5);
+		ArrayList<String> tableColumns_CC_UI=(ArrayList<String>) helper.getTableColumns(view15_Agent_data_col, driver);
+		tableColumns.add("Agents On Other ACD Calls");
+		tableColumns.removeAll(ExcelCache.getExpectedListData("Test_View15" , "view15_Agent_data_ds_lst_column_customization" ));
+		boolean actulValue=Helper.compareTwoList(tableColumns, tableColumns_CC_UI);
+		Assert.assertEquals(actulValue, true);		
+		logger.info("-----End of test case execution for :view15_validate_ColumnCustomization_Agents_Statistics_Data------");
 	}
 	
 	/**

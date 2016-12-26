@@ -81,6 +81,7 @@ public interface DashBoardView {
 	By barGraphToolTip = By.xpath(".//*[@id='ChartCombineBar']");
 	By saveMyViewToolTip = By.id("saveMyView");
 	By chartCombineStackToolTip = By.id("ChartCombineStack");
+	
 	/*
 	 * Pagination
 	 */
@@ -212,4 +213,15 @@ public interface DashBoardView {
 	
 	By tbl_View2 = By.xpath(".//*[@class='fht-table table dataTable tree alert-notification']//tr/th");
 
+	// View 15 Column Customization
+	By todaydata_columnCustomization = By.xpath("//div[@tableviewid='table-first1']/i");
+	By view15_today_data_col  = By.xpath("//table[@id='VIEW_15_table-first1']//th");
+	By currentdata_columnCustomization = By.xpath("//div[@tableviewid='table-second1']/i");
+	By view15_current_data_col  = By.xpath("//*[@id='VIEW_15_table-second1']//th");
+	By halfhourtdata_columnCustomization = By.xpath("//div[@tableviewid='table-third1']/i");
+	By view15_halfhour_data_col  = By.xpath("//*[@id='VIEW_15_table-third1']//th");
+	By view15_halfhour_lnk_cc_more =By.xpath("//div[@tableviewid='table-third1']//a[@id='addColumns']");
+	By Agent_data_columnCustomization = By.xpath("//div[@tableviewid='table-four1']/i");
+	By view15_Agent_data_col  = By.xpath("//*[@id='VIEW_15_table-four1']//th");
+	By view15_Agent_lnk_cc_more =By.xpath("//div[@tableviewid='table-four1']//a[@id='addColumns']");
 }

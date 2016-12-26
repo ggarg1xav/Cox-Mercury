@@ -598,13 +598,28 @@ public class Helper implements DashBoardView{
 			{
 			value=true;
 			}
-			else
+			else{
 				logger.error("Selected column : "+list1.get(i)+ " does not exist in UI table column list : "+list2);
 				value=false;
+			}
 		}
 		
 			return value;
 			
 		}
-
+	
+	/**
+	 * @author csingh 
+	 * Wait for given seconds
+	 */
+	
+	public void waitForLoad(int i)
+	{
+		try {
+			Thread.sleep(i*1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
