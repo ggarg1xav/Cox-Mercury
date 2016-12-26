@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -44,12 +45,10 @@ public class Test_View1 extends BaseClass implements DashBoardView {
 
 		// Login and Navigating to Views
 		helper.login(driver);
-		driver.findElement(View).click();
-		driver.findElement(Queue_Summary).click();
-		driver.findElement(View1).click();
+		By[] element = { View, Queue_Summary, View1 };
+		helper.navigate_view(element, wait, driver);
 		helper.waitloader(driver);
-		logger.info("----------Nagigated to View1----------");
-
+		logger.info("------Before Test------");
 	}
 
 	// Validating table and column names
@@ -146,6 +145,6 @@ public class Test_View1 extends BaseClass implements DashBoardView {
 	@AfterMethod
 	public void After_Test() {
 		driver.close();
-		System.out.println("------End Test------");
-	}
+		logger.info("------End Test------");
+		}
 }

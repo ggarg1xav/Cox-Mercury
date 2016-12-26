@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -49,19 +50,10 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		helper.handle_popup();
 
 		// Login and Navigating to View
-		driver.findElement(user_name).sendKeys(
-				Properties_Reader.readProperty("Username"));
-		driver.findElement(pword).sendKeys(
-				Properties_Reader.readProperty("Password"));
-		driver.findElement(submit_login).click();
-		logger.info("Successfully loged on to the application");
-		driver.findElement(View).click();
-		logger.info("Successfully clicked on to the View link on left pannel");
-		wait.until(ExpectedConditions.visibilityOf(driver
-				.findElement(Queue_Summary_EMC)));
-		driver.findElement(Queue_Summary_EMC).click();
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(View2)));
-		driver.findElement(View2).click();
+		helper.login(driver);
+		By[] element = { View, Queue_Summary_EMC, View2 };
+		helper.navigate_view(element, wait, driver);
+		
 		logger.info("***** Successfully clicked on to the View2 link on left pannel");
 
 		wait = new WebDriverWait(driver, 5);

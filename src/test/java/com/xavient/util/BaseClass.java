@@ -23,7 +23,6 @@ public class BaseClass implements DashBoardView{
 	public  WebDriver Browser_Selection(String browser)  {
 
 		String path = System.getProperty("user.dir");
-		System.out.println("driver path is"+path);
 		if (browser.equalsIgnoreCase("firefox")) {	
 			// create firefox instance
 			driver = new FirefoxDriver();

@@ -1,6 +1,7 @@
 package com.xavient.test.script;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -43,11 +44,9 @@ WebDriver driver;
 		// Login and Navigating to View
 		helper.login(driver);
 		helper.waitForBrowserToLoadCompletely(driver);
-		driver.findElement(View).click();
-		driver.findElement(CumulativePerformance).click();
-		driver.findElement(View5).click();
-		System.out.println("------Before Test------");
-	}
+		By[] element = { View, CumulativePerformance, View5 };
+		helper.navigate_view(element, wait, driver);
+		logger.info("------Before Test------");	}
 
 	/**
 	 * @author guneet
@@ -154,8 +153,7 @@ WebDriver driver;
 	@AfterMethod
 	public void After_Test() {
 		driver.close();
-		System.out.println("------End Test------");
-	}
+		logger.info("------End Test------");	}
 
 
 }

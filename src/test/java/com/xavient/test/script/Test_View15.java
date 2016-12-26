@@ -60,14 +60,9 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 
 		// Login and Navigating to View
 		helper.login(driver);
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(View)));
-		driver.findElement(View).click();
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(Queue_And_Agent_Overview)));
-		driver.findElement(Queue_And_Agent_Overview).click();
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(View15)));
-		driver.findElement(View15).click();
-		System.out.println("------Before Test------");
-
+		By[] element = { View, Queue_And_Agent_Overview, View15 };
+		helper.navigate_view(element, wait, driver);
+		logger.info("------Before Test------");
 	}
 
 	/**
@@ -375,6 +370,6 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	@AfterMethod
 	public void After_Test() {
 		driver.close();
-		System.out.println("------End Test------");
-	}
+		logger.info("------End Test------");
+		}
 }
