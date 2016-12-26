@@ -3,6 +3,7 @@ package com.xavient.test.script;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +21,6 @@ import org.testng.annotations.Test;
 import com.xavient.pages.DashBoardView;
 import com.xavient.util.BaseClass;
 import com.xavient.util.Helper;
-import com.xavient.util.Properties_Reader;
 
 
 /**
@@ -58,12 +58,8 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 
 		// Login and Navigating to View
 		helper.login(driver);
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(View)));
-		driver.findElement(View).click();
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(Queue_And_Agent_Overview)));
-		driver.findElement(Queue_And_Agent_Overview).click();
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(View15)));
-		driver.findElement(View15).click();
+		By [] element = {View , Queue_And_Agent_Overview , View15};
+		helper.navigate_view(element , wait , driver);
 		System.out.println("------Before Test------");
 
 	}

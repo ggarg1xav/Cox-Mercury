@@ -31,7 +31,8 @@ public interface DashBoardView {
 
 	By CumulativePerformance = By.xpath("//a[text()='Cumulative Performance']");
 	By View5 = By.xpath("//a[contains(text(),'Forecast Staffing By COE And Partner View')]");
-	
+	By View3_title = By.xpath(".//*[contains(text(),'Residential,Technical Support - LOB Queue & Agent Overview With COE Agent Drilldown View')]");
+
 	/*
 	 view 3 - Table Names
 	 */
@@ -203,5 +204,15 @@ public interface DashBoardView {
 
 	By loader = By.xpath("//span[@class='fa fa-refresh fa-spin fa-4x']");
 
+	/*
+	 * View Customization  
+	 */
+	
+	By custom_View_save = By.id("saveMyView");
+	By custom_View_name = By.id("text");
+	By custom_view_OK = By.xpath(".//*[contains(text(),'OK')]");
+	By my_Views = By.xpath(".//*[@tooltip='My Views']");
+	String my_View_table1 = ".//*[contains(text(),'";
+	String my_View_table2 = "')]/../../..";
 	
 }
