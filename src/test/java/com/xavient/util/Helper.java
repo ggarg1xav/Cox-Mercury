@@ -13,6 +13,7 @@ import java.util.Set;
 
 
 import org.apache.log4j.Logger;
+import org.muthu.Verify;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -22,10 +23,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import com.xavient.pages.DashBoardView;
 
+@Listeners({org.muthu.TestMethodListener.class})
 public class Helper implements DashBoardView{
 	/**
 	 * Handling Browser pop-up with AutoIT.
@@ -69,7 +73,7 @@ public class Helper implements DashBoardView{
 		logger.info("-----Comparing the table columns size----- ");
 		logger.info("Actual table columns size from UI: "+rows);
 		logger.info("Expected table columns size from Excel: "+xls_col_names.size());
-		Assert.assertEquals(rows, xls_col_names.size() , "No of columns are not same");
+		Verify.verifyEquals(rows, xls_col_names.size() , "No of columns are not same");
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 
 		//Iterating for fetching elements from UI.
@@ -87,7 +91,7 @@ public class Helper implements DashBoardView{
 		//Comparing List (Column Names)
 		logger.info("Actual table columns names from UI: "+ui_col_names);
 		logger.info("Expected table columns names from Excel: "+xls_col_names);
-		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All Column Names does not match");		
+		Verify.verifyEquals(xls_col_names.containsAll(ui_col_names) , true , "All Column Names does not match");		
 	}
 	/**
 	 * Method is fetching and comparing data from XLS and UI for single values.
@@ -106,7 +110,7 @@ public class Helper implements DashBoardView{
 		String xls_table_name = ExcelCache.getExpectedData(class_name , table_element);
 		logger.info("Expected table columns from excel: "+xls_table_name);
 		//Comparing String.
-		Assert.assertEquals(ui_col_names, xls_table_name , "Table Names are different");
+		Verify.verifyEquals(ui_col_names, xls_table_name , "Table Names are different");
 	}
 	public void validate_list_data( By element  , WebDriver driver  , String class_name , String table_element)
 	{
@@ -117,7 +121,7 @@ public class Helper implements DashBoardView{
 		{
 			ui_col_names.add(webelement.getText());
 		}
-		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
+		Verify.verifyEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
 	}
 
 	public void validate_list_data_axis( By element  , WebDriver driver  , String class_name , String table_element)
@@ -156,7 +160,7 @@ public class Helper implements DashBoardView{
 		}
 		logger.info("Actual Values from UI:"+ui_col_names);
 		logger.info("Expected values from Excel Sheet:"+xls_col_names);
-		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
+		Verify.verifyEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
 	}
 
 	/*
@@ -264,7 +268,7 @@ public class Helper implements DashBoardView{
 			logger.info("List data in descending order :-  "+sortedData);
 		}
 		for (int i = 0; i < tableData2.size(); i++) {
-			Assert.assertEquals(sortedData.get(i), tableData2.get(i));
+			Verify.verifyEquals(sortedData.get(i), tableData2.get(i));
 		}
 
 	}
@@ -365,7 +369,7 @@ public class Helper implements DashBoardView{
 		}
 		logger.info("Actual Values from UI:"+ui_col_names);
 		logger.info("Expected values from Excel Sheet:"+xls_col_names);
-		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
+		Verify.verifyEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
 	}
 
 	/*
@@ -379,7 +383,7 @@ public class Helper implements DashBoardView{
 		for (int i = 0; i < listelement.size() - 2; i++) {
 			ui_col_names.add(listelement.get(i).getText());
 		}
-		Assert.assertEquals(xls_col_names.containsAll(ui_col_names), true, "All values does not match");
+		Verify.verifyEquals(xls_col_names.containsAll(ui_col_names), true, "All values does not match");
 	}
 
 	/**
@@ -399,7 +403,7 @@ public class Helper implements DashBoardView{
 		logger.info("Expected Size from Excel Sheet:"+xls_col_names.size());
 		logger.info("Actual Values from UI:"+ui_col_names);
 		logger.info("Expected values from Excel Sheet:"+xls_col_names);
-		Assert.assertEquals(xls_col_names.containsAll(ui_col_names), true, "All values does not match");
+		Verify.verifyEquals(xls_col_names.containsAll(ui_col_names), true, "All values does not match");
 	}
 
 
@@ -424,7 +428,7 @@ public class Helper implements DashBoardView{
 
 		logger.info("Actual drop down Values from UI:"+ui_col_names);
 		logger.info("Expected drop down values from Excel Sheet:"+xls_col_names);
-		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
+		Verify.verifyEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
 	}
 
 
@@ -457,10 +461,10 @@ public class Helper implements DashBoardView{
 		//Validating values based on Key.
 		if (data_of_table.get(index).getText().matches(Properties_Reader.readProperty("int_regex"))) {
 			for (WebElement element_data : data_of_table)
-				Assert.assertEquals(element_data.getText().matches(Properties_Reader.readProperty("int_regex")),true);
+				Verify.verifyEquals(element_data.getText().matches(Properties_Reader.readProperty("int_regex")),true);
 		} else if (data_of_table.get(index).getText().matches(Properties_Reader.readProperty("NA"))) {
 			for (WebElement element_data : data_of_table)
-				Assert.assertEquals(element_data.getText().equals(key), true);
+				Verify.verifyEquals(element_data.getText().equals(key), true);
 		}
 	}
 
@@ -615,11 +619,11 @@ public class Helper implements DashBoardView{
 			e.printStackTrace();
 		}
 	}
-			/**
-			 * @author ggarg
-			 * Method is fetching and comparing data from XLS and UI using attribute.
-			 */
-			public void validate_list_data_using_attribute( By element  , WebDriver driver  , String class_name , String table_element)
+	/**
+	 * @author ggarg
+	 * Method is fetching and comparing data from XLS and UI using attribute.
+	 */
+	public void validate_list_data_using_attribute( By element  , WebDriver driver  , String class_name , String table_element)
 	{
 		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
 		ArrayList<String> ui_col_names = new ArrayList<String>();	
@@ -628,7 +632,7 @@ public class Helper implements DashBoardView{
 		{
 			ui_col_names.add(webelement.getAttribute("textContent"));
 		}
-		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
+		Verify.verifyEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");
 	}
 
 	/**
@@ -646,5 +650,4 @@ public class Helper implements DashBoardView{
 		}
 
 	}
-
 }

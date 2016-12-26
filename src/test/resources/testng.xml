@@ -7,13 +7,14 @@
 
 	<listeners>
 		<listener class-name="com.uttesh.pdfngreport.PDFReportListener" />
+		<listener class-name="org.muthu.TestMethodListener" />
 	</listeners>
 	
-	<test name="View3">
+<test name="View3">
 		<classes>
 			<class name="com.xavient.test.script.Test_View3"></class>
 		</classes>
-	</test>
+	</test>  
 	<test name="View15">
 		<classes>
 			<class name="com.xavient.test.script.Test_View15"></class>

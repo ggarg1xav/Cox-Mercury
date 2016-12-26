@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -29,6 +30,7 @@ import com.xavient.util.Helper;
  * @author csingh5
  *
  */
+@Listeners({org.muthu.TestMethodListener.class})
 public class Test_View15 extends BaseClass implements DashBoardView {
 
 	WebDriver driver;
@@ -75,7 +77,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * 
 	 * @author csingh5
 	 */
-	@Test(enabled = true)
+	@Test
 	public void view15_validate_table_data() {
 		logger.info("-----Start test case execution for :view15_validate_table_data------");
 		wait.until(ExpectedConditions.visibilityOf(driver.findElement(view15_today_data)));
@@ -104,7 +106,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating table pagination
 	 */
-	@Test(enabled=true)
+	@Test
 	public void  view15_table_pagination() {
 		logger.info("-----Start test case execution for :view15_table_pagination------");
 		//Validating pagination dropdown value
@@ -155,7 +157,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating table sorting
 	 */
-	@Test(enabled=true)
+	@Test
 	public void view15_table_sorting() {
 		logger.info("-----Start test case execution for :view15_table_sorting------");
 		if(!helper.isElementPresent(driver, noRecordData))
@@ -207,7 +209,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating static data set of line graph 
 	 */
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void view15_validate_line_graph_data()  {
 	logger.info("-----Start test case execution for :view15_validate_line_graph_data------");
 		//Navigating to line chart page. 	
@@ -220,7 +222,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating filter name
 	 */
-	@Test(enabled=true)
+	@Test
 	public void view15_validate_filter_name()
 	{
 		logger.info("-----Start test case execution for :view15_validate_filter_name------");
@@ -235,7 +237,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * Method is validating filter value.
 	 */
 	
-	@Test(enabled=true)
+	@Test
 	public void view15_validate_filter_dropdown()
 	{
 		logger.info("-----Start test case execution for :view15_validate_filter_dropdown------");
@@ -260,6 +262,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		// Validate Time Zone FilterList
 		helper.validate_filter_dropdown_data(timeZoneFilterList, driver, "Test_View15", "view15_Filter_timeZoneFilterList_data");
 		logger.info("-----End test case execution for :view15_validate_filter_dropdown------");
+		//helper.Assert.assertAll();
 	}
 	
 	/**
@@ -267,7 +270,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * Method is to validate the ColumnCustomization for Today's Data
 	 * 
 	 */
-	@Test(enabled = true)
+	@Test
 	public void view15_validate_ColumnCustomization_Today_Data(){
 		WebDriverWait wait = new WebDriverWait(driver, 100);
 		logger.info("-----Start test case execution for :view15_validate_ColumnCustomization_Today_Data------");		
@@ -295,7 +298,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * Method is to validate the ColumnCustomization for Current Data
 	 * 
 	 */
-	@Test(enabled = true)
+	@Test
 	public void view15_validate_ColumnCustomization_Current_Data(){
 		WebDriverWait wait = new WebDriverWait(driver, 100);
 		logger.info("-----Start test case execution for :view15_validate_ColumnCustomization_Current_Data------");		
@@ -318,7 +321,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * Method is to validate the ColumnCustomization for Half Hour Data
 	 * 
 	 */
-	@Test(enabled = true)
+	@Test
 	public void view15_validate_ColumnCustomization_HalfHour_Data(){
 		WebDriverWait wait = new WebDriverWait(driver, 100);
 		logger.info("-----Start test case execution for :view15_validate_ColumnCustomization_HalfHour_Data------");		
@@ -346,7 +349,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * Method is to validate the ColumnCustomization for Agents Statistics Data
 	 * 
 	 */
-	@Test(enabled = true)
+	@Test
 	public void view15_validate_ColumnCustomization_Agents_Statistics_Data(){
 		WebDriverWait wait = new WebDriverWait(driver, 100);
 		logger.info("-----Start test case execution for :view15_validate_ColumnCustomization_Agents_Statistics_Data------");		
