@@ -3,7 +3,6 @@ package com.xavient.test.script;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,24 +16,21 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import com.xavient.pages.DashBoardView;
 import com.xavient.util.BaseClass;
 import com.xavient.util.Helper;
-import com.xavient.util.Properties_Reader;
-
 public class Test_View3 extends BaseClass implements  DashBoardView {
 
-WebDriver driver;
- Helper helper;
- WebDriverWait wait;
- Logger logger = Logger.getLogger(Test_View3.class);
- 
-/**
- * Calling Before Test for navigating to particular view3.
- * @param browser
- * @author NMakkar
- */
+	WebDriver driver;
+	Helper helper;
+	WebDriverWait wait;
+	Logger logger = Logger.getLogger(Test_View3.class);
+
+	/**
+	 * Calling Before Test for navigating to particular view3. 
+	 * @param browser
+	 * @author NMakkar
+	 */
 	@BeforeMethod
 	@Parameters({ "browser"})
 	public void Before_Test(@Optional("Chrome") String browser) {
@@ -49,19 +45,11 @@ WebDriver driver;
 		helper.handle_popup();
 		
 		//Login and Navigating to View
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(user_name)));
-		driver.findElement(user_name).sendKeys(Properties_Reader.readProperty("Username"));
-		driver.findElement(pword).sendKeys(Properties_Reader.readProperty("Password"));
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(submit_login)));
-		driver.findElement(submit_login).click();
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(View)));
-		driver.findElement(View).click();
-		driver.findElement(Queue_And_Agent_Overview).click();
-		driver.findElement(View3).click();
-		
-		
-		System.out.println("------Before Test------");
+		By[] element = { View, Queue_And_Agent_Overview, View3 };
+		helper.navigate_view(element, wait, driver);
+		logger.info("------Before Test------");
 	}
+	
 	/**
 	 * Closing Browser After Test.
 	 */

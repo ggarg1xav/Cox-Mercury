@@ -694,5 +694,25 @@ public class Helper implements DashBoardView{
 		System.out.println(to_check + "===========" + my_View_table1 + custom_View_Name + my_View_table2 + "===========" + driver.findElement(By.xpath(my_View_table1 + custom_View_Name + my_View_table2)).getText());
 		Assert.assertEquals((driver.findElement(By.xpath(my_View_table1 + custom_View_Name + my_View_table2)).getText().contains(to_check)), true,"Strings dont match");
 	}
+	
+	/**
+	 * Common method for Navigating to diff. views.
+	 * 
+	 * @author NMakkar
+	 * @param nav_elements
+	 * @param wait
+	 * @param driver
+	 */
+	public void navigate_view(By[] nav_elements, WebDriverWait wait,
+			WebDriver driver) {
+		// TODO Auto-generated method stub
+		//Clicking on Elements after waiting for it.
+		for (By element : nav_elements) {
+			wait.until(ExpectedConditions.visibilityOf(driver
+					.findElement(element)));
+			driver.findElement(element).click();
+		}
+	}
+	
 
 }
