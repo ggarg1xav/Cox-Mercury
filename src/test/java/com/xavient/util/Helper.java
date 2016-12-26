@@ -3,6 +3,7 @@ package com.xavient.util;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.beans.Visibility;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -16,6 +17,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -30,7 +32,7 @@ public class Helper implements DashBoardView{
 	 * @author NMakkar
 	 */
 
-	
+
 	static Logger logger = Logger.getLogger(Helper.class);
 
 	public void handle_popup()
@@ -68,13 +70,19 @@ public class Helper implements DashBoardView{
 		logger.info("Actual table columns size from UI: "+rows);
 		logger.info("Expected table columns size from Excel: "+xls_col_names.size());
 		Assert.assertEquals(rows, xls_col_names.size() , "No of columns are not same");
-
+		WebDriverWait wait = new WebDriverWait(driver, 10);
 
 		//Iterating for fetching elements from UI.
 		for (int i = 1 ;  i <= rows ; i ++)
 		{
 			String locator = element_start +"[" + i + "]" + element_end;
-			ui_col_names.add(driver.findElement(By.xpath(locator)).getText().trim());
+
+
+			WebElement row_names = driver.findElement(By.xpath(locator));
+			wait.until(ExpectedConditions.visibilityOf(row_names));
+			ui_col_names.add(row_names.getText().trim());
+
+
 		}
 		//Comparing List (Column Names)
 		logger.info("Actual table columns names from UI: "+ui_col_names);
@@ -89,7 +97,7 @@ public class Helper implements DashBoardView{
 	 * @param table_element
 	 */
 
-	public void validate_table_names( WebElement element  , String class_name , String table_element)
+	public void validate_table_names(WebElement element  , String class_name , String table_element)
 	{
 		//XLS data.
 		String ui_col_names = element.getText();
@@ -114,14 +122,18 @@ public class Helper implements DashBoardView{
 
 	public void validate_list_data_axis( By element  , WebDriver driver  , String class_name , String table_element)
 	{
+		WebDriverWait wait = new WebDriverWait(driver, 10);
 		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
 		ArrayList<String> ui_col_names = new ArrayList<String>();	
-
+		System.out.println("excel column names are"+" "+xls_col_names);
+		wait.until(ExpectedConditions.presenceOfElementLocated(element));
 		List<WebElement> listelement = driver.findElements(element);
 		for (int i=0;i<listelement.size();i++)
 		{
 			WebElement webelement= listelement.get(i);
+
 			String ui_innerlist="";
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("tspan")));
 			List<WebElement> listText=webelement.findElements(By.tagName("tspan"));
 			if (listText.size()>1)
 			{
@@ -133,6 +145,7 @@ public class Helper implements DashBoardView{
 				}
 				String ui_innerlistTrim = ui_innerlist.trim();
 				ui_col_names.add(ui_innerlistTrim);
+				//System.out.println(ui_col_names);
 			}
 			else
 			{
@@ -307,7 +320,7 @@ public class Helper implements DashBoardView{
 			List<WebElement> dr = driver.findElements(By.xpath(view2DrillStart + i + view2DrillEnd));
 			while (dr.get(dr.size() - 1).getAttribute("class").toString()
 					.equalsIgnoreCase("treegrid-expander treegrid-expander-collapsed drilling")) {
-				dr.get(dr.size() - 1).click();
+				javaScriptExecutor(driver,dr.get(dr.size() - 1));
 				i++;
 				dr = driver.findElements(By.xpath(view2DrillStart + i + view2DrillEnd));
 			}
@@ -378,7 +391,7 @@ public class Helper implements DashBoardView{
 		Select select = new Select(driver.findElement(element));
 		ArrayList<String> ui_col_names = new ArrayList<String>();
 		List<WebElement> elementCount = select.getOptions();
-		
+
 		for (int i = 0; i <=elementCount.size() - 1; i++) {
 			ui_col_names.add(elementCount.get(i).getAttribute("label").toString());
 		}
@@ -414,35 +427,14 @@ public class Helper implements DashBoardView{
 		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
 	}
 
-	public void drillDown(WebDriver driver) {
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 
-		int i = 1;
-		WebElement drill1 = driver.findElement(
-				By.xpath(".//*[@id='VIEW_1_table-first']/tbody/tr[1]/td/span[contains(@class,'drilling')]"));
-		wait.until(ExpectedConditions.elementToBeClickable(drill1));
-		String drill1_text = drill1.getAttribute("class").toString();
-		System.out.println("The row text is" + " " + drill1_text);
-		javaScriptExecutor(driver, drill1);
-		while (drill1_text.contains("expander-collapsed drilling")) {
 
-			i++;
-
-			WebElement drill2 = driver.findElement(By
-					.xpath(".//*[@id='VIEW_1_table-first']/tbody/tr[" + i + "]/td/span[contains(@class,'drilling')]"));
-			wait.until(ExpectedConditions.elementToBeClickable(drill2));
-			String drill2_text = drill2.getAttribute("class").toString();
-			javaScriptExecutor(driver, drill2);
-			drill1_text = drill2_text;
-		}
-
-	}
 
 	public void javaScriptExecutor(WebDriver driver, WebElement element) {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
-	
+
 	/**
 	 * @author NMakkar
 	 * @param driver
@@ -451,9 +443,9 @@ public class Helper implements DashBoardView{
 	 * @param key
 	 */
 	public void data_validate_Down(WebDriver driver, String key,List<WebElement> col_data, List<WebElement> data_of_table) {
-		
+
 		int index = 0;
-		
+
 		//Picking up Key index for comparing.
 		for (int i = 0; i < col_data.size(); i++) {
 			if (col_data.get(i).getText().equalsIgnoreCase(key)) {
@@ -461,7 +453,7 @@ public class Helper implements DashBoardView{
 				break;
 			}
 		}
-			
+
 		//Validating values based on Key.
 		if (data_of_table.get(index).getText().matches(Properties_Reader.readProperty("int_regex"))) {
 			for (WebElement element_data : data_of_table)
@@ -471,7 +463,7 @@ public class Helper implements DashBoardView{
 				Assert.assertEquals(element_data.getText().equals(key), true);
 		}
 	}
-	
+
 	/**
 	 * @author NMakkar
 	 * @param col_of_table
@@ -512,7 +504,7 @@ public class Helper implements DashBoardView{
 		}
 	}
 
-	
+
 
 	/**
 	 * Method is fetching data from XLS select the fetched value in multi-select list.
@@ -531,16 +523,16 @@ public class Helper implements DashBoardView{
 			for (int j=0;j<listelement.size();j++)
 			{
 				if(listelement.get(j).getAttribute("value").equals(xls_col_names.get(i)) && !listelement.get(j).isSelected() )
-						{
-							listelement.get(j).click();
-							break;
-						}
-				
+				{
+					listelement.get(j).click();
+					break;
+				}
+
 			}
 		}	
-		
+
 	}
-	
+
 	/**
 	 * Method is fetching data from XLS de-select the fetched value in multi-select list.
 	 * @author nkumar9
@@ -558,21 +550,21 @@ public class Helper implements DashBoardView{
 			for (int j=0;j<listelement.size();j++)
 			{
 				if(listelement.get(j).getAttribute("value").equals(xls_col_names.get(i)) && listelement.get(j).isSelected() )
-						{
-							listelement.get(j).click();
-							break;
-						}
-				
+				{
+					listelement.get(j).click();
+					break;
+				}
+
 			}
 		}	
-		
+
 	}
-	
+
 	/**
 	 * @author nkumar9 
 	 * Method is to get table columns from UI
 	 */
-	
+
 	public List<String> getTableColumns( By element, WebDriver driver) {
 		System.out.println("abc");
 		List<WebElement> listelement = driver.findElements(element);
@@ -581,10 +573,10 @@ public class Helper implements DashBoardView{
 		{
 			ui_col_names.add(webelement.getText());
 		}
-		
+
 		return ui_col_names;
-		
-	
+
+
 	}
 	/**
 	 * @author nkumar9 
@@ -596,23 +588,24 @@ public class Helper implements DashBoardView{
 		{
 			if(list2.contains(list1.get(i)))
 			{
-			value=true;
+				value=true;
 			}
-			else{
+			else
+			{
 				logger.error("Selected column : "+list1.get(i)+ " does not exist in UI table column list : "+list2);
 				value=false;
 			}
 		}
-		
-			return value;
-			
-		}
-	
+		return value;
+
+	}
+
+
 	/**
 	 * @author csingh 
 	 * Wait for given seconds
 	 */
-	
+
 	public void waitForLoad(int i)
 	{
 		try {
@@ -622,4 +615,38 @@ public class Helper implements DashBoardView{
 			e.printStackTrace();
 		}
 	}
+			/**
+			 * @author ggarg
+			 * Method is fetching and comparing data from XLS and UI using attribute.
+			 */
+			public void validate_list_data_using_attribute( By element  , WebDriver driver  , String class_name , String table_element)
+	{
+		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
+		ArrayList<String> ui_col_names = new ArrayList<String>();	
+		List<WebElement> listelement = driver.findElements(element);
+		for (WebElement webelement : listelement)
+		{
+			ui_col_names.add(webelement.getAttribute("textContent"));
+		}
+		Assert.assertEquals(xls_col_names.containsAll(ui_col_names) , true , "All values does not match");				
+	}
+
+	/**
+	 * Validating dropdown values
+	 * @author guneet
+	 */
+	public void explicitWait(WebDriver driver, int wait)
+	{
+		try {
+			wait= 1000*wait;
+			Thread.sleep(wait);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 }
+
+	

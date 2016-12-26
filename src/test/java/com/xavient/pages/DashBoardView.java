@@ -123,6 +123,11 @@ public interface DashBoardView {
 	By languageFilterList = By.xpath(".//*[@id='langHandller']");
 	By timeZoneFilterList = By.xpath(".//*[@id='tzHandller']");
 	By customerRegionList = By.xpath("//select[@id='regionHandller']"); 
+	By functionHandllerFilterList= By.xpath("//select[@id='functionHandller']");
+	By startTimeHandllerFilterList= By.xpath("//select[@id='startTimeHandller']");
+	By endTimeHandllerFilterList= By.xpath("//select[@id='endTimeHandller']");
+	By functionFilterList = By.xpath("//select[@id='functionHandller']"); 
+
 	/*
 	 * View 15
 	 * 
@@ -176,6 +181,26 @@ public interface DashBoardView {
 	By icon_lst_chart_dd= By.xpath("//*[@id='div_first']/div[1]/div/div[2]/button");
 	
 
+	//View 1 Table name
+	 By view1_residential_summary = By.xpath(".//*[contains(text(),'Residential EMC Summary View')]");
+	 String view1_residential_summary_col = ".//*[@id='exRowTable_wrapper']//table[@class='fht-table table dataTable tree alert-notification']/thead/tr/th";
+
+//View 1 Line Chart
+	By view1_line_agentCount_x_axis=By.xpath("//*[name()='svg']//*[name()='g']//*[text()='Calls']/parent::*/parent::*/child::*");
+	By view1_line_percentage_x_axis=By.xpath("//*[name()='svg']//*[name()='g']//*[text()='Current']/../parent::*/child::*");
+	By view1_line_time_x_axis=By.xpath("//*[name()='svg']//*[name()='g']//*[text()='Waiting']/../parent::*/child::*");
+
+//View 1 Bar Graph	
+	By view1_bar_agentCount_x_axis=By.xpath("//*[name()='svg']//*[name()='g']//*[text()='Calls']/parent::*/parent::*/child::*");
+	By view1_bar_percentage_x_axis=By.xpath("//*[name()='svg']//*[name()='g']//*[text()='Current']/../parent::*/child::*");
+    By view1_bar_time_x_axis=By.xpath("//*[name()='svg']//*[name()='g']//*[text()='Waiting']/../parent::*/child::*");
+    
+ //View 1 Drill Down
+    String view1DrillStart= "//*[@id='VIEW_1_table-first']/tbody/tr[";
+    String view1DrillEnd= "]/td[1]/span";
+    String view1_table_name="//*[@id='VIEW_1_table-first']/tbody/tr";
+    
+
 	/*
 
 	 * View 3 Table Data in rows.
@@ -202,7 +227,7 @@ public interface DashBoardView {
 	By view5_Time_x_axis_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdivTime']//*[name()='svg']//*[name()='g'][1]//*[name()='text'][contains(@text-anchor, 'middle')]");
 	By view5_Time_y_axis_label = By.xpath("//*[name()='svg']//*[name()='g']//*[contains(text(),'Time')]");
 	By view5_Time_sub_label = By.xpath(".//*[@id='div_first_VIEW_5_chartdivTime_legend']/*[name()='svg']//*[name()='tspan']");
-
+	By view5_ForecastStaffing_table = By.xpath(".//*[@id='exRowTable_wrapper']/descendant::thead[1]/tr/th");
 	By loader = By.xpath("//span[@class='fa fa-refresh fa-spin fa-4x']");
 
 

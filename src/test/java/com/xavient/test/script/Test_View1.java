@@ -50,6 +50,6 @@ public class Test_View1 extends BaseClass implements  DashBoardView{
 		public void view1_validate_table_drata()  {
 	  //helper.validate_table_names(driver.findElement(view1_residential_summary),"Test_View1","view1_residential_summary");
 	  //helper.validate_table_columns(view1_residential_summary_col, driver , "" , "Test_View1" , "view1_residential_summary_col" );	  
-	  helper.drillDown(driver);	 
+	 // helper.drillDown(driver);	 
 	 }
 	 }

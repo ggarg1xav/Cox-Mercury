@@ -73,6 +73,80 @@ WebDriver driver;
 	
 	}
 	
+	/**
+	 * @author guneet
+	 * Method is validating filter name
+	 */
+	@Test
+	public void view5_validate_filter_name()
+	{
+		logger.info("-----Start test case execution for :view5_validate_filter_name------");
+		helper.waitloader(driver);
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(filterBtn)));
+		helper.clickByJavascript(driver, driver.findElement(filterBtn));
+		helper.validate_filter_data(filterTxt, driver, "Test_View5", "view5_FilterName_data");
+		logger.info("-----End test case execution for :view5_validate_filter_name------");
+	}
+	
+	/**
+	 * @author guneet
+	 * Method is validating filter value.
+	 */
+	@Test
+	public void view5_validate_filter_dropdown()
+	{
+		logger.info("-----Start test case execution for :view5_validate_filter_dropdown------");
+		helper.waitloader(driver);
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(filterBtn)));
+		helper.clickByJavascript(driver, driver.findElement(filterBtn));
+		
+		// Validate Start Time FilterList
+		helper.validate_filter_dropdown_data(startTimeHandllerFilterList, driver, "Test_View5", "view5_FilteIntervalRangeStart_data");
+		
+		// Validate End Time FilterList
+		helper.validate_filter_dropdown_data(endTimeHandllerFilterList, driver, "Test_View5", "view5_FilteIntervalRangeEnd_data");
+		
+		// Validate Organization FilterList
+		helper.validate_filter_dropdown_data(organizationFilterList, driver, "Test_View5", "view5_FilterOrganizationValue_data");
+		
+		// Validate COE FilterList
+		helper.validate_filter_dropdown_data(coeFilterList, driver, "Test_View5", "view5_Filter_coeFilterList_data");		
+		
+		// Validate LOB FilterList
+		helper.validate_filter_dropdown_data(lobFilterList, driver, "Test_View5", "view5_Filter_lobFilterList_data");
+		
+		// Validate SUB LOB FilterList
+		helper.validate_filter_dropdown_data(subLobFilterList, driver, "Test_View5", "view5_Filter_subLobFilterList_data");		
+		
+		// Validate Functional Groups FilterList
+		helper.validate_filter_dropdown_data(functionalGroupsFilterList, driver, "Test_View5", "view5_Filter_functionalGroupsFilterList_data");
+		
+		// Validate Sub Functional Groups FilterList
+		helper.validate_filter_dropdown_data(subFunctionalGroupsFilterList, driver, "Test_View5", "view5_Filter_subFunctionalGroupsFilterList_data");
+		
+		// Validate  Function FilterList
+		helper.validate_filter_dropdown_data(functionHandllerFilterList, driver, "Test_View5", "view5_Filter_functionFilterList_data");
+	
+		// Validate Language FilterList
+		helper.validate_filter_dropdown_data(languageFilterList, driver, "Test_View5", "view5_Filter_languageFilterList_data");
+
+		// Validate Time Zone FilterList
+		helper.validate_filter_dropdown_data(timeZoneFilterList, driver, "Test_View5", "view5_Filter_timeZoneFilterList_data");
+		logger.info("-----End test case execution for :view5_validate_filter_dropdown------");
+	}
+	/**
+	 * Validating Table and Column data.
+	 * @author guneet
+	 */
+		@Test
+		public void view5_validate_table_data()  {
+			logger.info("-----Start test case execution for :view3_validate_table_data------");
+			helper.waitloader(driver);
+			helper.waitForBrowserToLoadCompletely(driver);
+			driver.findElement(pauseToolTip).click();
+			helper.validate_list_data_using_attribute(view5_ForecastStaffing_table , driver , "Test_View5" , "view5_ForecastStaffing_table" );	
+			logger.info("-----End of test case execution for :view3_validate_table_data------");
+		}
 	
 	/**
 	 * Closing Browser After Test.
