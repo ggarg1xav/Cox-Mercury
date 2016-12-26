@@ -648,5 +648,3 @@ public class Helper implements DashBoardView{
 	}
 
 }
-
-	
