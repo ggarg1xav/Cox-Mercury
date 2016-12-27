@@ -1,7 +1,9 @@
 package com.xavient.test.script;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -19,6 +21,7 @@ import org.testng.annotations.Test;
 
 import com.xavient.pages.DashBoardView;
 import com.xavient.util.BaseClass;
+import com.xavient.util.ExcelCache;
 import com.xavient.util.Helper;
 public class Test_View3 extends BaseClass implements  DashBoardView {
 
@@ -52,14 +55,6 @@ public class Test_View3 extends BaseClass implements  DashBoardView {
 		logger.info("------Before Test------");
 	}
 	
-	/**
-	 * Closing Browser After Test.
-	 */
-		@AfterMethod
-		public void After_Test() {
-			driver.close();
-			logger.info("------End Test------");
-		}
 /**
  * Validating Table and Column names.
  * @author NMakkar
@@ -304,7 +299,124 @@ public class Test_View3 extends BaseClass implements  DashBoardView {
 		helper.create_validate_Custom_View(driver, wait, string_to_validate);
 
 	}
+	/**
+	 * @author nkumar9 
+	 * Method is to validate the drop down list values in line chart
+	 * @throws InterruptedException 
+	 */
+	@Test
+	public void view3_table_CurrentData_validate_ColumnCustomization(){
+		WebDriverWait wait = new WebDriverWait(driver, 100);
+		logger.info("-----Start test case execution for :view3_table_CurrentData_validate_ColumnCustomization------");
+		helper.explicitWait(driver, 5);
+		helper.waitloader(driver);
+		helper.waitForBrowserToLoadCompletely(driver);
+		driver.findElement(pauseToolTip).click();
+		driver.findElement(tabularViewToolTip).click();	
+		helper.explicitWait(driver, 2);
+		ArrayList<String> tableColumns=(ArrayList<String>) helper.getTableColumns(tbl_View3_CurrentData, driver);
+		logger.info("Table column before customization:"+tableColumns);
+		driver.findElement(img_column_cust_currentData).click();		
+		wait.until(ExpectedConditions.visibilityOf(driver
+				.findElement(currentData_columnCustomization)));
+		driver.findElement(currentData_columnCustomization).click();
+		helper.explicitWait(driver, 5);
+		helper.deSelectCheckboxFromDD(lst_column_customization, driver, "Test_View3", "ds_lst_Currentdata_column_customization");
+		helper.explicitWait(driver, 5);
+		helper.selectCheckboxFromDD(lst_column_customization, driver, "Test_View3", "lst_CurrentData_column_customization");
+		helper.explicitWait(driver, 5);
+		driver.findElement(img_column_cust_currentData).click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		ArrayList<String> tableColumns_CC_UI=(ArrayList<String>) helper.getTableColumns(tbl_View3_CurrentData, driver);
+		tableColumns.addAll(ExcelCache.getExpectedListData("Test_View3" , "lst_CurrentData_column_customization" ));
+		tableColumns.removeAll(ExcelCache.getExpectedListData("Test_View3" , "ds_lst_Currentdata_column_customization" ));
+		boolean actulValue=Helper.compareTwoList(tableColumns, tableColumns_CC_UI);
+		Assert.assertEquals(actulValue, true);		
+		logger.info("-----End of test case execution for :view3_table_CurrentData_validate_ColumnCustomization------");
 	
+	}
+	/**
+	 * @author nkumar9 
+	 * Method is to validate the drop down list values in line chart
+	 * @throws InterruptedException 
+	 */
+	@Test
+	public void view3_table_TodayData_validate_ColumnCustomization(){
+		WebDriverWait wait = new WebDriverWait(driver, 100);
+		logger.info("-----Start test case execution for :view3_table_TodayData_validate_ColumnCustomization------");
+		helper.explicitWait(driver, 5);
+		helper.waitloader(driver);
+		helper.waitForBrowserToLoadCompletely(driver);
+		driver.findElement(pauseToolTip).click();
+		driver.findElement(tabularViewToolTip).click();
+		helper.explicitWait(driver, 2);
+		ArrayList<String> tableColumns=(ArrayList<String>) helper.getTableColumns(tbl_View3_TodayData, driver);
+		logger.info("Table column before customization:"+tableColumns);
+		driver.findElement(img_column_cust_todayData).click();		
+		wait.until(ExpectedConditions.visibilityOf(driver
+				.findElement(todayData_columnCustomization)));
+		driver.findElement(todayData_columnCustomization).click();
+		helper.explicitWait(driver, 5);
+		helper.deSelectCheckboxFromDD(lst_column_customization, driver, "Test_View3", "ds_lst_TodayData_column_customization");
+		helper.explicitWait(driver, 5);
+		helper.selectCheckboxFromDD(lst_column_customization, driver, "Test_View3", "lst_TodayData_column_customization");
+		helper.explicitWait(driver, 5);
+		driver.findElement(img_column_cust_todayData).click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		ArrayList<String> tableColumns_CC_UI=(ArrayList<String>) helper.getTableColumns(tbl_View3_TodayData, driver);
+		tableColumns.addAll(ExcelCache.getExpectedListData("Test_View3" , "lst_TodayData_column_customization" ));
+		tableColumns.removeAll(ExcelCache.getExpectedListData("Test_View3" , "ds_lst_TodayData_column_customization" ));
+		boolean actulValue=Helper.compareTwoList(tableColumns, tableColumns_CC_UI);
+		Assert.assertEquals(actulValue, true);		
+		logger.info("-----End of test case execution for :view3_table_TodayData_validate_ColumnCustomization------");
+	
+	}
+	/**
+	 * @author nkumar9 
+	 * Method is to validate the drop down list values in line chart
+	 * @throws InterruptedException 
+	 */
+	@Test
+	public void view3_table_CurrentAgent_validate_ColumnCustomization(){
+		WebDriverWait wait = new WebDriverWait(driver, 100);
+		logger.info("-----Start test case execution for :view3_table_CurrentAgent_validate_ColumnCustomization------");
+		helper.explicitWait(driver, 5);
+		helper.waitloader(driver);
+		helper.waitForBrowserToLoadCompletely(driver);
+		driver.findElement(pauseToolTip).click();
+		helper.explicitWait(driver, 2);
+		driver.findElement(tabularViewToolTip).click();
+		helper.explicitWait(driver, 2);
+		ArrayList<String> tableColumns=(ArrayList<String>) helper.getTableColumns(tbl_View3_CurrentAgent, driver);
+		logger.info("Table column before customization:"+tableColumns);
+		driver.findElement(img_column_cust_currentAgent).click();		
+		wait.until(ExpectedConditions.visibilityOf(driver
+				.findElement(currentAgent_columnCustomization)));
+		driver.findElement(currentAgent_columnCustomization).click();
+		helper.explicitWait(driver, 5);
+		helper.deSelectCheckboxFromDD(lst_column_customization, driver, "Test_View3", "ds_lst_CurrentAgent_column_customization");
+		helper.explicitWait(driver, 5);
+		helper.selectCheckboxFromDD(lst_column_customization, driver, "Test_View3", "lst_CurrentAgent_column_customization");
+		helper.explicitWait(driver, 5);
+		driver.findElement(img_column_cust_currentAgent).click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		ArrayList<String> tableColumns_CC_UI=(ArrayList<String>) helper.getTableColumns(tbl_View3_CurrentAgent, driver);
+		tableColumns.addAll(ExcelCache.getExpectedListData("Test_View3" , "lst_CurrentAgent_column_customization" ));
+		tableColumns.removeAll(ExcelCache.getExpectedListData("Test_View3" , "ds_lst_CurrentAgent_column_customization" ));
+		boolean actulValue=Helper.compareTwoList(tableColumns, tableColumns_CC_UI);
+		Assert.assertEquals(actulValue, true);		
+		logger.info("-----End of test case execution for :view3_table_CurrentAgent_validate_ColumnCustomization------");
+	
+	}
+	/**
+	 * Closing Browser After Test.
+	 */
+		@AfterMethod
+		public void After_Test() {
+			driver.close();
+			logger.info("------End Test------");
+			
+		}
 
 }
 

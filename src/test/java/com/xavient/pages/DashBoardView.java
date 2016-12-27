@@ -184,6 +184,7 @@ public interface DashBoardView {
 	//View 1 Table name
 	 By view1_residential_summary = By.xpath("//h4/span");
 	 String view1_residential_summary_col = ".//*[@id='exRowTable_wrapper']//table[@class='fht-table table dataTable tree alert-notification']/thead/tr/th";
+	 
 
 //View 1 Line Chart
 	By view1_line_agentCount_x_axis=By.xpath("//*[name()='svg']//*[name()='g']//*[text()='Calls']/parent::*/parent::*/child::*");
@@ -264,4 +265,19 @@ public interface DashBoardView {
 	String my_View_table2 = "')]/../../..";
 	String my_View_table2_check_box = "')]/../../../td[1]/input";
 	By delete_View = By.xpath(".//*[@id='deleteView']/i");
+	
+	By tbl_View1 = By.xpath(".//*[@class='fht-table table dataTable tree alert-notification']//tr/th");
+	By tbl_View5 = By.xpath(".//*[@class='fht-table table dataTable tree alert-notification']//tr/th");
+	
+	By tbl_View3_CurrentData = By.xpath(".//*[@id='VIEW_3_table-first1']/thead/tr/th");
+	By tbl_View3_TodayData = By.xpath(".//*[@id='VIEW_3_table-second1']/thead/tr/th");
+	By tbl_View3_CurrentAgent = By.xpath(".//*[@id='VIEW_3_table-third1']/thead/tr/th");
+	
+	By img_column_cust_currentData = By.xpath("//div[@tableviewid='table-first1']/i");
+	By currentData_columnCustomization = By.xpath("//div[@tableviewid='table-first1']//a[@id='addColumns']");
+	By img_column_cust_todayData = By.xpath("//div[@tableviewid='table-second1']/i");
+	By todayData_columnCustomization = By.xpath("//div[@tableviewid='table-second1']//a[@id='addColumns']");
+	By img_column_cust_currentAgent = By.xpath("//div[@tableviewid='table-third1']/i");
+	By currentAgent_columnCustomization = By.xpath("//div[@tableviewid='table-third1']//a[@id='addColumns']");
+	
 }
