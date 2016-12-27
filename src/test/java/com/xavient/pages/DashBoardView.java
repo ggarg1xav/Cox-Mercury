@@ -292,4 +292,4 @@ public interface DashBoardView {
 	By todayData_columnCustomization = By.xpath("//div[@tableviewid='table-second1']//a[@id='addColumns']");
 	By img_column_cust_currentAgent = By.xpath("//div[@tableviewid='table-third1']/i");
 	By currentAgent_columnCustomization = By.xpath("//div[@tableviewid='table-third1']//a[@id='addColumns']");
-
+}
