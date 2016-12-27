@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,14 +12,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.xavient.pages.DashBoardView;
 import com.xavient.util.BaseClass;
@@ -390,7 +385,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method validating creation of Custom Views.
 	 */
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void view15_Custom_Views() {
 		logger.info("-----Start test case execution for :view15_Custom_Views------");
 		//Getting View3 Title to validate text in My view.
@@ -400,13 +395,4 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		helper.create_validate_Custom_View(driver, wait, string_to_validate);
 		logger.info("-----End of test case execution for :view15_Custom_Views------------");
 	}
-
-	/**
-	 * Closing Browser After Test.
-	 */
-//	@AfterMethod
-//	public void After_Test() {
-//		driver.close();
-//		logger.info("------End Test------");
-//	}
 }
