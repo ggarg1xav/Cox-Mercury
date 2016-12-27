@@ -269,7 +269,7 @@ public class Helper implements DashBoardView{
 
 	public void login(WebDriver driver)
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 5);
+		WebDriverWait wait = new WebDriverWait(driver, 30);
 		driver.findElement(user_name).sendKeys(Properties_Reader.readProperty("Username"));
 		driver.findElement(pword).sendKeys(Properties_Reader.readProperty("Password"));
 		wait.until(ExpectedConditions.visibilityOf(driver.findElement(submit_login)));

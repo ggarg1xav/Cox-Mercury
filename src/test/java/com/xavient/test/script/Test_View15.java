@@ -51,17 +51,20 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		logger.info(browser + " is opened successfully");
 		// Initialize
 		helper = new Helper();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		wait = new WebDriverWait(driver, 30);
-		
+
 		// Handling PopUP with AutoIT , Need to have this screen as active
 		// when this method is being executed.
 		helper.handle_popup();
 
 		// Login and Navigating to View
 		helper.login(driver);
-		By[] element = { View, Queue_And_Agent_Overview, View15 };
-		helper.navigate_view(element, wait, driver);
+		helper.waitForBrowserToLoadCompletely(driver);
+		//		By[] element = { View, Queue_And_Agent_Overview, View15 };
+		//		helper.navigate_view(element, wait, driver);
+		helper.clickByJavascript(driver, driver.findElement(View));
+		helper.clickByJavascript(driver, driver.findElement(Queue_And_Agent_Overview));
+		helper.clickByJavascript(driver, driver.findElement(View15));
 		logger.info("------Before Test------");
 	}
 
@@ -116,25 +119,25 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 			wait.until(ExpectedConditions.visibilityOf(driver.findElement(pagerGridCount)));
 			String count=driver.findElement(pagerGridCount).getText();
 			Object[] pagerGridCountList = count.split(" "); 
-			
+
 			//Validating texts 
 			Assert.assertEquals("of", pagerGridCountList[1]);
 			Assert.assertEquals("items", pagerGridCountList[3]);		
 			Assert.assertEquals(" items per page", driver.findElement(pagerPageDropText).getText());
-			
+
 			count = count.split(" ")[2];
 			if(Integer.parseInt(count)>5){
 
 				//Checking pagination first and previous is disabled
 				Assert.assertEquals("true", driver.findElement(pagerFirst).getAttribute("disabled"),"Pagination first must be disabled");
 				Assert.assertEquals("true", driver.findElement(pagerPrevious).getAttribute("disabled"),"Pagination Previous must be disabled");
-				
+
 				//clicking pagination last button
 				driver.findElement(pagerLast).click();
-				
+
 				Assert.assertEquals("true", driver.findElement(pagerLast).getAttribute("disabled"),"Pagination Last must be disabled");
 				Assert.assertEquals("true", driver.findElement(pagerNext).getAttribute("disabled"),"Pagination Next must be disabled");
-				
+
 				driver.findElement(pagerPrevious).click();
 			}
 		}
@@ -145,7 +148,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 
 		logger.info("-----End of test case execution for :view15_table_pagination------");
 	}
-	
+
 	/**
 	 * @author csingh
 	 * Method is validating table sorting
@@ -187,30 +190,30 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 			{
 				logger.info("----Only one record is present so no need to sorting------");
 			}
-			
+
 		} else
 		{
 			logger.info("-----Data does not present for Agents Details Table------");
 		}
-		
+
 		logger.info("-----End of test case execution for :view15_table_sorting------");
 	}
-	
+
 	// Graph test cases are not completed as we are facing the java script error on the graphs
-	
+
 	/**
 	 * @author csingh
 	 * Method is validating static data set of line graph 
 	 */
 	@Test(enabled=true)
 	public void view15_validate_line_graph_data()  {
-	logger.info("-----Start test case execution for :view15_validate_line_graph_data------");
+		logger.info("-----Start test case execution for :view15_validate_line_graph_data------");
 		//Navigating to line chart page. 	
-	wait.until(ExpectedConditions.visibilityOf(driver.findElement(lineChartToolTip)));
-	driver.findElement(lineChartToolTip).click();
-	logger.info("-----End of test case execution for :view_validate_line_graph_data------");
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(lineChartToolTip)));
+		driver.findElement(lineChartToolTip).click();
+		logger.info("-----End of test case execution for :view_validate_line_graph_data------");
 	}
-	
+
 	/**
 	 * @author csingh
 	 * Method is validating filter name
@@ -224,12 +227,12 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		helper.validate_filter_data(filterTxt, driver, "Test_View15", "view15_FilterName_data");
 		logger.info("-----End test case execution for :view15_validate_filter_name------");
 	}
-	
+
 	/**
 	 * @author csingh
 	 * Method is validating filter value.
 	 */
-	
+
 	@Test(enabled=true)
 	public void view15_validate_filter_dropdown()
 	{
@@ -256,7 +259,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		helper.validate_filter_dropdown_data(timeZoneFilterList, driver, "Test_View15", "view15_Filter_timeZoneFilterList_data");
 		logger.info("-----End test case execution for :view15_validate_filter_dropdown------");
 	}
-	
+
 	/**
 	 * @author csingh 
 	 * Method is to validate the ColumnCustomization for Today's Data
@@ -284,7 +287,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		Assert.assertEquals(actulValue, true);		
 		logger.info("-----End of test case execution for :view15_validate_ColumnCustomization_Today_Data------");
 	}
-	
+
 	/**
 	 * @author csingh 
 	 * Method is to validate the ColumnCustomization for Current Data
@@ -307,7 +310,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		Assert.assertEquals(actulValue, true);		
 		logger.info("-----End of test case execution for :view15_validate_ColumnCustomization_Current_Data------");
 	}
-	
+
 	/**
 	 * @author csingh 
 	 * Method is to validate the ColumnCustomization for Half Hour Data
@@ -335,7 +338,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		Assert.assertEquals(actulValue, true);		
 		logger.info("-----End of test case execution for :view15_validate_ColumnCustomization_HalfHour_Data------");
 	}
-	
+
 	/**
 	 * @author csingh 
 	 * Method is to validate the ColumnCustomization for Agents Statistics Data
@@ -363,7 +366,22 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		Assert.assertEquals(actulValue, true);		
 		logger.info("-----End of test case execution for :view15_validate_ColumnCustomization_Agents_Statistics_Data------");
 	}
-	
+
+	/**
+	 * @author csingh
+	 * Method validating creation of Custom Views.
+	 */
+	@Test
+	public void view15_Custom_Views() {
+		logger.info("-----Start test case execution for :view15_Custom_Views------");
+		//Getting View3 Title to validate text in My view.
+		String string_to_validate = driver.findElement(View15).getText();
+
+		//Calling Method for creation and validation for custom views.
+		helper.create_validate_Custom_View(driver, wait, string_to_validate);
+		logger.info("-----End of test case execution for :view15_Custom_Views------------");
+	}
+
 	/**
 	 * Closing Browser After Test.
 	 */
@@ -371,5 +389,5 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	public void After_Test() {
 		driver.close();
 		logger.info("------End Test------");
-		}
+	}
 }

@@ -23,9 +23,10 @@ public interface DashBoardView {
 
 	By View = By.cssSelector(".fa.fa-file-text-o");
 	By View3 = By.xpath(".//*[contains(text(),'LOB Queue & Agent Overview With COE Agent Drilldown View')]");
-	By Queue_And_Agent_Overview = By.xpath(".//*[contains(text(),'Queue And Agent Overview')]");
-	By View15 = By.xpath("//*[@class='nav nav-pills nav-stacked']//*[contains(text(),'COE With Agent View')]");
-
+//	By Queue_And_Agent_Overview = By.xpath(".//*[contains(text(),'Queue And Agent Overview')]");
+//	By View15 = By.xpath("//*[@class='nav nav-pills nav-stacked']//*[contains(text(),'COE With Agent View')]");
+	By Queue_And_Agent_Overview = By.xpath("//*[text()='Queue And Agent Overview']");
+	By View15 = By.xpath("//*[contains(text(),'COE With Agent View')]");
 	By Queue_Summary_EMC = By.xpath(".//*[contains(text(),'Queue Summary - EMC')]");
 	By View2 = By.xpath(".//*[contains(text(),' LOB Summary View')]"); 
 
@@ -132,7 +133,8 @@ public interface DashBoardView {
 	 * View 15
 	 * 
 	 */
-	By view15_today_data = By.xpath("//*[@id='tableCtrl']//h4");
+//	By view15_today_data = By.xpath("//*[@id='tableCtrl']//h4");
+	By view15_today_data = By.xpath("//h4[contains(text(),'Today')]");
 	String view15_today_data_table  = "//table[@id='VIEW_15_table-first1']//th"; 
 	By view15_current_data = By.xpath("//h4[text()='Current Data']");
 	String view15_current_data_table  = "//*[@id='VIEW_15_table-second1']//th"; 
