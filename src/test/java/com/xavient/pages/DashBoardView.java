@@ -262,6 +262,15 @@ public interface DashBoardView {
 	By my_Views = By.xpath(".//*[@tooltip='My Views']");
 	String my_View_table1 = ".//*[contains(text(),'";
 	String my_View_table2 = "')]/../../..";
+
 	String my_View_table2_check_box = "')]/../../../td[1]/input";
 	By delete_View = By.xpath(".//*[@id='deleteView']/i");
+
+	
+	/*
+	 * View 3 table sort
+	 */
+	String tableRowStart="//div[@class='ui-grid-canvas']/div";
+	String tableRowLast="//div[@role='gridcell']/div";
+
 }
