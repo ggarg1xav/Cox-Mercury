@@ -146,6 +146,20 @@ WebDriver driver;
 			helper.validate_list_data_using_attribute(view5_ForecastStaffing_table , driver , "Test_View5" , "view5_ForecastStaffing_table" );	
 			logger.info("-----End of test case execution for :view3_validate_table_data------");
 		}
+		
+		/**
+		 * @author NMakkar
+		 * Method validating creation of Custom Views.
+		 */
+		@Test
+		public void view5_Custom_Views() {
+		//Getting View3 Title to validate text in My view.
+			String string_to_validate = driver.findElement(View5).getText();
+			
+			//Calling Method for creation and validation for custom views.
+			helper.create_validate_Custom_View(driver, wait, string_to_validate);
+
+		}
 	
 	/**
 	 * Closing Browser After Test.

@@ -713,6 +713,22 @@ ArrayList<WebElement> a = new 	ArrayList<WebElement>();
 		//Navigating to Custom View and validating it.
 		driver.findElement(my_Views).click();
 		Assert.assertEquals((driver.findElement(By.xpath(my_View_table1 + custom_View_Name + my_View_table2)).getText().contains(to_check)), true,"Strings dont match");
+		
+		//Deleting created View.
+		WebElement check_box = driver.findElement(By.xpath(my_View_table1 + custom_View_Name + my_View_table2_check_box));
+		while(!driver.findElement(By.xpath(".//*[@id='myView']/tbody/tr[76]/td[1]/input")).isSelected())
+			{check_box.click();
+			if (check_box.isSelected())
+				break;
+			}
+		driver.findElement(delete_View).click();
+		driver.findElement(custom_view_DELETE).click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -733,5 +749,110 @@ ArrayList<WebElement> a = new 	ArrayList<WebElement>();
 		}
 	}
 	
+	/**
+	 * Table sorting.
+	 *
+	 * @author guneet
+	 * @param driver
+	 * @param tableDataRow
+	 * @param tableHeaderStart
+	 * @param tableHeaderSortArrow
+	 * @param tableRowStart
+ 	 * @param tableRowLast
+ 	 * @return
+	 */
+	public void validate_table_sorting(WebDriver driver, By tableDataRow, String tableHeaderStart,String tableHeaderSortArrow,String tableRowStart,String tableRowLast){
+		LinkedList<String>  tableData = new LinkedList<String>();
+		int tableComtentCount = getWebelentSize(tableDataRow,driver);
+		int totalTableCount = getWebelentSize(By.xpath(tableHeaderStart), driver);
+		if (tableComtentCount > 0) {
+			for (int i = 1; i <= totalTableCount; i++) {
+				for (int j = 0; j < 2; j++) {
+					driver.findElement(By.xpath(tableHeaderStart + "[" + i + "]" + tableHeaderSortArrow)).click();
+					for (int i1 = 1; i1 <= tableComtentCount; i1++) {
+						List<WebElement> el = driver.findElements(By.xpath(tableRowStart+"[" + i1 + "]"+tableRowLast));
+						tableData.add(el.get(i - 1).getText().toString());
+					}
+					if(j==0)
+						validateListIsSorted(tableData,"asc");
+					else if(j==1)
+						validateListIsSorted(tableData,"desc");
+					tableData.clear();
+				}
+			}
+		}
+	}
+	/**
+	 * Pagination Drop Down.
+	 *
+	 * @author guneet
+	 * @param driver
+	 * @param dropdown
+	 * @param dropList
+ 	 * @return
+	 */
+	public void navigation_pagination_dropdown(WebDriver driver, By dropdown, int dropList[] ){
+		
+		Select select = new Select(driver.findElement(dropdown));
+		Select select2 = new Select(driver.findElement(dropdown));
+		List<WebElement> dCount = select2.getOptions();
+		for (int i = 0; i < dCount.size()-1; i++) {
+			select.selectByIndex(i);
+			Assert.assertEquals(dropList[i], Integer.parseInt(select2.getFirstSelectedOption().getText()));
+		}
+	}
 
+	/**
+	 * pagination navigation
+	 *
+	 * @author guneet
+	 * @param driver
+	 * @param pagerFirst
+	 * @param pagerPrevious
+	 * @param pagerLast
+	 * @param pagerNext
+	 * @param pagerGridCount
+ 	 * @return
+	 */
+	public void validate_pagination_navigation_arrow(WebDriver driver, By pagerFirst, By pagerPrevious,By pagerLast, By pagerNext, By pagerGridCount){
+		WebDriverWait wait;
+		wait = new WebDriverWait(driver , 5);
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(pagerGridCount)));
+		String count=driver.findElement(pagerGridCount).getText();
+		count = count.split(" ")[2];
+		if(Integer.parseInt(count)>5){
+
+			//Checking pagination first and previous is disabled
+			Assert.assertEquals("true", driver.findElement(pagerFirst).getAttribute("disabled"),"Pagination first must be disabled");
+			Assert.assertEquals("true", driver.findElement(pagerPrevious).getAttribute("disabled"),"Pagination Previous must be disabled");
+			
+			//clicking pagination last button
+			driver.findElement(pagerLast).click();
+			
+			Assert.assertEquals("true", driver.findElement(pagerLast).getAttribute("disabled"),"Pagination Last must be disabled");
+			Assert.assertEquals("true", driver.findElement(pagerNext).getAttribute("disabled"),"Pagination Next must be disabled");
+			
+			driver.findElement(pagerPrevious).click();
+		}
+	}
+	
+	/**
+	 * pagination page text
+	 *
+	 * @author guneet
+	 * @param driver
+	 * @param pagerGridCount
+	 * @param pagerPageDropText
+ 	 * @return
+	 */
+	public void validate_pagination_text(WebDriver driver, By pagerGridCount, By pagerPageDropText){
+		String count=driver.findElement(pagerGridCount).getText();
+		Object[] pagerGridCountList = count.split(" "); 
+		
+		//Validating text 
+		Assert.assertEquals("of", pagerGridCountList[1]);
+		Assert.assertEquals("items", pagerGridCountList[3]);		
+		Assert.assertEquals(" items per page", driver.findElement(pagerPageDropText).getText());
+	}
+	
 }

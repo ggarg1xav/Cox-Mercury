@@ -295,7 +295,6 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 */
 	@Test(enabled = true)
 	public void view15_validate_ColumnCustomization_Current_Data(){
-		WebDriverWait wait = new WebDriverWait(driver, 100);
 		logger.info("-----Start test case execution for :view15_validate_ColumnCustomization_Current_Data------");		
 		ArrayList<String> tableColumns=(ArrayList<String>) helper.getTableColumns(view15_current_data_col, driver);
 		logger.info("Table column before customization:"+tableColumns);

@@ -1,7 +1,5 @@
 package com.xavient.test.script;
 
-import java.util.concurrent.TimeUnit;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -137,6 +135,20 @@ public class Test_View1 extends BaseClass implements DashBoardView {
 		// Validate Time Zone FilterList
 		helper.validate_filter_dropdown_data(timeZoneFilterList, driver, "Test_View1", "view1_Filter_timeZoneFilterList_data");
 		logger.info("-----End test case execution for :view5_validate_filter_dropdown------");
+	}
+	
+	/**
+	 * @author NMakkar
+	 * Method validating creation of Custom Views.
+	 */
+	@Test
+	public void view1_Custom_Views() {
+	//Getting View3 Title to validate text in My view.
+		String string_to_validate = driver.findElement(View1).getText();
+		
+		//Calling Method for creation and validation for custom views.
+		helper.create_validate_Custom_View(driver, wait, string_to_validate);
+
 	}
 
 	/**

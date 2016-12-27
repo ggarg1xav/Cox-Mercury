@@ -2,7 +2,7 @@ package com.xavient.test.script;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,11 +16,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import com.xavient.pages.DashBoardView;
 import com.xavient.util.BaseClass;
 import com.xavient.util.Helper;
 public class Test_View3 extends BaseClass implements  DashBoardView {
 
+	//Object Declaration.
 	WebDriver driver;
 	Helper helper;
 	WebDriverWait wait;
@@ -38,12 +40,11 @@ public class Test_View3 extends BaseClass implements  DashBoardView {
 		driver = Browser_Selection(browser);
 		//Initialize
 		helper = new Helper();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		wait = new WebDriverWait(driver , 5);
 		
 		//Handling PopUP with AutoIT , Need to have this screen as active when this method is being executed.
 		helper.handle_popup();
-		
+		helper.login(driver);
 		//Login and Navigating to View
 		helper.login(driver);
 		By[] element = { View, Queue_And_Agent_Overview, View3 };
@@ -127,26 +128,7 @@ public class Test_View3 extends BaseClass implements  DashBoardView {
 	@Test(enabled=true,priority =2)
 	public void view3_table_sorting() {
 		logger.info("-----Start test case execution for :view3_table_sorting------");
-		LinkedList<String>  tableData = new LinkedList<String>();
-		int tableComtentCount = helper.getWebelentSize(view3_agent_details_data, driver);
-		logger.info("Agent details table ");
-		int totalTableCount = helper.getWebelentSize(By.xpath(view3_Agent_table_data_start), driver);
-		if (tableComtentCount > 0) {
-			for (int i = 1; i <= totalTableCount; i++) {
-				for (int j = 0; j < 2; j++) {
-					driver.findElement(By.xpath(view3_Agent_table_data_start + "[" + i + "]" + view3_Agent_table_data_sort_arrow)).click();
-					for (int i1 = 1; i1 <= tableComtentCount; i1++) {
-						List<WebElement> el = driver.findElements(By.xpath("//div[@class='ui-grid-canvas']/div[" + i1 + "]//div[@role='gridcell']/div"));
-						tableData.add(el.get(i - 1).getText().toString());
-					}
-					if(j==0)
-						helper.validateListIsSorted(tableData,"asc");
-					else if(j==1)
-						helper.validateListIsSorted(tableData,"desc");
-					tableData.clear();
-				}
-			}
-		}
+		helper.validate_table_sorting(driver,view3_agent_details_data,view3_Agent_table_data_start,view3_Agent_table_data_sort_arrow,tableRowStart,tableRowLast);
 		logger.info("-----End of test case execution for :view3_table_sorting------");
 	}
 	
@@ -157,41 +139,10 @@ public class Test_View3 extends BaseClass implements  DashBoardView {
 	@Test(enabled=true, priority = 3)
 	public void  view3_table_pagination() {
 		logger.info("-----Start test case execution for :view3_table_pagination------");
-		Select select = new Select(driver.findElement(pagerPageDrop));
-
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(pagerGridCount)));
-		String count=driver.findElement(pagerGridCount).getText();
-		Object[] pagerGridCountList = count.split(" "); 
-		
-		//Validating text 
-		Assert.assertEquals("of", pagerGridCountList[1]);
-		Assert.assertEquals("items", pagerGridCountList[3]);		
-		Assert.assertEquals(" items per page", driver.findElement(pagerPageDropText).getText());
-		
-		count = count.split(" ")[2];
-		if(Integer.parseInt(count)>5){
-
-			//Checking pagination first and previous is disabled
-			Assert.assertEquals("true", driver.findElement(pagerFirst).getAttribute("disabled"),"Pagination first must be disabled");
-			Assert.assertEquals("true", driver.findElement(pagerPrevious).getAttribute("disabled"),"Pagination Previous must be disabled");
-			
-			//clicking pagination last button
-			driver.findElement(pagerLast).click();
-			
-			Assert.assertEquals("true", driver.findElement(pagerLast).getAttribute("disabled"),"Pagination Last must be disabled");
-			Assert.assertEquals("true", driver.findElement(pagerNext).getAttribute("disabled"),"Pagination Next must be disabled");
-			
-			driver.findElement(pagerPrevious).click();
-
-			//Validating pagination dropdown value
-			Select select2 = new Select(driver.findElement(pagerPageDrop));
-			List<WebElement> dCount = select2.getOptions();
-			int dropList[] = {5,10,25,50,100};
-			for (int i = 0; i < dCount.size()-1; i++) {
-				select.selectByIndex(i);
-				Assert.assertEquals(dropList[i], Integer.parseInt(select2.getFirstSelectedOption().getText()));
-			}
-		}
+		int dropList[] = {5,10,25,50,100};
+		helper.validate_pagination_navigation_arrow(driver, pagerFirst, pagerPrevious, pagerLast, pagerNext,pagerGridCount);
+		helper.navigation_pagination_dropdown(driver, pagerPageDrop, dropList);
+		helper.validate_pagination_text(driver, pagerGridCount, pagerPageDropText);
 		logger.info("-----End of test case execution for :view3_table_pagination------");
 	}
 	
