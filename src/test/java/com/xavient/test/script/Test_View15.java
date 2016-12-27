@@ -19,10 +19,14 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import com.xavient.pages.DashBoardView;
 import com.xavient.util.BaseClass;
 import com.xavient.util.ExcelCache;
 import com.xavient.util.Helper;
+import com.xavient.util.Reporting;
 
 
 /**
@@ -36,7 +40,6 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	WebDriverWait wait;
 	Logger logger = Logger.getLogger(Test_View15.class);
 
-
 	/**
 	 * Calling Before Test for navigating to particular view15.
 	 * @param browser
@@ -46,8 +49,10 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	@BeforeMethod
 	@Parameters({ "browser" })
 	public void Before_Test(@Optional("Chrome") String browser) {
-
+		extent = Reporting.Instance();
+		test = extent.startTest("Test_View15","Verify View 15 Different Scenarios");
 		driver = Browser_Selection(browser);
+		test.log(LogStatus.PASS, browser + " is opened successfully");
 		logger.info(browser + " is opened successfully");
 		// Initialize
 		helper = new Helper();
@@ -56,15 +61,17 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		// Handling PopUP with AutoIT , Need to have this screen as active
 		// when this method is being executed.
 		helper.handle_popup();
-
+		test.log(LogStatus.PASS, "Alert pop is closed");
 		// Login and Navigating to View
 		helper.login(driver);
+		test.log(LogStatus.PASS, "User is logged into application");
 		helper.waitForBrowserToLoadCompletely(driver);
-		//		By[] element = { View, Queue_And_Agent_Overview, View15 };
-		//		helper.navigate_view(element, wait, driver);
 		helper.clickByJavascript(driver, driver.findElement(View));
+		test.log(LogStatus.PASS, "Clicked on the Views");
 		helper.clickByJavascript(driver, driver.findElement(Queue_And_Agent_Overview));
+		test.log(LogStatus.PASS, "Clicked on the Queue And Agent Overview");
 		helper.clickByJavascript(driver, driver.findElement(View15));
+		test.log(LogStatus.PASS, "Clicked on the View 15");
 		logger.info("------Before Test------");
 	}
 
@@ -79,22 +86,35 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		wait.until(ExpectedConditions.visibilityOf(driver.findElement(view15_today_data)));
 		//Validating today data table
 		helper.validate_table_names(driver.findElement(view15_today_data), "Test_View15", "view15_todays_data_details");
+		test.log(LogStatus.PASS, "Verified the today data table headline");
 		helper.validate_table_columns(view15_today_data_table, driver, "", "Test_View15", "view15_today_data_table");
+		test.log(LogStatus.PASS, "Verified the today data table columns");
 		//Validating current data table
 		helper.validate_table_names(driver.findElement(view15_current_data), "Test_View15", "view15_current_data_details");
+		test.log(LogStatus.PASS, "Verified the current data table headline");
 		helper.validate_table_columns(view15_current_data_table, driver, "", "Test_View15", "view15_current_data_table");
+		test.log(LogStatus.PASS, "Verified the current data table columns");
 		//Validating Half hour data table
 		helper.validate_table_names(driver.findElement(view15_Half_Hour_data), "Test_View15", "view15_view15_Half_Hour_data_details");
+		test.log(LogStatus.PASS, "Verified the Half hour table headline");
 		helper.validate_table_columns(view15_Half_Hour_data_table, driver, "", "Test_View15", "view15_view15_Half_Hour_data_table");
+		test.log(LogStatus.PASS, "Verified the Half hour data table columns");
 		//Validating Agents Statistics for all COEs data table
 		helper.validate_table_names(driver.findElement(view15_Agents_Statistics_data), "Test_View15", "view15_Agents_Statistics_data");
+		test.log(LogStatus.PASS, "Verified the Agents Statistics for all COEs table headline");
 		helper.validate_table_columns(view15_Agents_Statistics_data_table, driver, "", "Test_View15", "view15_Agents_Statistics_data_table");
+		test.log(LogStatus.PASS, "Verified the Agents Statistics for all COEs table columns");
 		//Validating Site details data table
 		helper.validate_table_names(driver.findElement(view15_Site_Detail_data), "Test_View15", "view15_Site_Detail_data");
+		test.log(LogStatus.PASS, "Verified the Site details table headline");
 		helper.validate_table_columns(view15_Site_Detail_data_table, driver, "", "Test_View15", "view15_Site_Detail_data_table");
+		test.log(LogStatus.PASS, "Verified the Site details table columns");
 		//Validating Agent details data tables
+		helper.waitForLoad(2);
 		helper.validate_table_names(driver.findElement(view15_Agent_Detail_data), "Test_View15", "view15_Agent_Detail_data");
-		helper.validate_table_columns(view15_Agent_Detail_data_table, driver, "", "Test_View15", "view15_Agent_Detail_data_table");
+		test.log(LogStatus.PASS, "Verified the Agent details table headline");
+		helper.validate_table_columns(view15_Agent_Detail_data_table_start, driver, view15_Agent_Detail_data_table_end, "Test_View15", "view15_Agent_Detail_data_table");
+		test.log(LogStatus.PASS, "Verified the Agent details table columns");
 		logger.info("-----End test case execution for :view15_validate_table_data------");
 	}
 
@@ -102,7 +122,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating table pagination
 	 */
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void  view15_table_pagination() {
 		logger.info("-----Start test case execution for :view15_table_pagination------");
 		//Validating pagination dropdown value
@@ -153,7 +173,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating table sorting
 	 */
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void view15_table_sorting() {
 		logger.info("-----Start test case execution for :view15_table_sorting------");
 		if(!helper.isElementPresent(driver, noRecordData))
@@ -205,7 +225,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating static data set of line graph 
 	 */
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void view15_validate_line_graph_data()  {
 		logger.info("-----Start test case execution for :view15_validate_line_graph_data------");
 		//Navigating to line chart page. 	
@@ -218,7 +238,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating filter name
 	 */
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void view15_validate_filter_name()
 	{
 		logger.info("-----Start test case execution for :view15_validate_filter_name------");
@@ -233,7 +253,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * Method is validating filter value.
 	 */
 
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void view15_validate_filter_dropdown()
 	{
 		logger.info("-----Start test case execution for :view15_validate_filter_dropdown------");
@@ -265,7 +285,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * Method is to validate the ColumnCustomization for Today's Data
 	 * 
 	 */
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void view15_validate_ColumnCustomization_Today_Data(){
 		WebDriverWait wait = new WebDriverWait(driver, 100);
 		logger.info("-----Start test case execution for :view15_validate_ColumnCustomization_Today_Data------");		
@@ -293,7 +313,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * Method is to validate the ColumnCustomization for Current Data
 	 * 
 	 */
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void view15_validate_ColumnCustomization_Current_Data(){
 		logger.info("-----Start test case execution for :view15_validate_ColumnCustomization_Current_Data------");		
 		ArrayList<String> tableColumns=(ArrayList<String>) helper.getTableColumns(view15_current_data_col, driver);
@@ -315,7 +335,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * Method is to validate the ColumnCustomization for Half Hour Data
 	 * 
 	 */
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void view15_validate_ColumnCustomization_HalfHour_Data(){
 		WebDriverWait wait = new WebDriverWait(driver, 100);
 		logger.info("-----Start test case execution for :view15_validate_ColumnCustomization_HalfHour_Data------");		
@@ -343,7 +363,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * Method is to validate the ColumnCustomization for Agents Statistics Data
 	 * 
 	 */
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void view15_validate_ColumnCustomization_Agents_Statistics_Data(){
 		WebDriverWait wait = new WebDriverWait(driver, 100);
 		logger.info("-----Start test case execution for :view15_validate_ColumnCustomization_Agents_Statistics_Data------");		
@@ -370,7 +390,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method validating creation of Custom Views.
 	 */
-	@Test
+	@Test(enabled = false)
 	public void view15_Custom_Views() {
 		logger.info("-----Start test case execution for :view15_Custom_Views------");
 		//Getting View3 Title to validate text in My view.
@@ -384,9 +404,9 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	/**
 	 * Closing Browser After Test.
 	 */
-	@AfterMethod
-	public void After_Test() {
-		driver.close();
-		logger.info("------End Test------");
-	}
+//	@AfterMethod
+//	public void After_Test() {
+//		driver.close();
+//		logger.info("------End Test------");
+//	}
 }

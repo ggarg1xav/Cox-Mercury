@@ -58,8 +58,9 @@ public class Helper implements DashBoardView{
 		//Initialize.
 		List<String> xls_col_names  = ExcelCache.getExpectedListData(class_name , table_element );
 		ArrayList<String> ui_col_names = new ArrayList<String>();	
+		System.out.println(element_start+element_end);
 		int rows = driver.findElements(By.xpath(element_start+element_end)).size();
-
+		System.out.println(rows);
 		//Comparing No of columns
 		logger.info("-----Comparing the table columns size----- ");
 		logger.info("Actual table columns size from UI: "+rows);
