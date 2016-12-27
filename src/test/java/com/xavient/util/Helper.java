@@ -540,7 +540,7 @@ ArrayList<WebElement> a = new 	ArrayList<WebElement>();
 		{
 			for (int j=0;j<listelement.size();j++)
 			{
-				if(listelement.get(j).getAttribute("value").equals(xls_col_names.get(i)) && !listelement.get(j).isSelected() )
+				if(listelement.get(j).getAttribute("value").trim().equals(xls_col_names.get(i)) && !listelement.get(j).isSelected() )
 				{
 					listelement.get(j).click();
 					break;
@@ -567,7 +567,7 @@ ArrayList<WebElement> a = new 	ArrayList<WebElement>();
 		{
 			for (int j=0;j<listelement.size();j++)
 			{
-				if(listelement.get(j).getAttribute("value").equals(xls_col_names.get(i)) && listelement.get(j).isSelected() )
+				if(listelement.get(j).getAttribute("value").trim().equals(xls_col_names.get(i)) && listelement.get(j).isSelected() )
 				{
 					listelement.get(j).click();
 					break;
@@ -749,6 +749,7 @@ ArrayList<WebElement> a = new 	ArrayList<WebElement>();
 			driver.findElement(element).click();
 		}
 	}
+
 	
 	/**
 	 * Table sorting.
@@ -802,6 +803,22 @@ ArrayList<WebElement> a = new 	ArrayList<WebElement>();
 			Assert.assertEquals(dropList[i], Integer.parseInt(select2.getFirstSelectedOption().getText()));
 		}
 	}
+
+	/**
+	 * @author ggarg
+	 * Method is fetching and comparing data from XLS and UI using attribute.
+	 */
+	public List<String> getTableColumns( By element  , WebDriver driver, String view)
+{
+ArrayList<String> ui_col_names = new ArrayList<String>();	
+List<WebElement> listelement = driver.findElements(element);
+for (WebElement webelement : listelement)
+{
+	ui_col_names.add(webelement.getAttribute("textContent"));
+}	
+return ui_col_names;
+}
+
 
 	/**
 	 * pagination navigation
