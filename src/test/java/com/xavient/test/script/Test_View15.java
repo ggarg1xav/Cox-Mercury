@@ -69,7 +69,6 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		parent.log(LogStatus.PASS, "Clicked on the View 15");
 		helper.clickByJavascript(driver, driver.findElement(pauseToolTip));
 		logger.info("------Before Test------");
-		throw new SkipException("sKIP");
 	}
 
 	/**
