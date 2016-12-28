@@ -393,7 +393,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 
 	/**
 	 * @author csingh
-	 * Method validating creation of Custom Views.
+	 * Method validating creation of Custom View.
 	 */
 	@Test(enabled = true)
 	public void view15_Custom_Views() {
