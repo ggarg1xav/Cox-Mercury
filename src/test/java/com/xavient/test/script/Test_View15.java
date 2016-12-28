@@ -120,7 +120,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method is validating table pagination
 	 */
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void  view15_table_pagination() {
 		child = extent.startTest("View15 Table Pagination","Verify Table Pagination");
 		logger.info("-----Start test case execution for :view15_table_pagination------");
@@ -390,7 +390,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	 * @author csingh
 	 * Method validating creation of Custom View.
 	 */
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void view15_Custom_Views() {
 		child = extent.startTest("view15_Custom_Views","Verify Custom View");
 		logger.info("-----Start test case execution for :view15_Custom_Views------");

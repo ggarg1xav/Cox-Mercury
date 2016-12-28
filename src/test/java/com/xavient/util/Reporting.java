@@ -14,6 +14,10 @@ import com.relevantcodes.extentreports.ExtentReports;
 
 public class Reporting {
 
+	/**
+	 * @author csingh
+	 * Method for creating Extent Report Instance
+	 */
 	public static ExtentReports Instance()
 	{
 		ExtentReports extent;
@@ -22,6 +26,10 @@ public class Reporting {
 		return extent;
 	}
 	
+	/**
+	 * @author csingh
+	 * Method for taking the screenshot
+	 */
 	public static String CaptureScreen(WebDriver driver)
 	{
 		String ImagesPath = getPath()+"\\Reports\\Screenshot\\";
@@ -35,6 +43,10 @@ public class Reporting {
 		return ImagesPath+currentTime()+".jpg";
 	}
 	
+	/**
+	 * @author csingh
+	 * Method for getting path of the project
+	 */
 	public static String getPath()
 	{
 		File file =  new File("");
@@ -42,6 +54,10 @@ public class Reporting {
 		return path;
 	}
 	
+	/**
+	 * @author csingh
+	 * Method for finding the current time
+	 */
 	public static String currentTime()
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
@@ -49,6 +65,10 @@ public class Reporting {
 		return sdf.format(date);
 	}
 	
+	/**
+	 * @author csingh
+	 * Method for deleting the existing report
+	 */
 	public static void deleteReport()
 	{
 		try {

@@ -92,6 +92,11 @@ public class BaseClass implements DashBoardView{
 		return driver;
 	}
 	
+	/**
+	 * @author csingh
+	 * Method for delete the report and creating the 
+	 * instance of the report
+	 */
 	@BeforeSuite
 	public void startExecute()
 	{
@@ -99,6 +104,11 @@ public class BaseClass implements DashBoardView{
 		extent = Reporting.Instance();
 	}
 	
+	/**
+	 * @author csingh
+	 * Method for taking screenshot if test case
+	 * is failed.
+	 */
 	@AfterMethod
 	public void getStatus(ITestResult result1)
 	{
