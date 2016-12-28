@@ -18,7 +18,7 @@ public class Reporting {
 	{
 		ExtentReports extent;
 		String Path = getPath()+"\\Reports\\ExtentReport.html";
-		extent = new ExtentReports(Path);
+		extent = new ExtentReports(Path,true);
 		return extent;
 	}
 	
@@ -39,7 +39,6 @@ public class Reporting {
 	{
 		File file =  new File("");
 		String path = file.getAbsolutePath();
-		System.out.println(path);
 		return path;
 	}
 	
@@ -49,4 +48,18 @@ public class Reporting {
 		Date date = new Date();
 		return sdf.format(date);
 	}
+	
+	public static void deleteReport()
+	{
+		try {
+			File f =  new File(getPath()+"\\Reports\\ExtentReport.html");
+			if(f.exists())
+			{
+				f.delete();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	} 
 }

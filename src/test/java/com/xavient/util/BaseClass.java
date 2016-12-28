@@ -21,7 +21,8 @@ import com.xavient.pages.DashBoardView;
 public class BaseClass implements DashBoardView{
 	WebDriver driver;
 	public static ExtentReports extent;
-	public static ExtentTest test;
+	public static ExtentTest parent;
+	public static ExtentTest child;
 	
 	/**
 	 * Method is initalizing driver with defined browser properties.
@@ -94,30 +95,26 @@ public class BaseClass implements DashBoardView{
 	@BeforeSuite
 	public void startExecute()
 	{
+		Reporting.deleteReport();
 		extent = Reporting.Instance();
-	}
-	
-	@AfterSuite
-	public void stopExecution()
-	{
-		extent.endTest(test);
-		extent.flush();
-		//extent.close();
 	}
 	
 	@AfterMethod
 	public void getStatus(ITestResult result1)
 	{
-
 		String result = " ";
 		int newResult = 0;
 		newResult = result1.getStatus();
-		result =test.getRunStatus().toString();
+		result =child.getRunStatus().toString();
 		if(result.equalsIgnoreCase("error")||result.equalsIgnoreCase("fail")||newResult==result1.FAILURE)
 		{
-			String img = test.addScreenCapture(Reporting.CaptureScreen(driver));
-			test.log(LogStatus.FAIL, "Image","Please refer the failed step Screenshot  below : " + img);
+			String img = child.addScreenCapture(Reporting.CaptureScreen(driver));
+			child.log(LogStatus.FAIL, "Image","Please refer the failed step Screenshot  below : " + img);
 		}
+		parent.appendChild(child);
 		driver.close();
+		extent.endTest(child);
+		extent.endTest(parent);
+		extent.flush();
 	}
 }
