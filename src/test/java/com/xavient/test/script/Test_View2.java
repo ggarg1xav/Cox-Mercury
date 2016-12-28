@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -290,7 +292,15 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		logger.info("-----End of test case execution for :view2_table_graph_chart_validate_ColumnCustomization------");
 	
 	}
-	
+	/**
+	 * Closing Browser After Test.
+	 */
+		@AfterClass
+		public void close_browser() {
+			driver.close();
+			logger.info("------End Test------");
+			
+		}
 	
 
 
