@@ -1,11 +1,15 @@
 package com.xavient.test.script;
 
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
@@ -14,6 +18,7 @@ import org.testng.annotations.Test;
 
 import com.xavient.pages.DashBoardView;
 import com.xavient.util.BaseClass;
+import com.xavient.util.ExcelCache;
 import com.xavient.util.Helper;
 
 public class Test_View5 extends BaseClass implements  DashBoardView{
@@ -159,6 +164,41 @@ WebDriver driver;
 			//Calling Method for creation and validation for custom views.
 			helper.create_validate_Custom_View(driver, wait, string_to_validate);
 
+		}
+		/**
+		 * @author nkumar9 
+		 * Method is to validate the drop down list values in line chart
+		 * @throws InterruptedException 
+		 */
+		@Test
+		public void view5_table_graph_chart_validate_ColumnCustomization(){
+			WebDriverWait wait = new WebDriverWait(driver, 100);
+			helper.explicitWait(driver, 5);
+			helper.waitloader(driver);
+			helper.waitForBrowserToLoadCompletely(driver);
+			driver.findElement(pauseToolTip).click();
+			logger.info("-----Start test case execution for :view5_table_graph_chart_validate_ColumnCustomization------");
+			driver.findElement(tabularViewToolTip).click();		
+			ArrayList<String> tableColumns=(ArrayList<String>) helper.getTableColumns(tbl_View5, driver,"view5");
+			logger.info("Table column before customization:"+tableColumns);
+			driver.findElement(img_column_cust).click();		
+			wait.until(ExpectedConditions.visibilityOf(driver
+					.findElement(lnk_cc_more)));
+			driver.findElement(lnk_cc_more).click();
+			helper.explicitWait(driver, 5);
+			helper.deSelectCheckboxFromDD(lst_column_customization, driver, "Test_View5", "ds_lst_column_customization");
+			helper.explicitWait(driver, 5);
+			helper.selectCheckboxFromDD(lst_column_customization, driver, "Test_View5", "lst_column_customization");
+			helper.explicitWait(driver, 5);
+			driver.findElement(img_column_cust).click();
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			ArrayList<String> tableColumns_CC_UI=(ArrayList<String>) helper.getTableColumns(tbl_View5, driver,"view5");
+			tableColumns.addAll(ExcelCache.getExpectedListData("Test_View5" , "lst_column_customization" ));
+			tableColumns.removeAll(ExcelCache.getExpectedListData("Test_View5" , "ds_lst_column_customization" ));
+			boolean actulValue=Helper.compareTwoList(tableColumns, tableColumns_CC_UI);
+			Assert.assertEquals(actulValue, true);		
+			logger.info("-----End of test case execution for :view5_table_graph_chart_validate_ColumnCustomization------");
+		
 		}
 	
 	/**
