@@ -292,4 +292,10 @@ public interface DashBoardView {
 	By todayData_columnCustomization = By.xpath("//div[@tableviewid='table-second1']//a[@id='addColumns']");
 	By img_column_cust_currentAgent = By.xpath("//div[@tableviewid='table-third1']/i");
 	By currentAgent_columnCustomization = By.xpath("//div[@tableviewid='table-third1']//a[@id='addColumns']");
+	
+	//View 2 Drill Down
+    String view2DrillStart= "//*[@id='VIEW_2_table-first']/tbody/tr[";
+    String view2DrillEnd= "]/td[1]/span";
+    String view2_table_name="//*[@id='VIEW_2_table-first']/tbody/tr";
+    
 }
