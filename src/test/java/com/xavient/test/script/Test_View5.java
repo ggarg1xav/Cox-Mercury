@@ -62,6 +62,9 @@ WebDriver driver;
 	helper.waitloader(driver);
 	driver.findElement(chartCombineStackToolTip).click();
 
+	helper.waitForBrowserToLoadCompletely(driver);
+	driver.findElement(pauseToolTip).click();
+	
 	helper.validate_list_data(view5_AgentCount_sub_label, driver, "Test_View5", "view5_AgentCount_sub_label");
 	helper.validate_list_data(view5_Percentage_sub_label, driver, "Test_View5", "view5_Percentage_sub_label");
 	helper.validate_list_data(view5_Time_sub_label, driver, "Test_View5", "view5_Time_sub_label");
