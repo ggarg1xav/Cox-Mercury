@@ -21,7 +21,7 @@ public class Reporting {
 	public static ExtentReports Instance()
 	{
 		ExtentReports extent;
-		String Path = getPath()+"\\Reports\\ExtentReport.html";
+		String Path = getPath()+Properties_Reader.readProperty("report_path");
 		extent = new ExtentReports(Path,true);
 		return extent;
 	}
@@ -32,7 +32,7 @@ public class Reporting {
 	 */
 	public static String CaptureScreen(WebDriver driver,String name)
 	{
-		String ImagesPath = getPath()+"\\Reports\\Screenshot\\";
+		String ImagesPath = getPath()+Properties_Reader.readProperty("screenshots");
 		TakesScreenshot oScn = (TakesScreenshot)driver;
 		File oScnShot = oScn.getScreenshotAs(OutputType.FILE);
 		File oDest = new File(ImagesPath+name+".jpg");
@@ -73,7 +73,7 @@ public class Reporting {
 	public static void deleteReport()
 	{
 		try {
-			File f =  new File(getPath()+"\\Reports\\ExtentReport.html");
+			File f =  new File(getPath()+Properties_Reader.readProperty("report_path"));
 			if(f.exists())
 			{
 				f.delete();

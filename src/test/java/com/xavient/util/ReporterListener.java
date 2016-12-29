@@ -23,7 +23,7 @@ public class ReporterListener implements IReporter {
 
 	@Override
 	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
-		extent = new ExtentReports(System.getProperty("user.dir")+"\\Reports\\"+"Report.html", true);
+		extent = new ExtentReports(System.getProperty("user.dir")+ Properties_Reader.readProperty("report_path"), true);
 
 		for (ISuite suite : suites) {
 			Map<String, ISuiteResult> result = suite.getResults();
@@ -59,7 +59,7 @@ public class ReporterListener implements IReporter {
 					test.assignCategory(group);
 
 				if (result.getThrowable() != null) {
-					String img = test.addScreenCapture((System.getProperty("user.dir")+"\\Reports\\Screenshot\\" + result.getMethod().getMethodName()) + ".jpg");
+					String img = test.addScreenCapture((System.getProperty("user.dir")+Properties_Reader.readProperty("screenshots") + result.getMethod().getMethodName()) + ".jpg");
 					test.log(LogStatus.FAIL, result.getThrowable());
 					test.log(LogStatus.FAIL, img);
 				} else {
