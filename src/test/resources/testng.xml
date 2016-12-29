@@ -7,16 +7,12 @@
 
 	<listeners>
 		<listener class-name="com.uttesh.pdfngreport.PDFReportListener" />
+		<listener class-name="com.xavient.util.ReporterListener" />
 	</listeners>
 	
-	<test name="View3">
+	<test name="View5">
 		<classes>
-			<class name="com.xavient.test.script.Test_View3"></class>
-		</classes>
-	</test>
-	<test name="View15">
-		<classes>
-			<class name="com.xavient.test.script.Test_View15"></class>
+			<class name="com.xavient.test.script.Test_View5"></class>
 		</classes>
 	</test>
 
