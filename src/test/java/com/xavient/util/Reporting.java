@@ -30,17 +30,17 @@ public class Reporting {
 	 * @author csingh
 	 * Method for taking the screenshot
 	 */
-	public static String CaptureScreen(WebDriver driver)
+	public static String CaptureScreen(WebDriver driver,String name)
 	{
 		String ImagesPath = getPath()+"\\Reports\\Screenshot\\";
 		TakesScreenshot oScn = (TakesScreenshot)driver;
 		File oScnShot = oScn.getScreenshotAs(OutputType.FILE);
-		File oDest = new File(ImagesPath+currentTime()+".jpg");
+		File oDest = new File(ImagesPath+name+".jpg");
 		try {
 			FileUtils.copyFile(oScnShot, oDest);
 		} catch (IOException e) {System.out.println(e.getMessage());}
-		System.out.println(getPath()+"\\Reports\\Screenshot\\"+currentTime()+".jpg");
-		return ImagesPath+currentTime()+".jpg";
+		System.out.println(getPath()+"\\Reports\\Screenshot\\"+name+".jpg");
+		return ImagesPath+name+".jpg";
 	}
 	
 	/**
