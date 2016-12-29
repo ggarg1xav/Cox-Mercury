@@ -385,7 +385,7 @@ public class Helper implements DashBoardView{
 		List<WebElement> elementCount = select.getOptions();
 
 		for (int i = 0; i <=elementCount.size() - 1; i++) {
-			ui_col_names.add(elementCount.get(i).getAttribute("label").toString());
+			ui_col_names.add(elementCount.get(i).getAttribute("label").toString().trim());
 		}
 		logger.info("Actual Size from UI:"+ui_col_names.size());
 		logger.info("Expected Size from Excel Sheet:"+xls_col_names.size());
