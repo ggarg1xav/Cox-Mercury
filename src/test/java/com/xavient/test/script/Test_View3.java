@@ -47,8 +47,7 @@ public class Test_View3 extends BaseClass implements  DashBoardView {
 		//Handling PopUP with AutoIT , Need to have this screen as active when this method is being executed.
 		helper.handle_popup();
 		parent.log(LogStatus.PASS, "Alert pop is closed");
-		helper.login(driver);
-		parent.log(LogStatus.PASS, "Alert pop is closed");
+		
 		//Login and Navigating to View
 		helper.login(driver);
 		parent.log(LogStatus.PASS, "User is logged into application");
