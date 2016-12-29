@@ -120,7 +120,7 @@ public class BaseClass implements DashBoardView{
 		{
 			String img = test.addScreenCapture(Reporting.CaptureScreen(result1.getMethod().getMethodName(),driver));
 			System.out.println(img); 
-			test.log(LogStatus.INFO, "Image", "Screenshot below : " + img);
+			test.log(LogStatus.FAIL, "Image", "Screenshot below : " + img);
 		}
 		driver.close();
 	}
