@@ -738,9 +738,9 @@ ArrayList<WebElement> a = new 	ArrayList<WebElement>();
 		// TODO Auto-generated method stub
 		//Clicking on Elements after waiting for it.
 		for (By element : nav_elements) {
-			wait.until(ExpectedConditions.visibilityOf(driver.findElement(element)));
-			driver.findElement(element).click();
+			clickByJavascript(driver, driver.findElement(element));
 		}
+		
 	}
 
 	
