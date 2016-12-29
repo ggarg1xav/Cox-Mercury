@@ -1,17 +1,21 @@
 package com.xavient.test.script;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import com.relevantcodes.extentreports.LogStatus;
 import com.xavient.pages.DashBoardView;
 import com.xavient.util.BaseClass;
@@ -230,7 +234,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * @author nkumar9 
 	 * Method is to validate the drop down list values in bar chart
 	 */
-	@Test(enabled = true , priority =8)
+	@Test(enabled = false , priority =8)
 	public void view2_bargraph_chart_validate_dropdown() {
 		logger.info("-----Start test case execution for :view2_bargraph_chart_validate_dropdown------");
 		navigateToBarGraph();
@@ -246,7 +250,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * Method is to validate the drop down list values in line chart
 	 * @throws InterruptedException 
 	 */
-	@Test(enabled = true , priority =9)
+	@Test(enabled = false , priority =9)
 	public void view2_table_graph_chart_validate_ColumnCustomization(){
 		WebDriverWait wait = new WebDriverWait(driver, 100);
 		logger.info("-----Start test case execution for :view2_table_graph_chart_validate_ColumnCustomization------");
@@ -273,7 +277,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * Method is validating filter value  for list Organization.
 	 */
 		
-	@Test(enabled=true, priority = 10)
+	@Test(enabled=false, priority = 10)
 	public void view2_validate_organizationfilter_dropdown()
 	{
 		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
@@ -286,7 +290,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * Method is validating filter value for list lob.
 	 */
 		
-	@Test(enabled=true, priority = 11)
+	@Test(enabled=false, priority = 11)
 	public void view2_validate_lobfilter_dropdown()
 	{
 		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
@@ -300,7 +304,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * Method is validating filter value  for list subLob.
 	 */
 		
-	@Test(enabled=true, priority = 12)
+	@Test(enabled=false, priority = 12)
 	public void view2_validate_sublobfilter_dropdown()
 	{
 		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
@@ -314,7 +318,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * Method is validating filter value for list groups.
 	 */
 		
-	@Test(enabled=true, priority = 13)
+	@Test(enabled=false, priority = 13)
 	public void view2_validate_groupsfilter_dropdown()
 	{
 		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
@@ -328,7 +332,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * Method is validating filter value for list Sub Functional groups.
 	 */
 		
-	@Test(enabled=true, priority = 14)
+	@Test(enabled=false, priority = 14)
 	public void view2_validate_subFunctionalGroupsfilter_dropdown()
 	{
 		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
@@ -342,7 +346,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * Method is validating filter value for list Functions.
 	 */
 		
-	@Test(enabled=true, priority = 15)
+	@Test(enabled=false, priority = 15)
 	public void view2_validate_functionsfilter_dropdown()
 	{
 		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
@@ -356,7 +360,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * Method is validating filter value for list language.
 	 */
 		
-	@Test(enabled=true, priority = 16)
+	@Test(enabled=false, priority = 16)
 	public void view2_validate_languagefilter_dropdown()
 	{
 		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
@@ -370,7 +374,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 * Method is validating filter value for list Time Zone.
 	 */
 		
-	@Test(enabled=true, priority = 17)
+	@Test(enabled=false, priority = 17)
 	public void view2_validate_timezonefilter_dropdown()
 	{
 		logger.info("-----Start test case execution for :view2_validate_filter_dropdown------");
@@ -404,6 +408,29 @@ public static void navigateToBarGraph()
 	helper.explicitWait(driver,5);
 	logger.info("Successfully clicked on Bar Chart image");
 	
-	}
+}
+@AfterClass
+public static void killDriver()
+{
+	  String  strCmdLinechr = String.format("TaskKill /F /IM " + "chromedriver.exe");
+	  String  strCmdLineie = String.format("TaskKill /F /IM " + "iedriverserver.exe");
+		try {
+			System.out.println("Total memory :"+Runtime.getRuntime().totalMemory());
+			System.out.println("Free memory :"+Runtime.getRuntime().freeMemory());
+			System.out.println("Available processors :"+Runtime.getRuntime().availableProcessors());
+			
+			
+			Runtime.getRuntime().exec(strCmdLinechr);
+			Runtime.getRuntime().exec(strCmdLineie);
+			System.out.println("Total memory after prosess run :"+Runtime.getRuntime().totalMemory());
+			System.out.println("Free memory after prosess run :"+Runtime.getRuntime().freeMemory());
+			System.out.println("Available processors after prosess run :"+Runtime.getRuntime().availableProcessors());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+
+}
 
 }
