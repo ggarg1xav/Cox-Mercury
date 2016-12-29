@@ -44,7 +44,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 
 	@BeforeMethod
 	@Parameters({ "browser" })
-	public void Before_Test(@Optional("Chrome") String browser) {
+	public void Before_Test(@Optional("ie") String browser) {
 		driver = Browser_Selection(browser);
 		logger.info(browser + " is opened successfully");
 		// Initialize
@@ -294,6 +294,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		logger.info("-----Start test case execution for :view15_validate_ColumnCustomization_Current_Data------");	
 		ArrayList<String> tableColumns=(ArrayList<String>) helper.getTableColumns(view15_current_data_col, driver);
 		logger.info("Table column before customization:"+tableColumns);
+		helper.waitForLoad(2);
 		driver.findElement(currentdata_columnCustomization).click();
 		helper.deSelectCheckboxFromDD(lst_column_customization, driver, "Test_View15", "view15_current_data_ds_lst_column_customization");
 		driver.findElement(currentdata_columnCustomization).click();
