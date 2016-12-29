@@ -38,8 +38,9 @@ public class Reporting {
 		File oDest = new File(ImagesPath+name+".jpg");
 		try {
 			FileUtils.copyFile(oScnShot, oDest);
-		} catch (IOException e) {System.out.println(e.getMessage());}
-		System.out.println(getPath()+"\\Reports\\Screenshot\\"+name+".jpg");
+		} catch (IOException e) {
+		e.printStackTrace();
+			}
 		return ImagesPath+name+".jpg";
 	}
 	

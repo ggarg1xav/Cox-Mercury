@@ -173,7 +173,6 @@ public class Helper implements DashBoardView{
 				 */
 
 				if (i == 1 && state.equals("complete")) {
-					System.out.println();
 					return;
 				}
 				i++;
@@ -187,7 +186,6 @@ public class Helper implements DashBoardView{
 			 */
 			while (true) {
 				state = ((JavascriptExecutor) driver).executeScript("return document.readyState;").toString();
-				System.out.print("." + state.charAt(0) + ".");
 				if (state.equals("complete"))
 					break;
 
@@ -202,11 +200,10 @@ public class Helper implements DashBoardView{
 				if (i == 15 && state.equals("loading")) {
 					logger.info("\nBrowser in " + state + " state since last 60 secs. So refreshing browser.");
 					driver.navigate().refresh();
-					System.out.print("Waiting for browser loading to complete");
+					logger.info("Waiting for browser loading to complete");
 					i = 0;
 				} else if (i == 6 && state.equals("interactive")) {
-					System.out.println(
-							"\nBrowser in " + state + " state since last 30 secs. So starting with execution.");
+					logger.info("\nBrowser in " + state + " state since last 30 secs. So starting with execution.");
 					return;
 				}
 
@@ -214,8 +211,6 @@ public class Helper implements DashBoardView{
 				oldstate = state;
 
 			}
-			System.out.println();
-
 		} catch (InterruptedException ie) {
 			ie.printStackTrace();
 		}

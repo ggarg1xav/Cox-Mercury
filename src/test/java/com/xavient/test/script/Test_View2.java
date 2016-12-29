@@ -3,6 +3,7 @@ package com.xavient.test.script;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,7 +13,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import com.relevantcodes.extentreports.LogStatus;
+
 import com.xavient.pages.DashBoardView;
 import com.xavient.util.BaseClass;
 import com.xavient.util.ExcelCache;
@@ -35,9 +36,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	@Parameters({ "browser" })
 	public void Setup(@Optional("Chrome") String browser) {
 		logger.info("-----Start test case execution for :Setup method------");
-		parent = extent.startTest("Test View2","Verify Different scenarios in View 2");
 		driver = Browser_Selection(browser);
-		parent.log(LogStatus.PASS, browser + " is opened successfully");
 		logger.info(browser + " is opened successfully");
 		// Initialize
 		helper = new Helper();
@@ -50,23 +49,18 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 		// Handling PopUP with AutoIT , Need to have this screen as active when
 		// this method is being executed.
 		helper.handle_popup();
-		parent.log(LogStatus.PASS, "Alert pop is closed");
 
 		// Login and Navigating to View
 		helper.login(driver);
-		parent.log(LogStatus.PASS, "User is logged into application");
 		By[] element = { View, Queue_Summary_EMC, View2 };
 		helper.navigate_view(element, wait, driver);
 		helper.explicitWait(driver, 5);
 		helper.waitForBrowserToLoadCompletely(driver);
 		helper.explicitWait(driver, 5);
 		logger.info("Waiting for driver to load the page");
-		parent.log(LogStatus.PASS, "Waiting for driver to load the page");
 		driver.findElement(pauseToolTip).click();
 		logger.info("User Clicked on to the pause button");
-		parent.log(LogStatus.PASS, "User Clicked on to the pause button");
 		logger.info("***** Successfully clicked on to the View2 link on left pannel");
-		parent.log(LogStatus.PASS, "Successfully clicked on to the View2 link on left pannel");
 		logger.info("-----End of test case execution for :Setup method------");
 	}
 
@@ -76,7 +70,7 @@ public class Test_View2 extends BaseClass implements DashBoardView {
 	 */
 	@Test(enabled = true, priority =1)
 	public void view2_linegraph_validate_AgentCount_data() {
-		child = extent.startTest("view2_linegraph_validate_AgentCount_data","Verifying the line graph data for Agent count");
+		
 		logger.info("-----Start test case execution for :view2_linegraph_validate_AgentCount_data------");	
 		navigateToLinegraphPage();
 		// Validating all static data.

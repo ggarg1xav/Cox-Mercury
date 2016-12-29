@@ -9,6 +9,7 @@ Make sure that MAVEN and JAVA path is configured in system variables.
 #Steps 
 1. Install git from https://git-scm.com/downloads
 2. Clone code from https://github.com/ggarg1xav/Cox-Mercury.git
+User / Password - gggarg1@xavient.com / ggarg1xav
 3. Execute it from InstallCommands.bat OR InstallCommands.sh 
 4. Now , check report in 'test-output' folder of your project.
 Keep updating your project with 'git pull' or same commands.
