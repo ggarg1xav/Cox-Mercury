@@ -186,14 +186,4 @@ public class Test_View1 extends BaseClass implements DashBoardView {
 		logger.info("-----End of test case execution for :view1_table_graph_chart_validate_ColumnCustomization------");
 	
 	}
-	
-
-	/**
-	 * Closing Browser After Test.
-	 */
-	@AfterMethod
-	public void After_Test() {
-		driver.close();
-		logger.info("------End Test------");
-		}
 }
