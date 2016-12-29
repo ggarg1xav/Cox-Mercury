@@ -76,7 +76,12 @@ public class BaseClass implements DashBoardView{
 				e.printStackTrace();
 			}
 			driver.findElement(IECertificate).click();
-
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		else {
@@ -109,22 +114,31 @@ public class BaseClass implements DashBoardView{
 	 * Method for taking screenshot if test case
 	 * is failed.
 	 */
-	@AfterMethod
+	@AfterMethod(alwaysRun=true)
 	public void getStatus(ITestResult result1)
 	{
-		String result = " ";
-		int newResult = 0;
-		newResult = result1.getStatus();
-		result =child.getRunStatus().toString();
-		if(result.equalsIgnoreCase("error")||result.equalsIgnoreCase("fail")||newResult==result1.FAILURE)
-		{
-			String img = child.addScreenCapture(Reporting.CaptureScreen(driver));
-			child.log(LogStatus.FAIL, "Image","Please refer the failed step Screenshot  below : " + img);
+		try {
+			String result = " ";
+			int newResult = 0;
+			newResult = result1.getStatus();
+			result =child.getRunStatus().toString();
+			if(result.equalsIgnoreCase("error")||result.equalsIgnoreCase("fail")||newResult==result1.FAILURE)
+			{
+				String img = child.addScreenCapture(Reporting.CaptureScreen(driver));
+				child.log(LogStatus.FAIL, "Image","Please refer the failed step Screenshot  below : " + img);
+			}else if(newResult==result1.SKIP)
+			{
+				String img = child.addScreenCapture(Reporting.CaptureScreen(driver));
+				child.log(LogStatus.SKIP, "Image","Please refer the skip step Screenshot  below : " + img);
+			}
+			
+			parent.appendChild(child);
+			extent.endTest(child);
+			extent.endTest(parent);
+			extent.flush();
+		} catch (Exception e) {
+			extent.flush();
 		}
-		parent.appendChild(child);
 		driver.close();
-		extent.endTest(child);
-		extent.endTest(parent);
-		extent.flush();
 	}
 }
