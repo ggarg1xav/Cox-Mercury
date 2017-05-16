@@ -11,6 +11,14 @@
 	</listeners>
 
 	<test name="View1">
+	<packages>
+	<package name = "" ></package>
+	<includes>
+	<include name = "com.xavient.test.script.Test_View1" ></include>
+		</includes>
+
+		</packages>
+	
 		<classes>
 			<class name="com.xavient.test.script.Test_View1"></class>
 		</classes>

@@ -45,6 +45,8 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 	@BeforeMethod
 	@Parameters({ "browser" })
 	public void Before_Test(@Optional("ie") String browser) {
+		System.out.println(1234);
+
 		driver = Browser_Selection(browser);
 		logger.info(browser + " is opened successfully");
 		// Initialize
@@ -62,6 +64,7 @@ public class Test_View15 extends BaseClass implements DashBoardView {
 		helper.clickByJavascript(driver, driver.findElement(View15));
 		helper.clickByJavascript(driver, driver.findElement(pauseToolTip));
 		logger.info("------Before Test------");
+		System.out.println(1234);
 	}
 
 	/**

@@ -30,7 +30,7 @@ public class Test_View1 extends BaseClass implements DashBoardView {
 	Helper helper;
 	WebDriverWait wait;
 
-	Logger logger = LogManager.getLogger(Test_View1.class);
+	Logger logger = Logger.getLogger(Test_View1.class);
 
 	@BeforeMethod
 	@Parameters({ "browser" })

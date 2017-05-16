@@ -27,5 +27,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="Libs/extentreports-2.41.2.jar"/>
+	<classpathentry kind="lib" path="D:/s.w/ojdbc6.jar" sourcepath="src"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

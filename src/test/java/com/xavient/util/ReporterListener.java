@@ -2,9 +2,13 @@ package com.xavient.util;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.IReporter;
 import org.testng.IResultMap;
 import org.testng.ISuite;
@@ -60,6 +64,7 @@ public class ReporterListener implements IReporter {
 
 				if (result.getThrowable() != null) {
 					String img = test.addScreenCapture((System.getProperty("user.dir")+Properties_Reader.readProperty("screenshots") + result.getMethod().getMethodName()) + ".jpg");
+					
 					test.log(LogStatus.FAIL, result.getThrowable());
 					test.log(LogStatus.FAIL, img);
 				} else {
@@ -75,4 +80,16 @@ public class ReporterListener implements IReporter {
 		calendar.setTimeInMillis(millis);
 		return calendar.getTime();
 	}
+	
+	public void print_all(HashMap<String,LinkedList<String>> listen_map  )
+	{
+		for (String  s: listen_map.keySet())
+			System.out.println("keys" + s);
+		for (LinkedList<String>  s: listen_map.values())
+		{for (String s1 : s)
+			System.out.println("values" + s1);
+		
+		
+		}
+}
 }

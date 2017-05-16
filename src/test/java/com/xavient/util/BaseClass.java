@@ -1,5 +1,7 @@
 package com.xavient.util;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -8,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeSuite;
@@ -125,5 +128,14 @@ public class BaseClass implements DashBoardView{
 		} catch (Exception e) {
 		}
 		driver.close();
+	}
+	
+	public static void main(String[] args) throws MalformedURLException {
+		DesiredCapabilities cap = new DesiredCapabilities();
+		 cap.setBrowserName("firefox");
+		 cap.setVersion("9.0.1");
+		 cap.setPlatform(org.openqa.selenium.Platform.WIN8_1);
+		WebDriver driver = new RemoteWebDriver(new
+				 URL("http://localhost:4444/wd/hub"),cap);
 	}
 }
